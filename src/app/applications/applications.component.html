@@ -1,3 +1,14 @@
-<p>
-  applications works!
-</p>
+<h2>Application Details</h2>
+<div><span>id: </span>{{application.id}}</div>
+<!--<div><span>name: </span>{{application.name | uppercase }}</div> -->
+<div>
+    <label>name:
+      <input [(ngModel)]="application.name" placeholder="App name">
+    </label>
+</div>
+<!--<div><span>description: </span>{{application.description}}</div> -->
+<div>
+    <label>description:
+      <input [(ngModel)]="application.description" placeholder="App description">
+    </label>
+</div>

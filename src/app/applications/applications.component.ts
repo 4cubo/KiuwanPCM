@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Application } from '../application';
 
 @Component({
   selector: 'app-applications',
@@ -9,7 +10,15 @@ export class ApplicationsComponent implements OnInit {
 
   constructor() { }
 
+  application: Application {
+    id : 1,
+    name : 'Acelera',
+    description : "Descripcion de Acelera"
+  };
+  
   ngOnInit() {
   }
 
 }
+
+
