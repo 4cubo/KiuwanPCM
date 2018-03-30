@@ -1,14 +1,20 @@
-<h2>Application Details</h2>
-<div><span>id: </span>{{application.id}}</div>
-<!--<div><span>name: </span>{{application.name | uppercase }}</div> -->
-<div>
-    <label>name:
-      <input [(ngModel)]="application.name" placeholder="App name">
-    </label>
-</div>
-<!--<div><span>description: </span>{{application.description}}</div> -->
-<div>
-    <label>description:
-      <input [(ngModel)]="application.description" placeholder="App description">
-    </label>
+<h2>Application List</h2>
+
+<ul class="applications">
+	<li *ngFor="let item of applications" (click)="onSelect(item)"   [class.selected]="item === selectedApp" ><span
+		class="badge">{{item.id}}</span> {{item.name}}</li>
+</ul>
+
+<div *ngIf="selectedApp">
+	<h2>{{ selectedApp.name | uppercase }} Details</h2>
+	<div>
+		<span>id: </span>{{selectedApp.id}}
+	</div>
+	<div>
+		<label>name: <input [(ngModel)]="selectedApp.name"
+			placeholder="name">
+		</label> <label>description: <input
+			[(ngModel)]="selectedApp.description" placeholder="description">
+		</label>
+	</div>
 </div>

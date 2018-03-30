@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Application } from '../application';
+import {Component, OnInit} from '@angular/core';
+import {Application} from '../application';
+import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
 
 @Component({
   selector: 'app-applications',
@@ -8,14 +9,20 @@ import { Application } from '../application';
 })
 export class ApplicationsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    console.log("Contructor de ApplicationsComponent"); //@aaa delete
+  }
 
-  application: Application {
-    id : 1,
-    name : 'Acelera',
-    description : "Descripcion de Acelera"
-  };
+  applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
+
+  //Selected in main list
+  selectedApp: Application;
   
+  onSelect(app: Application): void {
+    console.log("------selected " + app.name); //@aaa delete
+    this.selectedApp = app;
+  }
+
   ngOnInit() {
   }
 
