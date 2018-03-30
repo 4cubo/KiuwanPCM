@@ -10,7 +10,7 @@ import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
 export class ApplicationsComponent implements OnInit {
 
   constructor() {
-    console.log("Contructor de ApplicationsComponent"); //@aaa delete
+    console.log("Constructor de ApplicationsComponent"); //@aaa delete
   }
 
   applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
@@ -19,7 +19,7 @@ export class ApplicationsComponent implements OnInit {
   selectedApp: Application;
   
   onSelect(app: Application): void {
-    console.log("------selected " + app.name); //@aaa delete
+    console.log("  Application selected " + app.name); //@aaa delete
     this.selectedApp = app;
   }
 
