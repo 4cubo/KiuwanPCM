@@ -19,6 +19,6 @@ export class DashboardComponent implements OnInit {
 
   getApplications(): void {
     this.appProv.getApplications()
-      .subscribe(heroes => this.applications = heroes.slice(1, 5));
+      .subscribe(heroes => this.applications = heroes.slice(1, 9));
   }
 }

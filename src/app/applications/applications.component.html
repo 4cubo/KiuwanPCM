@@ -1,24 +1,43 @@
 <h2>Application List</h2>
-<ul class="applications">
-	<li *ngFor="let item of applications">
-		<a routerLink="/detail/{{item.id}}">
-			<span class="badge">{{item.id}} </span> {{item.name}}
-		</a>
-	</li>
-</ul>
 
-<!-- <div *ngIf="selectedApp"> -->
-<!-- 	<h2>{{ selectedApp.name | uppercase }} Details</h2> -->
-<!-- 	<div> -->
-<!-- 		<span>id: </span>{{selectedApp.id}} -->
-<!-- 	</div> -->
-<!-- 	<div> -->
-<!-- 		<label>name: <input [(ngModel)]="selectedApp.name" -->
-<!-- 			placeholder="name"> -->
-<!-- 		</label> <label>description: <input -->
-<!-- 			[(ngModel)]="selectedApp.description" placeholder="description"> -->
-<!-- 		</label> -->
-<!-- 	</div> -->
-<!-- </div> -->
+<!-- <ul class="applications"> -->
+<!-- 	<li *ngFor="let item of applications"> -->
+<!-- 		<a routerLink="/detail/{{item.id}}"> -->
+<!-- 			<span class="badge">{{item.id}} </span> {{item.name}} -->
+<!-- 		</a> -->
+<!-- 	</li> -->
+<!-- </ul> -->
 
-<!-- <app-application-detail [app]="selectedApp"></app-application-detail> -->
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id. </mat-header-cell>
+      <mat-cell *matCellDef="let app"> {{app.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let app"> {{app.name}} </mat-cell>
+    </ng-container>
+    
+    <!-- Descriptcion Column -->
+    <ng-container matColumnDef="descriptcion">
+      <mat-header-cell *matHeaderCellDef> Desc. </mat-header-cell>
+      <mat-cell *matCellDef="let app"> {{app.description}} </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)" >
+    
+    </mat-row>
+  </mat-table>
+   <mat-paginator #paginator
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="false">
+  </mat-paginator>
+</div>

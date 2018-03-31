@@ -11,6 +11,11 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+// @aaa Angular Material
+//import {MatTableModule, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+         MatSortModule} from '@angular/material';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTableModule,          // @aaa Angular Material
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    NoopAnimationsModule
   ],
   providers: [
     ApplicationProviderService,

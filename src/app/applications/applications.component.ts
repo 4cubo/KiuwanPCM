@@ -5,12 +5,20 @@ import {MessageService} from '../message.service';
 //import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
 import {ApplicationProviderService} from '../applicationprovider.service';
 
+import {ViewChild, AfterViewInit} from '@angular/core';
+
+import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {DataSource} from '@angular/cdk/collections';
+
+
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-applications',
   templateUrl: './applications.component.html',
   styleUrls: ['./applications.component.css']
 })
-export class ApplicationsComponent implements OnInit {
+export class ApplicationsComponent implements OnInit, AfterViewInit  {
 
   constructor(private appProv: ApplicationProviderService, private messageService: MessageService) {
     console.log("Constructor de ApplicationsComponent"); //@aaa delete
@@ -19,26 +27,51 @@ export class ApplicationsComponent implements OnInit {
   // applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
   applications: Application[];
 
-  // Selected in main list
-  // selectedApp: Application;
+
+  //dataSource = new ApplicationDataSource(this.appProv);
+  dataSource = new MatTableDataSource<Application>(this.applications);
+  //this.appProv.getApplications().subscribe(apps => this.applications = apps)
+  displayedColumns = ['id', 'name', 'descriptcion'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
+  onRowClicked(row) {
+    console.log('ApplicationsComponent.onRowClicked  clicked: ', row);
+  }
+ 
+  
+
+  getApplicationsCB( appList: Application[]  ): void {
+    this.applications = appList;
+    this.dataSource.data = appList;
+  }
 
   getApplications(): void {
-    /*this.applications = this.appProv.getApplications()*/
-    this.appProv.getApplications().subscribe(apps => this.applications = apps);
+    this.appProv.getApplications().subscribe( apps => this.getApplicationsCB(apps));
   }
 
-/*
-  onSelect(app: Application): void {
-    if (this.selectedApp !== app) {
-      this.messageService.add('ApplicationsComponent: selected app:' + app.name);
-      this.selectedApp = app;
-    }
-  }
-*/
+ 
   ngOnInit() {
     this.getApplications();
   }
-
+  
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 }
+
+export class ApplicationDataSource extends DataSource<any> {
+  
+  constructor(private appProv: ApplicationProviderService) {
+    super();
+  }
+  
+  connect(): Observable<Application[]> {
+    return this.appProv.getApplications();
+  }
+  
+  disconnect() {}
+}
+
+
 
 
