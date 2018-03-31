@@ -1,0 +1,9 @@
+<h3>Dashboard</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let app of applications" class="col-1-4" routerLink="/detail/{{app.id}}">
+    <div class="module application">
+      <h4>{{app.name}}</h4>
+      /detail/{{app.id}}
+    </div>
+  </a>
+</div>

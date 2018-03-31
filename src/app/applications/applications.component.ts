@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Application} from '../application';
-import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
+import {MessageService} from '../message.service';
+
+//import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
+import {ApplicationProviderService} from '../applicationprovider.service';
 
 @Component({
   selector: 'app-applications',
@@ -9,21 +12,31 @@ import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
 })
 export class ApplicationsComponent implements OnInit {
 
-  constructor() {
+  constructor(private appProv: ApplicationProviderService, private messageService: MessageService) {
     console.log("Constructor de ApplicationsComponent"); //@aaa delete
   }
 
-  applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
+  // applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
+  applications: Application[];
 
-  //Selected in main list
-  selectedApp: Application;
-  
-  onSelect(app: Application): void {
-    console.log("  Application selected " + app.name); //@aaa delete
-    this.selectedApp = app;
+  // Selected in main list
+  // selectedApp: Application;
+
+  getApplications(): void {
+    /*this.applications = this.appProv.getApplications()*/
+    this.appProv.getApplications().subscribe(apps => this.applications = apps);
   }
 
+/*
+  onSelect(app: Application): void {
+    if (this.selectedApp !== app) {
+      this.messageService.add('ApplicationsComponent: selected app:' + app.name);
+      this.selectedApp = app;
+    }
+  }
+*/
   ngOnInit() {
+    this.getApplications();
   }
 
 }

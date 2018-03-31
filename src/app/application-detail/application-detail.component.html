@@ -1,14 +1,15 @@
 <h2>[Application Detail Component]</h2>
 <div *ngIf="app">
 	<h2>{{ app.name | uppercase }} Details</h2>
+	
 	<div>
 		<span>id: </span>{{app.id}}
 	</div>
 	<div>
-		<label>name: <input [(ngModel)]="app.name"
-			placeholder="name">
-		</label> <label>description: <input
-			[(ngModel)]="app.description" placeholder="description">
-		</label>
+		<label>name: <input [(ngModel)]="app.name" placeholder="name"></label>
 	</div>
+	<div>
+		<label>description: <input [(ngModel)]="app.description" placeholder="description"></label>
+	</div>
+	<button (click)="goBack()">go back</button>
 </div>

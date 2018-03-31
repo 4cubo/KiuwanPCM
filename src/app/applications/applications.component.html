@@ -1,22 +1,24 @@
 <h2>Application List</h2>
-
 <ul class="applications">
-	<li *ngFor="let item of applications" (click)="onSelect(item)"   [class.selected]="item === selectedApp" ><span
-		class="badge">{{item.id}}</span> {{item.name}}</li>
+	<li *ngFor="let item of applications">
+		<a routerLink="/detail/{{item.id}}">
+			<span class="badge">{{item.id}} </span> {{item.name}}
+		</a>
+	</li>
 </ul>
 
-<div *ngIf="selectedApp">
-	<h2>{{ selectedApp.name | uppercase }} Details</h2>
-	<div>
-		<span>id: </span>{{selectedApp.id}}
-	</div>
-	<div>
-		<label>name: <input [(ngModel)]="selectedApp.name"
-			placeholder="name">
-		</label> <label>description: <input
-			[(ngModel)]="selectedApp.description" placeholder="description">
-		</label>
-	</div>
-</div>
+<!-- <div *ngIf="selectedApp"> -->
+<!-- 	<h2>{{ selectedApp.name | uppercase }} Details</h2> -->
+<!-- 	<div> -->
+<!-- 		<span>id: </span>{{selectedApp.id}} -->
+<!-- 	</div> -->
+<!-- 	<div> -->
+<!-- 		<label>name: <input [(ngModel)]="selectedApp.name" -->
+<!-- 			placeholder="name"> -->
+<!-- 		</label> <label>description: <input -->
+<!-- 			[(ngModel)]="selectedApp.description" placeholder="description"> -->
+<!-- 		</label> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
-<app-application-detail [app]="selectedApp"></app-application-detail>
+<!-- <app-application-detail [app]="selectedApp"></app-application-detail> -->
