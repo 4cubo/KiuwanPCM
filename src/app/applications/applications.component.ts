@@ -7,8 +7,8 @@ import {ApplicationProviderService} from '../applicationprovider.service';
 
 import {ViewChild, AfterViewInit} from '@angular/core';
 
-import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {DataSource} from '@angular/cdk/collections';
+import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
+import {DataSource, SelectionModel} from '@angular/cdk/collections';
 
 
 import { Observable } from 'rxjs';
@@ -29,14 +29,38 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
 
 
   dataSource = new MatTableDataSource<Application>(this.applications);
-  displayedColumns = ['id', 'name', 'descriptcion'];
+  displayedColumns = ['select', 'id', 'name', 'descriptcion'];
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  
+  
+  // Row selection setup
+  selection = new SelectionModel<Application>(true, []);
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+    this.selection.clear() :
+    this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  
   
   onRowClicked(row) {
     console.log('ApplicationsComponent.onRowClicked  clicked: ', row);
   }
  
-  
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 
   getApplicationsCB( appList: Application[]  ): void {
     this.applications = appList;
@@ -55,6 +79,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
   ngAfterViewInit() {
     this.paginator._intl.itemsPerPageLabel = "Apps per page";
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
 
