@@ -9,6 +9,9 @@
 <!-- </ul> -->
 
 <div class="example-container mat-elevation-z8">
+	<div class="spinner-container" *ngIf="applications.length<=0">
+        <mat-spinner></mat-spinner>
+    </div>
   <mat-table #table [dataSource]="dataSource">
 
     <!-- id Column -->

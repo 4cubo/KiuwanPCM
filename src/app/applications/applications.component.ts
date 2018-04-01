@@ -28,9 +28,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
   applications: Application[];
 
 
-  //dataSource = new ApplicationDataSource(this.appProv);
   dataSource = new MatTableDataSource<Application>(this.applications);
-  //this.appProv.getApplications().subscribe(apps => this.applications = apps)
   displayedColumns = ['id', 'name', 'descriptcion'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
@@ -55,6 +53,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
   }
   
   ngAfterViewInit() {
+    this.paginator._intl.itemsPerPageLabel = "Apps per page";
     this.dataSource.paginator = this.paginator;
   }
 }
