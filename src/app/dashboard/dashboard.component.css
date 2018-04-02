@@ -19,14 +19,14 @@ a {
 	box-sizing: border-box;
 }
 
-h3 {
-	text-align: center;
-	margin-bottom: 0;
-}
+/* h3 { */
+/* 	text-align: center; */
+/* 	margin-bottom: 0; */
+/* } */
 
-h4 {
-	position: relative;
-}
+/* h4 { */
+/* 	position: relative; */
+/* } */
 
 .grid {
 	margin: 0;
@@ -74,4 +74,16 @@ h4 {
 	.module {
 		min-width: 60px;
 	}
+}
+
+
+/* card styles */
+.example-card {
+  max-width: 400px;
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://img00.deviantart.net/ecd9/i/2012/022/9/a/homer_simpson_by_valhallaseven-d4nb6t8.jpg');
+  background-size: cover;
 }

@@ -10,7 +10,7 @@ import {MessageService} from './message.service';
 export class ApplicationProviderService {
 
   constructor(private messageService: MessageService) {
-    console.log("Constructor de ApplicationProviderService"); //@aaa delete
+    console.log("Constructor de ApplicationProvider[Service]"); //@aaa delete
   }
 
   applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
@@ -22,7 +22,7 @@ export class ApplicationProviderService {
 
   getApplications(): Observable<Application[]> {
     // Todo: send the message _after_ fetching the applications
-    this.messageService.add('ApplicationProviderService: fetched applications');
+    this.messageService.add('ApplicationProviderService: resolving applications');
 
     return of(MOCK_APPLICATIONS);
   }

@@ -1,14 +1,37 @@
 <div>
-	<h3>Dashboard</h3>
+	<h2>SAST Light Applications List</h2>
 	<div class="grid grid-pad">
-		<a *ngFor="let app of applications" class="col-1-4"
-			routerLink="/detail/{{app.id}}">
-			<div class="module application">
-				<h4>{{app.name}}</h4>
-				{{app.id}}<br>
-				{{app.description}}
-			</div>
-		</a>
+<!-- 	   <a *ngFor="let app of applications" class="col-1-4" routerLink="/detail/{{app.id}}"> -->
+			<div *ngFor="let app of applications" class="col-1-4">
+<!-- 			<div class="module application"> -->
+<!-- 				<h4>{{app.name}}</h4> -->
+<!-- 				{{app.id}}<br> -->
+<!-- 				{{app.description}} -->
+<!-- 			</div> -->
+			
+			<mat-card class="example-card"> 
+				<mat-card-header>
+					<div mat-card-avatar class="example-header-image">
+					</div>
+					<mat-card-title>{{app.name}}</mat-card-title> 
+					<mat-card-subtitle>{{app.description}}</mat-card-subtitle> 
+				</mat-card-header>
+<!-- 				<img mat-card-image -->
+<!-- 					src="https://material.angular.io/assets/img/examples/shiba2.jpg" -->
+<!-- 					alt="Photo of Homer">  -->
+				<mat-card-content>
+					<p>
+						Lorem Ipsum...
+					</p>
+				</mat-card-content>
+				<mat-card-actions>
+					<button mat-button>Details</button>
+					<button mat-button>Releasses</button>
+				</mat-card-actions> 
+			</mat-card>
+
+<!-- 		</a> -->
+		</div>
 	</div>
 	
 </div>

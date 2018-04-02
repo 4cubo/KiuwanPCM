@@ -7,8 +7,9 @@ import {ApplicationProviderService} from '../applicationprovider.service';
 
 import {ViewChild, AfterViewInit} from '@angular/core';
 
-import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
+import {MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
 import {DataSource, SelectionModel} from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 
 
 import { Observable } from 'rxjs';
@@ -20,7 +21,11 @@ import { Observable } from 'rxjs';
 })
 export class ApplicationsComponent implements OnInit, AfterViewInit  {
 
-  constructor(private appProv: ApplicationProviderService, private messageService: MessageService) {
+  constructor(
+    private appProv: ApplicationProviderService,
+    private messageService: MessageService,
+    private router: Router
+  ) {
     console.log("Constructor de ApplicationsComponent"); //@aaa delete
   }
 
@@ -35,7 +40,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatSort) sort: MatSort;
   
   
-  // Row selection setup
+  /** Row selection setup */
   selection = new SelectionModel<Application>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -54,6 +59,8 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
   
   onRowClicked(row) {
     console.log('ApplicationsComponent.onRowClicked  clicked: ', row);
+    this.router.navigate(['/detail/' + row.id]);
+    
   }
  
   applyFilter(filterValue: string) {
@@ -82,20 +89,3 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
     this.dataSource.sort = this.sort;
   }
 }
-
-export class ApplicationDataSource extends DataSource<any> {
-  
-  constructor(private appProv: ApplicationProviderService) {
-    super();
-  }
-  
-  connect(): Observable<Application[]> {
-    return this.appProv.getApplications();
-  }
-  
-  disconnect() {}
-}
-
-
-
-

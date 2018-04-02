@@ -5,10 +5,30 @@
   <app-messages></app-messages>
 </div> -->
 
-<h1>{{title}}</h1>
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+	<span>{{title}}</span>
+	<span class="example-spacer"></span>
+	<mat-icon class="example-icon">verified_user</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+ 
 <nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/applications">Applications</a>
+
+<!--   <a routerLink="/dashboard">Dashboard</a> -->
+<!--   <a routerLink="/applications">Applications</a> -->
+  
+	<mat-chip-list>
+<!--   		<mat-chip>Two fish</mat-chip> -->
+	    <mat-chip color="accent" selected="true" routerLink="/dashboard">Dashboard</mat-chip>
+		<mat-chip color="accent" selected="true" routerLink="/applications">Applications</mat-chip>
+</mat-chip-list>
+
+
 </nav>
 <router-outlet></router-outlet>
+<div class="footnote">
 <app-messages></app-messages>
+</div>

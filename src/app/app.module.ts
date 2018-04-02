@@ -14,7 +14,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // @aaa Angular Material
 //import {MatTableModule, MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-         MatSortModule, MatCheckboxModule, MatSelectModule} from '@angular/material';
+         MatSortModule, MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -36,6 +38,11 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     MatCheckboxModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatChipsModule,
     NoopAnimationsModule
   ],
   providers: [

@@ -1,17 +1,14 @@
 /* HeroDetailComponent's private CSS styles */
-label {
-	display: inline-block;
-	width: 3em;
-	margin: .5em 0;
-	color: #607D8B;
-	font-weight: bold;
+
+.example-card {
+  max-width: 400px;
 }
 
-input {
-	height: 2em;
-	font-size: 1em;
-	padding-left: .4em;
-}
+/* .example-header-image { */
+/*   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
+/*   background-size: cover; */
+/* } */
+
 
 button {
 	margin-top: 20px;

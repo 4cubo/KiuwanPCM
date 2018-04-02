@@ -1,15 +1,21 @@
-<h2>[Application Detail Component]</h2>
+<h2>Application Detail</h2>
 <div *ngIf="app">
-	<h2>{{ app.name | uppercase }} Details</h2>
 	
-	<div>
-		<span>id: </span>{{app.id}}
-	</div>
-	<div>
-		<label>name: <input [(ngModel)]="app.name" placeholder="name"></label>
-	</div>
-	<div>
-		<label>description: <input [(ngModel)]="app.description" placeholder="description"></label>
-	</div>
+	
+	<mat-card>
+	
+		<h2>{{ app.name | uppercase }} Details</h2>
+		
+		<div>
+			<span>id: </span>{{app.id}}
+		</div>
+		<div>
+			<label>name: <input [(ngModel)]="app.name" placeholder="name"></label>
+		</div>
+		<div>
+			<label>description: <input [(ngModel)]="app.description" placeholder="description"></label>
+		</div>
+	</mat-card>
+	
 	<button (click)="goBack()">go back</button>
 </div>
