@@ -19,6 +19,7 @@ import { Observable } from 'rxjs';
   templateUrl: './applications.component.html',
   styleUrls: ['./applications.component.css']
 })
+  
 export class ApplicationsComponent implements OnInit, AfterViewInit  {
 
   constructor(

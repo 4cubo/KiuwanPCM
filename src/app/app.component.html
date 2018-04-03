@@ -16,19 +16,24 @@
 
  
 <nav>
-
-<!--   <a routerLink="/dashboard">Dashboard</a> -->
-<!--   <a routerLink="/applications">Applications</a> -->
-  
 	<mat-chip-list>
-<!--   		<mat-chip>Two fish</mat-chip> -->
 	    <mat-chip color="accent" selected="true" routerLink="/dashboard">Dashboard</mat-chip>
-		<mat-chip color="accent" selected="true" routerLink="/applications">Applications</mat-chip>
-</mat-chip-list>
-
-
+		<mat-chip color="accent" selected="false" routerLink="/applications">Applications</mat-chip>
+	</mat-chip-list>
 </nav>
+
+
+
+<!-- <div class="jumbotron"> -->
+<!--     <div class="container"> -->
+<!--         <div class="col-sm-8 col-sm-offset-2"> -->
+<!--             <alert></alert> -->
+<!--             <router-outlet></router-outlet> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- </div> -->
+
+
+<alert></alert>
 <router-outlet></router-outlet>
-<div class="footnote">
 <app-messages></app-messages>
-</div>

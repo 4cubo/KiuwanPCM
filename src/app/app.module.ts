@@ -10,14 +10,22 @@ import { ApplicationProviderService } from './applicationprovider.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // @aaa Angular Material
-//import {MatTableModule, MatPaginator, MatTableDataSource} from '@angular/material';
-import {MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+import { MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
          MatSortModule, MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { AlertComponent } from './_alert/alert.component';
+import { AuthGuard } from './_auth/auth.guard';
+import { JwtInterceptorProvider } from './_helpers/jwt.interceptor';
+import { AlertService, UserService } from './_services/index';
+import { AuthenticationService } from './_services/authentication.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +33,14 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     ApplicationsComponent,
     ApplicationDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    AlertComponent,
+    LoginComponent,
+    RegisterComponent,
+    AdminUserComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     MatTableModule,          // @aaa Angular Material
     MatInputModule,
@@ -43,11 +54,18 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     MatIconModule,
     MatButtonModule,
     MatChipsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [
+    AuthGuard,
     ApplicationProviderService,
-    MessageService
+    MessageService,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    JwtInterceptorProvider
   ],
   bootstrap: [
     AppComponent
