@@ -43,3 +43,11 @@ nav  {
   flex: 1 1 auto;
 }
 
+.app-toolbar {
+	padding: 5px 10px;
+	text-decoration: none;
+	margin-top: 10px;
+	display: inline-block;
+
+	border-radius: 4px;
+}

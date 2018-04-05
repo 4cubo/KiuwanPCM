@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormControl, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms'; // <-- NgModel lives here
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -13,8 +13,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // @aaa Angular Material
-import { MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-         MatSortModule, MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule} from '@angular/material';
+import { MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule} from '@angular/material';
+import { MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule, MatFormFieldModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -26,6 +26,7 @@ import { AuthenticationService } from './_services/authentication.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
     NoopAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthGuard,

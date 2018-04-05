@@ -1,21 +1,9 @@
 <div>
-	<div class="grid grid-pad">
-		    
-		<h2>Hi {{currentUser.firstName}}!</h2>
-		<h3>All registered users:</h3>
-		<ul>
-			<li *ngFor="let user of users">            {{user.username}}
-				({{user.firstName}} {{user.lastName}})             - <a
-				(click)="deleteUser(user._id)">Delete</a>         
-			</li>
-		</ul>
-		    
-		<p>
-			<a [routerLink]="['/login']">Logout</a>
-		</p>
-	</div>
+<!-- 	<div> -->
+<!-- 		<h3>Hi {{currentUser.firstName}}!&nbsp;&nbsp;[<a [routerLink]="['/login']">Logout!</a>]</h3> -->
+<!-- 	</div> -->
 	
-	<h2>SAST Light Applications List</h2>
+<!-- 	<h2>SAST Light Applications List</h2> -->
 	<div class="grid grid-pad">
 		<div *ngFor="let app of applications" class="col-1-4">
 			<mat-card class="example-card"> 

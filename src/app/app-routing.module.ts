@@ -1,4 +1,5 @@
 import { AuthGuard } from './_auth/auth.guard';
+import { AdminUserComponent } from './admin-user/admin-user.component';
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,10 +18,11 @@ const routes: Routes = [
   { path: 'applications', component: ApplicationsComponent, canActivate: [AuthGuard] },
 
 
-  /* { path: '', component: HomeComponent, canActivate: [AuthGuard] }, */
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // otherwise redirect to home
+
+  { path: 'admu', component: AdminUserComponent, canActivate: [AuthGuard] }, /* @aaa TODO add AdminGuard to access this functionality */
+
   { path: '**', redirectTo: '' }
 ];
 

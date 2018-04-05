@@ -5,17 +5,20 @@
   <app-messages></app-messages>
 </div> -->
 
-<mat-toolbar color="accent">
+<mat-toolbar color="accent"  class="app-toolbar">
   <mat-toolbar-row>
-	<span>{{title}}</span>
+	<span>{{title}}&nbsp;&nbsp;<h3 *ngIf="currentUser">{{currentUser.firstName}}&nbsp;{{currentUser.lastName}}</h3></span>
 	<span class="example-spacer"></span>
-	<mat-icon class="example-icon">verified_user</mat-icon>
+<!-- 	<mat-icon class="example-icon" aria-hidden="true">verified_user</mat-icon> -->
+	<mat-icon class="example-icon" aria-hidden="true" routerLink="/admu">face</mat-icon>
+	<mat-icon class="example-icon" aria-hidden="true" routerLink="/login">power_settings_new</mat-icon>
+	
   </mat-toolbar-row>
 </mat-toolbar>
 
 
  
-<nav>
+<nav *ngIf="currentUser">
 	<mat-chip-list>
 	    <mat-chip color="accent" selected="true" routerLink="/dashboard">Dashboard</mat-chip>
 		<mat-chip color="accent" selected="false" routerLink="/applications">Applications</mat-chip>

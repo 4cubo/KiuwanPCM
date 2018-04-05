@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  //moduleId: module.id,
+  moduleId: module.id,
   selector: 'app-register',
   templateUrl: './register.component.html',
   //styleUrls: ['./register.component.css']
