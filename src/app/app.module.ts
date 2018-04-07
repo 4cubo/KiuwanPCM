@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { ApplicationsComponent } from './applications/applications.component';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
-import { ApplicationProviderService } from './applicationprovider.service';
+import { ApplicationProviderService } from './_services/applicationprovider.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -17,6 +17,12 @@ import { MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerM
 import { MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule, MatFormFieldModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+
+import { GrowlModule} from 'primeng/growl';
+import { FileUploadModule} from 'primeng/fileupload';
+import { Message} from 'primeng/api';
+
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AlertComponent } from './_alert/alert.component';
 import { AuthGuard } from './_auth/auth.guard';
@@ -26,7 +32,8 @@ import { AuthenticationService } from './_services/authentication.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
-
+import { ServiceRequestComponent } from './_sastlight-client-requests/client-request.component';
+import { NewSastlightClientRequestComponent } from './_sastlight-client-request/new-sastlight-client-request.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +45,9 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
     AlertComponent,
     LoginComponent,
     RegisterComponent,
-    AdminUserComponent
+    AdminUserComponent,
+    ServiceRequestComponent,
+    NewSastlightClientRequestComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,12 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
     NoopAnimationsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+//    MatFileUploadModule,
+//    MatFormFieldModule
+    GrowlModule,
+    FileUploadModule
   ],
   providers: [
     AuthGuard,

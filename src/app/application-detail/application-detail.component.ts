@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Application} from '../application';
-import {ApplicationProviderService} from '../applicationprovider.service';
+import {Application} from '../classes/application';
+import {ApplicationProviderService} from '../_services/applicationprovider.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {MessageService} from '../message.service';

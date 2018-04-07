@@ -1,33 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 import {Application} from '../classes/application';
 import {MessageService} from '../message.service';
 
-//import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
 import {ApplicationProviderService} from '../_services/applicationprovider.service';
 
 import {ViewChild, AfterViewInit} from '@angular/core';
 
 import {MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
 import {DataSource, SelectionModel} from '@angular/cdk/collections';
-import {Router } from '@angular/router';
-
-
-import {Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import {User} from '../_user/user';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-applications',
-  templateUrl: './applications.component.html',
-  styleUrls: ['./applications.component.css']
+  selector: 'app-client-request',
+  templateUrl: './client-request.component.html',
+  styleUrls: ['./client-request.component.css']
 })
-  
-export class ApplicationsComponent implements OnInit, AfterViewInit  {
+export class ServiceRequestComponent implements OnInit, AfterViewInit  {
 
+  currentUser: User;
+  
   constructor(
     private appProv: ApplicationProviderService,
     private messageService: MessageService,
     private router: Router
   ) {
-    console.log("Constructor de ApplicationsComponent"); //@aaa delete
+    
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log("Constructor de ApplicationsComponent: " + JSON.stringify(this.currentUser)); //@aaa delete
   }
 
   // applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
@@ -36,11 +38,11 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
 
   dataSource = new MatTableDataSource<Application>(this.applications);
   displayedColumns = ['select', 'id', 'name', 'descriptcion'];
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
-  
+
+
   /** Row selection setup */
   selection = new SelectionModel<Application>(true, []);
 
@@ -85,7 +87,7 @@ export class ApplicationsComponent implements OnInit, AfterViewInit  {
   }
   
   ngAfterViewInit() {
-    this.paginator._intl.itemsPerPageLabel = "Apps per page";
+    this.paginator._intl.itemsPerPageLabel = "Request per page";
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

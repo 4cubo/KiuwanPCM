@@ -1,4 +1,5 @@
 import { AuthGuard } from './_auth/auth.guard';
+import { NewSastlightClientRequestComponent } from './_sastlight-client-request/new-sastlight-client-request.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
@@ -6,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { ServiceRequestComponent } from './_sastlight-client-requests/client-request.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,11 +18,12 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'detail/:id', component: ApplicationDetailComponent, canActivate: [AuthGuard] },
   { path: 'applications', component: ApplicationsComponent, canActivate: [AuthGuard] },
+  { path: 'srequest', component: ServiceRequestComponent, canActivate: [AuthGuard] },
+  { path: 'nrequest', component: NewSastlightClientRequestComponent, canActivate: [AuthGuard] },
 
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-
   { path: 'admu', component: AdminUserComponent, canActivate: [AuthGuard] }, /* @aaa TODO add AdminGuard to access this functionality */
 
   { path: '**', redirectTo: '' }

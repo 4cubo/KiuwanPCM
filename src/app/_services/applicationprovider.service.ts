@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 
-import {Application} from './application';
-import {MOCK_APPLICATIONS} from './mock-applications'; //@aaa mock-applications
-import {MessageService} from './message.service';
+import {Application} from '../classes/application';
+import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
+import {MessageService} from '../message.service';
 
 @Injectable()
 export class ApplicationProviderService {

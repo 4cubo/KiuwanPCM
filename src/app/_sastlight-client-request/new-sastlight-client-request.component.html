@@ -1,0 +1,59 @@
+<!-- <mat-card class="example-card"> -->
+<!--   <mat-card-header color="accent"> -->
+<!--     <mat-card-title>Upload  SAST Light Request Excel File</mat-card-title> -->
+<!--   </mat-card-header> -->
+<!--   <mat-card-content> -->
+<!-- <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate class="example-form"> -->
+<!-- <label for="singleFile">Upload file</label> -->
+<!-- <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" /> -->
+<!-- <br> -->
+
+<!-- <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" [httpUrl]="'http://localhost:400/file'"> -->
+<!-- 	<mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload> -->
+<!-- </mat-file-upload-queue> -->
+<!-- </form> -->
+<!-- </mat-card-content> -->
+ 
+<!-- </mat-card> -->
+
+<!-- <div [fileUploadInputFor]="fileUploadQueue" class="upload-drop-zone"> -->
+<!--     Just drag and drop files here -->
+<!-- </div> -->
+ 
+ 
+<!-- <div style="width: 500px; background-color: red;"> -->
+<!--     <mat-file-upload-queue #fileUploadQueue -->
+<!--         [fileAlias]="'file'" -->
+<!--         [httpUrl]="'http://localhost:4000/jax-rs-jersey-application-sample'" multiple> -->
+    
+<!--         <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload> -->
+<!--     </mat-file-upload-queue> -->
+<!-- </div> -->
+
+<p-growl [value]="msgs"></p-growl>
+    
+<h3 class="first">New <b>SAST</b> Light Service Request Excel File:</h3> 
+<!-- multiple="multiple"    accept="image/*"  application/vnd.ms-excel-->
+<p-fileUpload name="SASTLightRequestFile[]"  
+	chooseLabel="Select or drag a file" 
+	uploadLabel="Upload Label" 
+	url="http://localhost:4000/uploadFile"  
+	(onUpload)="onUpload($event)"  
+	(onBeforeSend)="onBeforeSend($event)" 
+	(onSuccess)="onSuccess($event)" 
+	(uploadHandler)="uploadHandler($event)"    
+	accept="application/vnd.ms-excel"
+	maxFileSize="10000000">
+         
+	    <ng-template pTemplate="toolbar">
+	   		<div>Toolbar?</div>
+	   	</ng-template>  
+   	
+	    <ng-template pTemplate="content">
+	    	<div>
+		        <ul *ngIf="uploadedFiles.length">
+		            <li *ngFor="let file of uploadedFiles">{{file.fileConf.curName}} [{{file.name}}] - {{file.size}} bytes</li>
+		        </ul>
+			</div>
+	    </ng-template>        
+</p-fileUpload>

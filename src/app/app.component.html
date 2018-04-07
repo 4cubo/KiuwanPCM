@@ -12,16 +12,15 @@
 <!-- 	<mat-icon class="example-icon" aria-hidden="true">verified_user</mat-icon> -->
 	<mat-icon class="example-icon" aria-hidden="true" routerLink="/admu">face</mat-icon>
 	<mat-icon class="example-icon" aria-hidden="true" routerLink="/login">power_settings_new</mat-icon>
-	
   </mat-toolbar-row>
 </mat-toolbar>
 
-
  
-<nav *ngIf="currentUser">
+<nav>
 	<mat-chip-list>
 	    <mat-chip color="accent" selected="true" routerLink="/dashboard">Dashboard</mat-chip>
 		<mat-chip color="accent" selected="false" routerLink="/applications">Applications</mat-chip>
+		<mat-chip color="accent" selected="false" routerLink="/srequest">Request</mat-chip>
 	</mat-chip-list>
 </nav>
 

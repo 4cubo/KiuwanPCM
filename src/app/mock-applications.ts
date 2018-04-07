@@ -1,4 +1,4 @@
-import { Application } from './application';
+import { Application } from './classes/application';
 
 export const MOCK_APPLICATIONS: Application[] = [
   { id: 11, name: 'Acelera 11', description: "Desc. 11" },

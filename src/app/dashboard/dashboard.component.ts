@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Application} from '../application';
-import {ApplicationProviderService} from '../applicationprovider.service';
+import {Application} from '../classes/application';
+import {ApplicationProviderService} from '../_services/applicationprovider.service';
 
 
  import {User} from '../_user/user';                     /* @aaa   Listado de usuarios */
