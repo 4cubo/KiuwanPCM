@@ -12,16 +12,21 @@ import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// @aaa Angular Material
+/* @aaa Angular Material */
 import { MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule} from '@angular/material';
 import { MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule, MatFormFieldModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 
-import { GrowlModule} from 'primeng/growl';
+import { GrowlModule} from 'primeng/growl';   /* @aaa @TODO Delete from project, not used yet in upload file component*/
 import { FileUploadModule} from 'primeng/fileupload';
-import { Message} from 'primeng/api';
+import { Message} from 'primeng/api';         /* @aaa @TODO Delete from project, not used yet in upload file component*/
+import { OrganizationChartModule } from 'primeng/organizationchart';
+import { TabViewModule } from 'primeng/tabview';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AlertComponent } from './_alert/alert.component';
@@ -72,16 +77,21 @@ import { NewSastlightClientRequestComponent } from './_sastlight-client-request/
 //    MatFileUploadModule,
 //    MatFormFieldModule
     GrowlModule,
-    FileUploadModule
+    FileUploadModule,
+    OrganizationChartModule,
+    TabViewModule,
+    FieldsetModule,
+    ConfirmDialogModule
   ],
   providers: [
     AuthGuard,
+    JwtInterceptorProvider,
+    UserService,
     ApplicationProviderService,
     MessageService,
     AlertService,
     AuthenticationService,
-    UserService,
-    JwtInterceptorProvider
+    ConfirmationService
   ],
   bootstrap: [
     AppComponent
