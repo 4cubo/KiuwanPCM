@@ -71,41 +71,41 @@
 <!-- 									</form> -->
 <!-- 							    </p-tabPanel> -->
 							    <p-tabPanel header="Lab Project Manager">
-                                                                    <form  #f="ngForm" novalidate class="example-form">
-                                                                        <!--  PM User ID <- PM UID -->
-                                                                        <mat-form-field class="form-app-data-input">
-                                                                                <input placeholder="Project Manager UID"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_UID" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
-                                                                        </mat-form-field>
-                                                                        <!--  Provider -->
-                                                                        <mat-form-field class="form-app-data-input">
-                                                                                <input placeholder="Provider"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_PROV" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
-                                                                        </mat-form-field>
-                                                                        <br>									
-                                                                        <!--  PM Isban eMail 	<- 	PM_EMA -->
-                                                                        <mat-form-field class="form-app-data-input">
-                                                                                <input placeholder="PM Isban eMail"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_EMA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
-                                                                        </mat-form-field>
-                                                                        <br>
-                                                                        <!--  PM Firstname	<- 	PM_FN -->
-                                                                        <mat-form-field class="form-app-data-input">
-                                                                                <input placeholder="PM Firstname"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_FN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
-                                                                        </mat-form-field>
-                                                                        <br>
-                                                                        <!--  PM Lastname		<-	PM_LN -->
-                                                                        <mat-form-field class="form-app-data-input">
-                                                                                <input placeholder="PM Lastname"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_LN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
-                                                                        </mat-form-field>
-                                                                        <br>
-                                                                        <!--  Bussines Area	<-	PM_BA -->
-                                                                        <mat-form-field class="form-app-data-input">
-                                                                                <input placeholder="Bussines Area"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_BA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
-                                                                        </mat-form-field>
-                                                                        <br>
-                                                                        <!--  Functional Domain	<-	PM_FC -->
-                                                                        <mat-form-field class="form-app-data-input">
-                                                                                <input placeholder="Functional Domain"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_FC" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
-                                                                        </mat-form-field>
-                                                                    </form>
+	                                <form  #f="ngForm" novalidate class="example-form">
+	                                    <!--  PM User ID <- PM UID -->
+	                                    <mat-form-field class="form-app-data-input">
+	                                            <input placeholder="Project Manager UID"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_UID" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                    </mat-form-field>
+	                                    <!--  Provider -->
+	                                    <mat-form-field class="form-app-data-input">
+	                                            <input placeholder="Provider"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_PROV" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                    </mat-form-field>
+	                                    <br>									
+	                                    <!--  PM Isban eMail 	<- 	PM_EMA -->
+	                                    <mat-form-field class="form-app-data-input">
+	                                            <input placeholder="PM Isban eMail"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_EMA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                    </mat-form-field>
+	                                    <br>
+	                                    <!--  PM Firstname	<- 	PM_FN -->
+	                                    <mat-form-field class="form-app-data-input">
+	                                            <input placeholder="PM Firstname"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_FN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                    </mat-form-field>
+	                                    <br>
+	                                    <!--  PM Lastname		<-	PM_LN -->
+	                                    <mat-form-field class="form-app-data-input">
+	                                            <input placeholder="PM Lastname"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_LN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                    </mat-form-field>
+	                                    <br>
+	                                    <!--  Bussines Area	<-	PM_BA -->
+	                                    <mat-form-field class="form-app-data-input">
+	                                            <input placeholder="Bussines Area"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_BA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                    </mat-form-field>
+	                                    <br>
+	                                    <!--  Functional Domain	<-	PM_FC -->
+	                                    <mat-form-field class="form-app-data-input">
+	                                            <input placeholder="Functional Domain"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_FC" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                    </mat-form-field>
+	                                </form>
 							    </p-tabPanel>
 							    <p-tabPanel header="Project">
 							        <form  #f="ngForm" novalidate class="example-form">
@@ -222,12 +222,13 @@
 							<button type="text" (click)="confirmCreate()" pButton icon="fa-check" label="Create Infra"></button>
 							<button type="text" (click)="confirmDelete()" pButton icon="fa-check" label="Delete Temporal File"></button>
 							<button type="text" (click)="updateGraphData()" pButton icon="fa-check" label="Test Chart"></button>
+							<button type="text"  pButton icon="fa-check" label="Save {{uploadedFile.fileConf.curName}} "></button>
 <!-- 							<button mat-button>Create Infra for Application</button> -->
 <!-- 							<button mat-button>Delete Temporal File</button> -->
 						</mat-card-actions>
 					</mat-card>
-
-					<mat-card class="example-card"> 
+<!-- 					<mat-card class="example-card">  -->
+					<mat-card> 
 						<mat-card-header>
 							<mat-card-title>
 								Info Chart:
@@ -240,6 +241,7 @@
 									[(selection)]="selectedNode"
 									(onNodeSelect)="onNodeSelect($event)"
 									styleClass="company">
+							    
 							    <ng-template let-node pTemplate="person">
 							        <div class="node-header ui-corner-top">{{node.label}}</div>
 							        <div class="node-content">
@@ -247,9 +249,57 @@
 							           <div>{{node.data.name}}</div>
 							        </div>
 							    </ng-template>
+							    
 							    <ng-template let-node pTemplate="department">
 							        {{node.label}}
 							    </ng-template>
+							    
+							    <ng-template let-node pTemplate="sastrequest">
+							        <div class="node-header ui-corner-top">{{node.label}}</div>
+							        <div class="node-content">
+							        	<img src="assets/excel-8.png" width="32">
+							           	<div><b>{{node.data.curName}}</b></div>
+							           	<div>{{node.data.fileName}}</div>
+							        </div>
+							    </ng-template>
+							  
+							    <ng-template let-node pTemplate="project">
+							        <div class="node-header ui-corner-top">{{node.data.project}}</div>
+							        <div class="node-content">
+							        	<img src="assets/todo.png" width="32">
+							        	<div style="text-align: left; align-content: left;">
+								           <div class="spacer"><b>Application:</b></div><div>{{node.data.app}}</div>
+								           <div><b>Project:</b>{{node.data.projectZ}}</div>
+								           <div><b>Client:</b>{{node.data.client}}</div>
+								           <div><b>Provider:</b>{{node.data.provider}}</div>
+								           <div><b>PM:</b>{{node.data.pmn}}</div>
+								           <div><b>B.Area:</b>{{node.data.ba}}</div>
+								           <div><b>F.Domain:</b>{{node.data.fc}}</div>
+								        </div>
+							        </div>
+							    </ng-template>
+							    
+							    <ng-template let-node pTemplate="kiuwanapp">
+							        <div class="node-header ui-corner-top">{{node.label}}</div>
+							        <div class="node-content">
+							        	<img src="assets/kiuwan.jpg" width="32">
+							        	<div style="text-align: left; align-content: left;">
+								           <div><b>{{node.data.name}}</b></div>
+								        </div>
+							        </div>
+							    </ng-template>
+							    
+							    <ng-template let-node pTemplate="os">
+							        <div class="node-header ui-corner-top">{{node.label}}</div>
+							        <div class="node-content">
+							        	<img src="assets/factory.png" width="32">
+							        	<div style="text-align: left; align-content: left;">
+								           <div><b>{{node.data.factory}}</b></div>
+								           <div><b>{{node.data.os}}</b></div>
+								        </div>
+							        </div>
+							    </ng-template>
+							    
 							</p-organizationChart>
 							
 						</mat-card-content> 

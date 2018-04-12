@@ -33,11 +33,13 @@ export class NewSastlightClientRequestComponent implements OnInit {
     console.log("-------------->onUpload: event.xhr.response=" + JSON.stringify(event.xhr.response));
     const response = JSON.parse(event.xhr.response);
     this.msgs = [{severity: 'info', summary: 'Uploaded', detail: 'FILE UPLOADED'}];
-    for (let file of event.files) {
+    for (let file of event.files) { // only can be one
       file.fileConf = response.fileConf;
-      file.parsedStr = JSON.stringify(response.parsed);
+      file.parsedStr = JSON.stringify(response);
       file.parsed = response.parsed;
+      file.fileName = response.file;
       this.uploadedFile = file;
+      this.updateGraphData ();
     }
   }
 
@@ -81,40 +83,75 @@ export class NewSastlightClientRequestComponent implements OnInit {
     console.log("Selected detail:" + event.node.label);
   }
 
+  // Put on server this logic
   updateGraphData (){
-    let rootNodeF: TreeNode =  {
-        label : this.uploadedFile.file,
-        data: { name: this.uploadedFile.fileConf.curName, 'avatar': 'walter.jpg'},
-        type: 'person',
+    let excelFileNode: TreeNode =  {
+        label : 'SAST REQUEST FILE',
+        data: { fileName : this.uploadedFile.fileName, curName : this.uploadedFile.fileConf.curName + "   ", 'avatar': 'walter.jpg'},
+        type: 'sastrequest',
         styleClass: 'ui-person',
         expanded: true,
         children: []
     };
 
-    let rootNodeA: TreeNode =  {
-        label : this.uploadedFile.parsed.P_CLI + '  ' + this.uploadedFile.parsed.P_APP,
-        data: {name: this.uploadedFile.parsed.P_PRO, 'avatar': 'walter.jpg'},
-        type: 'person',
+    let projectNode: TreeNode =  {
+        label : 'SAST REQUEST INFO',
+        data: { projectZ : this.uploadedFile.parsed.P_PRO,
+                project : this.uploadedFile.parsed.P_DES,
+                client : this.uploadedFile.parsed.P_CLI,
+                app : this.uploadedFile.parsed.P_APP,
+                provider: this.uploadedFile.parsed.P_PROV,
+                ba: this.uploadedFile.parsed.PM_BA,
+                fc: this.uploadedFile.parsed.PM_FC,
+                pmn: (this.uploadedFile.parsed.PM_FN + ' '+ this.uploadedFile.parsed.PM_LN)
+        },
+        type: 'project',
         styleClass: 'ui-person',
         expanded: true,
         children: []
     };
-    
+
     let subAppsNodes: TreeNode[] = new Array (this.uploadedFile.parsed.__subAppNameList.length);
     for (let i = 0; i < this.uploadedFile.parsed.__subAppNameList.length; i++){  
       subAppsNodes[i] = <TreeNode> {
         label : this.uploadedFile.parsed.__subAppNameList[i],
-        data: { name: this.uploadedFile.parsed.P_PRO, 'avatar': 'walter.jpg'},
-        type: 'person',
+        data: { name: this.uploadedFile.parsed.__subAppNameList2[i]}, //, 'avatar': 'walter.jpg'
+        type: 'kiuwanapp',
         styleClass: 'ui-person',
         expanded: true,
         children: []
       };
-      rootNodeA.children = subAppsNodes;
+      projectNode.children = subAppsNodes;
     }
 
-    rootNodeF.children.push (rootNodeA);
-    this.data1 = [rootNodeF];
+    // OS and Factory
+    if(!this.uploadedFile.parsed.soData) this.uploadedFile.parsed.soData = [];
+    
+    let osNodes: TreeNode[] = new Array ( this.uploadedFile.parsed.soData.length );
+    for (let i = 0; i < this.uploadedFile.parsed.soData.length; i++) {
+      osNodes[i] = <TreeNode> {
+        label : this.uploadedFile.parsed.soData[i].F_OSI,
+        data: { factory: this.uploadedFile.parsed.soData[i].F_NAM, os : this.uploadedFile.parsed.soData[i].F_OST },
+        type: 'os',
+        styleClass: 'ui-person',
+        expanded : true,
+        children : [{
+              label: 'Token',
+              styleClass: 'department-cto'
+            }]
+      };
+      subAppsNodes[i].children.push( osNodes[i] );
+      subAppsNodes[i].children.push({
+              label: 'Token',
+              styleClass: 'department-cto'
+            });
+    }
+
+    excelFileNode.children.push (projectNode);
+    this.data1 = [];
+    this.data1 = [excelFileNode];
+
+    console.log ( 'OS:', JSON.stringify( this.uploadedFile.parsed.soData) );
   }
 
   ngOnInit() {

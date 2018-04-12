@@ -1,4 +1,26 @@
+.spacer {
+  flex: 1 1 auto;
+}
 
+.app-toolbar {
+	background-color : #E40014;
+}
+
+/*   @aaa p-button  styles .ui-fileupload .ui-fileupload-buttonbar .ui-fileupload-content */
+.ui-fileupload-content,
+.ui-fileupload,
+.ui-fileupload-buttonbar,
+.ui-button,  
+.ui-button.choose,
+button.ui-button.ui-state-default, 
+.ui-button.ui-state-default.mycolor {
+  background-color: #E40014;
+  border-color: #E40014;
+  color: #00000;
+}
+.fileHeader{
+	color: #00000;
+}
 .example-card {
   mix-width: 100%;
   max-width: 100%;
@@ -35,13 +57,13 @@
 }
 
 .node-header {
-	background-color: #495ebb;
+	background-color: #E40014;
 	color: #ffffff;
 }
 
 .node-content {
 	text-align: center;
-	border: 1px solid #495ebb;
+	border: 1px solid #E40014;
 }
 
 .node-content img {
@@ -64,7 +86,7 @@
 }
 
 .ui-person .ui-node-toggler {
-	color: #495ebb !important;
+	color: #E40014 !important;
 }
 
 .department-cto .ui-node-toggler {
