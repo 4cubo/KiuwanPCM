@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
- 
 import { appConfig } from '../app.config';
 import { User } from '../_user/user';
  

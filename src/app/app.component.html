@@ -7,11 +7,11 @@
 
 <mat-toolbar color="accent"  class="app-toolbar">
   <mat-toolbar-row>
-	<span>{{title}}&nbsp;&nbsp;<h3 *ngIf="currentUser">{{currentUser.firstName}}&nbsp;{{currentUser.lastName}}</h3></span>
+	<span>{{title}}&nbsp;&nbsp;<h5 *ngIf="currentUser">{{currentUser.firstName}}&nbsp;{{currentUser.lastName}}</h5></span>
 	<span class="example-spacer"></span>
-<!-- 	<mat-icon class="example-icon" aria-hidden="true">verified_user</mat-icon> -->
-	<mat-icon class="example-icon" aria-hidden="true" routerLink="/admu">face</mat-icon>
-	<mat-icon class="example-icon" aria-hidden="true" routerLink="/login">power_settings_new</mat-icon>
+<!-- 	<mat-icon *ngIf="!currentUser" class="example-icon" aria-hidden="true" routerLink="/register" >verified_user</mat-icon> -->
+	<mat-icon *ngIf="currentUser" class="example-icon" aria-hidden="true" routerLink="/admu">face</mat-icon>
+	<mat-icon *ngIf="currentUser" class="example-icon" aria-hidden="true" (click)="logout()">power_settings_new</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
 

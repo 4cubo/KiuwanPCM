@@ -39,6 +39,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { ServiceRequestComponent } from './_sastlight-client-requests/client-request.component';
 import { NewSastlightClientRequestComponent } from './_sastlight-client-request/new-sastlight-client-request.component';
+import { ClientRequestProviderService } from './_services/clientrequestprovider.service';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { NewSastlightClientRequestComponent } from './_sastlight-client-request/
     MessageService,
     AlertService,
     AuthenticationService,
-    ConfirmationService
+    ConfirmationService,
+    ClientRequestProviderService
   ],
   bootstrap: [
     AppComponent

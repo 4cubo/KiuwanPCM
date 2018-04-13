@@ -1,9 +1,11 @@
+import { ClientRequestProviderService } from '../_services/clientrequestprovider.service';
 import {User} from '../_user/user';
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Message} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {TreeNode} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
+
 
 @Component({
   selector: 'app-new-sastlight-client-request',
@@ -18,7 +20,10 @@ export class NewSastlightClientRequestComponent implements OnInit {
   token: string;
   data1: TreeNode[];
 
-  constructor(private confirmationService: ConfirmationService) {
+  constructor (
+    private confirmationService: ConfirmationService,
+    private requestService: ClientRequestProviderService
+  ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log("NewSastlightClientRequestComponent.constructor user.token=:" + this.currentUser.token); //@aaa delete 
     this.token = this.currentUser.token;
@@ -48,7 +53,33 @@ export class NewSastlightClientRequestComponent implements OnInit {
     event.xhr.setRequestHeader('Authorization', 'Bearer ' + this.token);
   }
 
+  
+  resultSaveRequest( ) {
+   this.requestService.saveRequest( { obj : this.uploadedFile } )
+   .subscribe(
+      data => {
+        console.log("-^^^^^^^^^^^^^^^^>" + JSON.stringify( data.insertedIds )); // 
+        this.msgs = [{severity: 'info', summary: 'Request saved with id=' +
+           data.ops[0].fileConf.curName + '['+ data.insertedIds[0] +']', detail: 'CREATE'}];
+      },
+      error => {
+        this.msgs = [{severity: 'error', summary: 'Error', detail: error }];
+      }
+    );
+  }
 
+  confirmSaveTempFile() {
+    this.confirmationService
+    .confirm({
+      message: 'Are you sure that you want to save SAST Request data for ' + this.uploadedFile.fileName + '?',
+      header: 'Confirm save ' + this.uploadedFile.fileConf.curName,
+      icon: 'fa fa-question-circle',
+      accept: () => this.resultSaveRequest(),
+      reject: () => this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}]
+    }
+    );
+  }
+  
   confirmCreate() {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to create infra for application?',

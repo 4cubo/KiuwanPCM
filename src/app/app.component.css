@@ -17,7 +17,7 @@
 	margin-top: 10px;
 	display: inline-block;
 /* 	background-color: #eee; */
-	border-radius: 4px;
+	border-radius: 2px;
 }
 
 
@@ -37,5 +37,5 @@
 /* 	margin-top: 10px; */
 	display: inline-block;
 	background-color : #E40014;
-	border-radius: 20px;  /*4px;*/
+	border-radius: 2px;  /*4px;*/
 }

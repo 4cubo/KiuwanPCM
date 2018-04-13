@@ -7,17 +7,18 @@
 }
 
 /*   @aaa p-button  styles .ui-fileupload .ui-fileupload-buttonbar .ui-fileupload-content */
-.ui-fileupload-content,
-.ui-fileupload,
-.ui-fileupload-buttonbar,
-.ui-button,  
-.ui-button.choose,
-button.ui-button.ui-state-default, 
-.ui-button.ui-state-default.mycolor {
-  background-color: #E40014;
-  border-color: #E40014;
-  color: #00000;
-}
+/* .ui-fileupload-content, */
+/* .ui-fileupload, */
+/* .ui-fileupload-buttonbar, */
+/* .ui-button,   */
+/* .ui-button.choose, */
+/* button.ui-button.ui-state-default,  */
+/* .ui-button.ui-state-default.mycolor { */
+/*   background-color: #E40014; */
+/*   border-color: #E40014; */
+/*   color: #00000; */
+/* } */
+
 .fileHeader{
 	color: #00000;
 }

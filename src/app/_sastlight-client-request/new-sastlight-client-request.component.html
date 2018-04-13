@@ -1,35 +1,3 @@
-<!-- <mat-card class="example-card"> -->
-<!--   <mat-card-header color="accent"> -->
-<!--     <mat-card-title>Upload  SAST Light Request Excel File</mat-card-title> -->
-<!--   </mat-card-header> -->
-<!--   <mat-card-content> -->
-<!-- <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate class="example-form"> -->
-<!-- <label for="singleFile">Upload file</label> -->
-<!-- <input id="singleFile" type="file" [fileUploadInputFor]="fileUploadQueue" /> -->
-<!-- <br> -->
-
-<!-- <mat-file-upload-queue #fileUploadQueue [fileAlias]="'file'" [httpUrl]="'http://localhost:400/file'"> -->
-<!-- 	<mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload> -->
-<!-- </mat-file-upload-queue> -->
-<!-- </form> -->
-<!-- </mat-card-content> -->
- 
-<!-- </mat-card> -->
-
-<!-- <div [fileUploadInputFor]="fileUploadQueue" class="upload-drop-zone"> -->
-<!--     Just drag and drop files here -->
-<!-- </div> -->
- 
- 
-<!-- <div style="width: 500px; background-color: red;"> -->
-<!--     <mat-file-upload-queue #fileUploadQueue -->
-<!--         [fileAlias]="'file'" -->
-<!--         [httpUrl]="'http://localhost:4000/jax-rs-jersey-application-sample'" multiple> -->
-    
-<!--         <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload> -->
-<!--     </mat-file-upload-queue> -->
-<!-- </div> -->
-
 <p-growl [value]="msgs"></p-growl>
     
 <h3 class="first">New <b>SAST</b> Light Service Request Excel File:</h3> 
@@ -45,12 +13,6 @@
 	maxFileSize="1000000">
 	    <ng-template pTemplate="content">
 	    	<div>
-<!-- 		        <ul *ngIf="uploadedFiles.length"> -->
-<!-- 		            <li *ngFor="let file of uploadedFiles"> -->
-<!-- 		            	{{file.fileConf.curName}} [{{file.name}}] - {{file.size}} bytes -->
-<!-- 		            	{{file.parsed}} -->
-<!-- 		            </li> -->
-<!-- 		        </ul> -->
 				<div *ngIf="uploadedFile">
 					<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425">
 					</p-confirmDialog>
@@ -222,13 +184,13 @@
 							<button type="text" (click)="confirmCreate()" pButton icon="fa-check" label="Create Infra"></button>
 							<button type="text" (click)="confirmDelete()" pButton icon="fa-check" label="Delete Temporal File"></button>
 							<button type="text" (click)="updateGraphData()" pButton icon="fa-check" label="Test Chart"></button>
-							<button type="text"  pButton icon="fa-check" label="Save {{uploadedFile.fileConf.curName}} "></button>
+							<button type="text"  (click)="confirmSaveTempFile()" pButton icon="fa-check" label="Save {{uploadedFile.fileConf.curName}} "></button>
 <!-- 							<button mat-button>Create Infra for Application</button> -->
 <!-- 							<button mat-button>Delete Temporal File</button> -->
 						</mat-card-actions>
 					</mat-card>
 <!-- 					<mat-card class="example-card">  -->
-					<mat-card> 
+					<mat-card class="example-card"> 
 						<mat-card-header>
 							<mat-card-title>
 								Info Chart:
