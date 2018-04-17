@@ -18,6 +18,7 @@ import { MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatCh
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFileUploadModule } from 'angular-material-fileupload';
+//import { MatGridListModule } from '@angular/material/grid';
 
 import { GrowlModule} from 'primeng/growl';   /* @aaa @TODO Delete from project, not used yet in upload file component*/
 import { FileUploadModule} from 'primeng/fileupload';
@@ -27,6 +28,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+
 
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AlertComponent } from './_alert/alert.component';
@@ -40,6 +42,7 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 import { ServiceRequestComponent } from './_sastlight-client-requests/client-request.component';
 import { NewSastlightClientRequestComponent } from './_sastlight-client-request/new-sastlight-client-request.component';
 import { ClientRequestProviderService } from './_services/clientrequestprovider.service';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,7 @@ import { ClientRequestProviderService } from './_services/clientrequestprovider.
     BrowserModule,
 //    MatFileUploadModule,
 //    MatFormFieldModule
+    MatGridListModule,
     GrowlModule,
     FileUploadModule,
     OrganizationChartModule,
@@ -93,7 +97,7 @@ import { ClientRequestProviderService } from './_services/clientrequestprovider.
     AlertService,
     AuthenticationService,
     ConfirmationService,
-    ClientRequestProviderService
+    ClientRequestProviderService,
   ],
   bootstrap: [
     AppComponent

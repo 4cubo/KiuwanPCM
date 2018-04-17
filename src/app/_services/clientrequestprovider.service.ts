@@ -5,9 +5,18 @@ import { HttpClient } from '@angular/common/http';
 import { appConfig } from '../app.config';
 
 import {Application} from '../classes/application';
+import { SASTRequest } from '../classes/sastrequest';
 import {MOCK_APPLICATIONS} from '../mock-applications'; //@aaa mock-applications
 
 import {MessageService } from '../message.service';
+
+
+export class SASTRequestSaveResponse {
+  result: number;
+  dbId: string;
+  SASTId: string;
+}
+
 
 @Injectable()
 export class ClientRequestProviderService {
@@ -19,24 +28,19 @@ export class ClientRequestProviderService {
     console.log("Constructor de ClientRequestProviderService"); //@aaa delete
   }
 
-  applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
-
-  saveRequest( requestData ){
+  saveRequest (requestData){
     console.log("ClientRequestProviderService:saveRequest calling http server...." + JSON.stringify(requestData)); //@aaa delete
-    return this.http.post(appConfig.apiUrl + '/uploadFile/saveRequest', requestData);
+    return this.http.post<SASTRequestSaveResponse>(appConfig.apiUrl + '/uploadFile/saveRequest', requestData);
   }
 
-  getApplications(): Observable<Application[]> {
+  getAll() {
     // Todo: send the message _after_ fetching the applications
-    this.messageService.add('ClientRequestProviderService: resolving applications');
-
-    return of(MOCK_APPLICATIONS);
+    this.messageService.add('ClientRequestProviderService.getAll');
+    return this.http.get<SASTRequest[]>(appConfig.apiUrl + '/request');
   }
 
-  getApplication(id: number): Observable<Application> {
-    // Todo: send the message _after_ fetching the hero
-    this.messageService.add(`ClientRequestProviderService: fetched application id=${id}`);
-    return of(MOCK_APPLICATIONS.find(app => app.id === id));
+  getById(_id: string){
+    this.messageService.add(`ClientRequestProviderService.getById: id=${_id}`);
+    return this.http.get(appConfig.apiUrl + '/request/' + _id);
   }
-
 }

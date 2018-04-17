@@ -1,8 +1,8 @@
-import { AuthenticationService } from './_services/authentication.service';
+import {AuthenticationService} from './_services/authentication.service';
 import {Component, OnInit} from '@angular/core';
 import {User} from './_user/user';
 import {UserService} from './_services/index';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 
 
 @Component({
@@ -28,8 +28,8 @@ export class AppComponent implements OnInit {
     console.log("AdminUserComponent.ngOnInit");
     //this.loadAllUsers();
   }
-  
-  logout () {
+
+  logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }

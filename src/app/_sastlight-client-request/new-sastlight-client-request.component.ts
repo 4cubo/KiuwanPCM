@@ -1,10 +1,13 @@
 import { ClientRequestProviderService } from '../_services/clientrequestprovider.service';
 import {User} from '../_user/user';
+import { appConfig } from '../app.config';
+import { SASTRequest, SASTRequest_OS } from '../classes/sastrequest';
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Message} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {TreeNode} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -13,12 +16,13 @@ import {ConfirmationService} from 'primeng/api';
   styleUrls: ['./new-sastlight-client-request.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class NewSastlightClientRequestComponent implements OnInit {
 
+export class NewSastlightClientRequestComponent implements OnInit {
   msgs: Message[];
   currentUser: User;
   token: string;
   data1: TreeNode[];
+  uploadURL: string = appConfig.apiUrl + '/uploadFile';  //@aaa @TODO  la utl del p-fileupload no se esta cogiendo de conf
 
   constructor (
     private confirmationService: ConfirmationService,
@@ -29,23 +33,18 @@ export class NewSastlightClientRequestComponent implements OnInit {
     this.token = this.currentUser.token;
   }
 
-  private uploadURL: "http://localhost:4000/uploadFile/getData"; /* @aaa  no tira al meter {{uploadURL}} en el elemento*/
-
-  uploadedFile: any = null;
-
+  uploadedFile: SASTRequest;
 
   onUpload(event) {
-    console.log("-------------->onUpload: event.xhr.response=" + JSON.stringify(event.xhr.response));
-    const response = JSON.parse(event.xhr.response);
+    console.log("onUpload: event.xhr.response=" + JSON.stringify(event.xhr.response));
+    let response = JSON.parse(event.xhr.response);
     this.msgs = [{severity: 'info', summary: 'Uploaded', detail: 'FILE UPLOADED'}];
-    for (let file of event.files) { // only can be one
-      file.fileConf = response.fileConf;
-      file.parsedStr = JSON.stringify(response);
-      file.parsed = response.parsed;
-      file.fileName = response.file;
-      this.uploadedFile = file;
-      this.updateGraphData ();
-    }
+//    for (let file of event.files) { // only can be one
+//      // response[''] = response;
+//      break;
+//    }
+    this.uploadedFile = response;
+    this.updateGraphData ();
   }
 
   onBeforeSend(event) {
@@ -53,17 +52,21 @@ export class NewSastlightClientRequestComponent implements OnInit {
     event.xhr.setRequestHeader('Authorization', 'Bearer ' + this.token);
   }
 
-  
+  /* Send SASTRequest to be saved */
   resultSaveRequest( ) {
    this.requestService.saveRequest( { obj : this.uploadedFile } )
    .subscribe(
-      data => {
-        console.log("-^^^^^^^^^^^^^^^^>" + JSON.stringify( data.insertedIds )); // 
-        this.msgs = [{severity: 'info', summary: 'Request saved with id=' +
-           data.ops[0].fileConf.curName + '['+ data.insertedIds[0] +']', detail: 'CREATE'}];
+      result => {
+        if(result && result.result  ){
+          console.log("-^^^^^^^^^^^^^^^^>", result );
+          this.msgs = [{severity: 'info', summary: 'Request saved with id='+
+             result.SASTId + '[' + result.dbId + ']', detail: 'CREATE'}];
+        } else {
+          this.msgs = [{severity: 'error', summary: 'Error'  }];
+        }
       },
       error => {
-        this.msgs = [{severity: 'error', summary: 'Error', detail: error }];
+        this.msgs = [{severity: 'error', summary: 'Error', detail: error.error }];
       }
     );
   }
@@ -71,8 +74,8 @@ export class NewSastlightClientRequestComponent implements OnInit {
   confirmSaveTempFile() {
     this.confirmationService
     .confirm({
-      message: 'Are you sure that you want to save SAST Request data for ' + this.uploadedFile.fileName + '?',
-      header: 'Confirm save ' + this.uploadedFile.fileConf.curName,
+      message: 'Are you sure that you want to save SAST Request data for ' + this.uploadedFile.name + '?',
+      header: 'Confirm save ' + this.uploadedFile.curSASTId,
       icon: 'fa fa-question-circle',
       accept: () => this.resultSaveRequest(),
       reject: () => this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}]
@@ -116,9 +119,10 @@ export class NewSastlightClientRequestComponent implements OnInit {
 
   // Put on server this logic
   updateGraphData (){
+    console.log( "updateGraphData------------->", this.uploadedFile  );
     let excelFileNode: TreeNode =  {
         label : 'SAST REQUEST FILE',
-        data: { fileName : this.uploadedFile.fileName, curName : this.uploadedFile.fileConf.curName + "   ", 'avatar': 'walter.jpg'},
+        data: { fileName : this.uploadedFile.name, curName : this.uploadedFile.curSASTId + "   ", 'avatar': 'walter.jpg'},
         type: 'sastrequest',
         styleClass: 'ui-person',
         expanded: true,
@@ -127,14 +131,14 @@ export class NewSastlightClientRequestComponent implements OnInit {
 
     let projectNode: TreeNode =  {
         label : 'SAST REQUEST INFO',
-        data: { projectZ : this.uploadedFile.parsed.P_PRO,
-                project : this.uploadedFile.parsed.P_DES,
-                client : this.uploadedFile.parsed.P_CLI,
-                app : this.uploadedFile.parsed.P_APP,
-                provider: this.uploadedFile.parsed.P_PROV,
-                ba: this.uploadedFile.parsed.PM_BA,
-                fc: this.uploadedFile.parsed.PM_FC,
-                pmn: (this.uploadedFile.parsed.PM_FN + ' '+ this.uploadedFile.parsed.PM_LN)
+        data: { projectZ : this.uploadedFile.P_PRO,
+                project : this.uploadedFile.P_DES,
+                client : this.uploadedFile.P_CLI,
+                app : this.uploadedFile.P_APP,
+                provider: this.uploadedFile.P_PROV,
+                ba: this.uploadedFile.PM_BA,
+                fc: this.uploadedFile.PM_FC,
+                pmn: (this.uploadedFile.PM_FN + ' ' + this.uploadedFile.PM_LN)
         },
         type: 'project',
         styleClass: 'ui-person',
@@ -142,11 +146,11 @@ export class NewSastlightClientRequestComponent implements OnInit {
         children: []
     };
 
-    let subAppsNodes: TreeNode[] = new Array (this.uploadedFile.parsed.__subAppNameList.length);
-    for (let i = 0; i < this.uploadedFile.parsed.__subAppNameList.length; i++){  
+    let subAppsNodes: TreeNode[] = new Array (this.uploadedFile.__subAppNameList.length);
+    for (let i = 0; i < this.uploadedFile.__subAppNameList.length; i++){  
       subAppsNodes[i] = <TreeNode> {
-        label : this.uploadedFile.parsed.__subAppNameList[i],
-        data: { name: this.uploadedFile.parsed.__subAppNameList2[i]}, //, 'avatar': 'walter.jpg'
+        label : this.uploadedFile.__subAppNameList[i],
+        data: { name: this.uploadedFile.__subAppNameList2[i]}, //, 'avatar': 'walter.jpg'
         type: 'kiuwanapp',
         styleClass: 'ui-person',
         expanded: true,
@@ -156,13 +160,15 @@ export class NewSastlightClientRequestComponent implements OnInit {
     }
 
     // OS and Factory
-    if(!this.uploadedFile.parsed.soData) this.uploadedFile.parsed.soData = [];
-    
-    let osNodes: TreeNode[] = new Array ( this.uploadedFile.parsed.soData.length );
-    for (let i = 0; i < this.uploadedFile.parsed.soData.length; i++) {
+    if(!this.uploadedFile.soData) {
+        this.uploadedFile.soData = SASTRequest_OS[0];
+    }
+
+    let osNodes: TreeNode[] = new Array ( this.uploadedFile.soData.length );
+    for (let i = 0; i < this.uploadedFile.soData.length; i++) {
       osNodes[i] = <TreeNode> {
-        label : this.uploadedFile.parsed.soData[i].F_OSI,
-        data: { factory: this.uploadedFile.parsed.soData[i].F_NAM, os : this.uploadedFile.parsed.soData[i].F_OST },
+        label : this.uploadedFile.soData[i].F_OSI,
+        data: { factory: this.uploadedFile.soData[i].F_NAM, os : this.uploadedFile.soData[i].F_OST },
         type: 'os',
         styleClass: 'ui-person',
         expanded : true,
@@ -182,7 +188,7 @@ export class NewSastlightClientRequestComponent implements OnInit {
     this.data1 = [];
     this.data1 = [excelFileNode];
 
-    console.log ( 'OS:', JSON.stringify( this.uploadedFile.parsed.soData) );
+    console.log ( 'OS:', JSON.stringify( this.uploadedFile.soData) );
   }
 
   ngOnInit() {

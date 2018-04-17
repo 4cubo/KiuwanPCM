@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Application} from '../classes/application';
-import {MessageService} from '../message.service';
-
-import {ApplicationProviderService} from '../_services/applicationprovider.service';
-
-import {ViewChild, AfterViewInit} from '@angular/core';
-
-import {MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
-import {DataSource, SelectionModel} from '@angular/cdk/collections';
+// import { Application} from '../classes/application';
+import { MessageService} from '../message.service';
+// import { ApplicationProviderService} from '../_services/applicationprovider.service';
+import { ClientRequestProviderService } from '../_services/clientrequestprovider.service';
+import { ViewChild, AfterViewInit} from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
+import { DataSource, SelectionModel} from '@angular/cdk/collections';
 import { Router } from '@angular/router';
-import {User} from '../_user/user';
+import { User} from '../_user/user';
+import { SASTRequest } from '../classes/sastrequest';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,28 +22,28 @@ export class ServiceRequestComponent implements OnInit, AfterViewInit  {
   currentUser: User;
   
   constructor(
-    private appProv: ApplicationProviderService,
+    //private appProv: ApplicationProviderService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private requestService: ClientRequestProviderService
   ) {
     
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log("Constructor de ApplicationsComponent: " + JSON.stringify(this.currentUser)); //@aaa delete
   }
 
-  // applications: Application[] = MOCK_APPLICATIONS; //@aaa mock-applications
-  applications: Application[];
+  requestList: SASTRequest[];
 
-
-  dataSource = new MatTableDataSource<Application>(this.applications);
-  displayedColumns = ['select', 'id', 'name', 'descriptcion'];
+  dataSource = new MatTableDataSource<SASTRequest>(this.requestList);
+  //displayedColumns = ['select', 'id', 'name', 'descriptcion'];
+  displayedColumns = ['select', 'P_DES', 'P_APP', 'P_PRO', 'PM_BA', 'PM_FC', 'P_NUMTEC', 'P_CLI'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
   /** Row selection setup */
-  selection = new SelectionModel<Application>(true, []);
+  selection = new SelectionModel<SASTRequest>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -58,34 +57,34 @@ export class ServiceRequestComponent implements OnInit, AfterViewInit  {
     this.selection.clear() :
     this.dataSource.data.forEach(row => this.selection.select(row));
   }
-  
-  
+
   onRowClicked(row) {
-    console.log('ApplicationsComponent.onRowClicked  clicked: ', row);
-    this.router.navigate(['/detail/' + row.id]);
-    
+    console.log('ClientRequestComponent.onRowClicked  clicked: ', row);
+    // this.router.navigate(['/detail/' + row.id]);
   }
- 
-  applyFilter(filterValue: string) {
+
+  applyFilter( filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
 
-  getApplicationsCB( appList: Application[]  ): void {
-    this.applications = appList;
-    this.dataSource.data = appList;
+  getRequestList_CB( reqList: SASTRequest[]  ): void {
+    for ( let i = 0; i < reqList.length; i++ ){
+        console.log ("----------_>"+JSON.stringify(reqList[i]));
+    }
+    this.requestList = reqList;
+    this.dataSource.data = reqList;
   }
 
-  getApplications(): void {
-    this.appProv.getApplications().subscribe( apps => this.getApplicationsCB(apps));
-  }
+  getRequestList(): void {
+    this.requestService.getAll().subscribe( sastRequestList => this.getRequestList_CB(sastRequestList) );
+  };
 
- 
   ngOnInit() {
-    this.getApplications();
+    this.getRequestList();
   }
-  
+
   ngAfterViewInit() {
     this.paginator._intl.itemsPerPageLabel = "Request per page";
     this.dataSource.paginator = this.paginator;

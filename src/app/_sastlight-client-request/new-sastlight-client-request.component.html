@@ -1,12 +1,12 @@
 <p-growl [value]="msgs"></p-growl>
     
 <h3 class="first">New <b>SAST</b> Light Service Request Excel File:</h3> 
-<!-- multiple="multiple"    accept="image/*"  application/vnd.ms-excel-->
+<!-- multiple="multiple"    accept="image/*"  application/vnd.ms-excel url="http://localhost:4000/uploadFile" -->
 <p-fileUpload 
 	name="SASTLightRequestFile[]"
 	chooseLabel="Select or drag a file"
 	uploadLabel="Upload"
-	url="http://localhost:4000/uploadFile"
+	url={{uploadURL}}
 	(onUpload)="onUpload($event)"
 	(onBeforeSend)="onBeforeSend($event)"
 	accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -19,8 +19,8 @@
 				
 					<mat-card class="example-card"> 
 						<mat-card-header>
-							<mat-card-title><b>{{uploadedFile.fileConf.curName}}</b> -> [{{uploadedFile.name}}]</mat-card-title> 
-							<mat-card-subtitle>{{uploadedFile.size}} bytes</mat-card-subtitle> 
+							<mat-card-title><b>{{ uploadedFile.curSASTId }}</b> -> [{{ uploadedFile.name }}]</mat-card-title> 
+							<mat-card-subtitle>{{ uploadedFile.size }} bytes</mat-card-subtitle> 
 						</mat-card-header>
 						<mat-card-content>
 							<p-tabView>
@@ -28,7 +28,7 @@
 <!-- 							       <form  #f="ngForm" novalidate class="example-form"> -->
 <!-- 										 Provider -->
 <!-- 										<mat-form-field class="form-app-data-input"> -->
-<!-- 											<input placeholder="Provider"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_PROV" [ngModelOptions]="{standalone: true}" disabled matInput type="text"> -->
+<!-- 											<input placeholder="Provider"  maxLength="100"  [(ngModel)]="uploadedFile.P_PROV" [ngModelOptions]="{standalone: true}" disabled matInput type="text"> -->
 <!-- 										</mat-form-field> -->
 <!-- 									</form> -->
 <!-- 							    </p-tabPanel> -->
@@ -36,36 +36,36 @@
 	                                <form  #f="ngForm" novalidate class="example-form">
 	                                    <!--  PM User ID <- PM UID -->
 	                                    <mat-form-field class="form-app-data-input">
-	                                            <input placeholder="Project Manager UID"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_UID" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                            <input placeholder="Project Manager UID"  maxLength="100"  [(ngModel)]="uploadedFile.PM_UID" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 	                                    </mat-form-field>
 	                                    <!--  Provider -->
 	                                    <mat-form-field class="form-app-data-input">
-	                                            <input placeholder="Provider"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_PROV" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                            <input placeholder="Provider"  maxLength="100"  [(ngModel)]="uploadedFile.P_PROV" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 	                                    </mat-form-field>
 	                                    <br>									
 	                                    <!--  PM Isban eMail 	<- 	PM_EMA -->
 	                                    <mat-form-field class="form-app-data-input">
-	                                            <input placeholder="PM Isban eMail"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_EMA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                            <input placeholder="PM Isban eMail"  maxLength="100"  [(ngModel)]="uploadedFile.PM_EMA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 	                                    </mat-form-field>
 	                                    <br>
 	                                    <!--  PM Firstname	<- 	PM_FN -->
 	                                    <mat-form-field class="form-app-data-input">
-	                                            <input placeholder="PM Firstname"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_FN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                            <input placeholder="PM Firstname"  maxLength="100"  [(ngModel)]="uploadedFile.PM_FN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 	                                    </mat-form-field>
 	                                    <br>
 	                                    <!--  PM Lastname		<-	PM_LN -->
 	                                    <mat-form-field class="form-app-data-input">
-	                                            <input placeholder="PM Lastname"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_LN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                            <input placeholder="PM Lastname"  maxLength="100"  [(ngModel)]="uploadedFile.PM_LN" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 	                                    </mat-form-field>
 	                                    <br>
 	                                    <!--  Bussines Area	<-	PM_BA -->
 	                                    <mat-form-field class="form-app-data-input">
-	                                            <input placeholder="Bussines Area"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_BA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                            <input placeholder="Bussines Area"  maxLength="100"  [(ngModel)]="uploadedFile.PM_BA" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 	                                    </mat-form-field>
 	                                    <br>
 	                                    <!--  Functional Domain	<-	PM_FC -->
 	                                    <mat-form-field class="form-app-data-input">
-	                                            <input placeholder="Functional Domain"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.PM_FC" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+	                                            <input placeholder="Functional Domain"  maxLength="100"  [(ngModel)]="uploadedFile.PM_FC" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 	                                    </mat-form-field>
 	                                </form>
 							    </p-tabPanel>
@@ -73,22 +73,22 @@
 							        <form  #f="ngForm" novalidate class="example-form">
 							        	<!--  Application Name	<-	P_APP -->
 										<mat-form-field class="form-app-data-input">
-											<input placeholder="Application Name"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_APP" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+											<input placeholder="Application Name"  maxLength="100"  [(ngModel)]="uploadedFile.P_APP" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 										<br>
 							        	<!--  Project 			<-	P_PRO -->
 										<mat-form-field class="form-app-data-input">
-											<input placeholder="Project"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_PRO" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+											<input placeholder="Project"  maxLength="100"  [(ngModel)]="uploadedFile.P_PRO" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 										<br>
 							        	<!--  Project Description	<-	P_DES -->
 										<mat-form-field class="form-app-data-input">
-											<input placeholder="Project Description"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_DES" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+											<input placeholder="Project Description"  maxLength="100"  [(ngModel)]="uploadedFile.P_DES" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 										<br>
 							        	<!--  Client				<-	P_CLI -->
 										<mat-form-field class="form-app-data-input">
-											<input placeholder="Client"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_CLI" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+											<input placeholder="Client"  maxLength="100"  [(ngModel)]="uploadedFile.P_CLI" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 									</form>
 							    </p-tabPanel>
@@ -96,19 +96,19 @@
 							        <form  #f="ngForm" novalidate class="example-form">
 							        	<!--  Num Tec	<-	P_NUMTEC -->
 										<mat-form-field class="form-app-data-input">
-											<input placeholder="Num. of Tech."  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_NUMTEC" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+											<input placeholder="Num. of Tech."  maxLength="100"  [(ngModel)]="uploadedFile.P_NUMTEC" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 										<br>
-										<mat-form-field class="form-app-data-input" *ngIf="uploadedFile.parsed.P_NUMTEC>0">
-											<input placeholder="Tech. 1"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_T1" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+										<mat-form-field class="form-app-data-input" *ngIf="uploadedFile.P_NUMTEC>0">
+											<input placeholder="Tech. 1"  maxLength="100"  [(ngModel)]="uploadedFile.P_T1" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 										<br>
-										<mat-form-field class="form-app-data-input" *ngIf="uploadedFile.parsed.P_NUMTEC>1">
-											<input placeholder="Tech. 2"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_T2" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+										<mat-form-field class="form-app-data-input" *ngIf="uploadedFile.P_NUMTEC>1">
+											<input placeholder="Tech. 2"  maxLength="100"  [(ngModel)]="uploadedFile.P_T2" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 										<br>
-										<mat-form-field class="form-app-data-input" *ngIf="uploadedFile.parsed.P_NUMTEC>2">
-											<input placeholder="Tech. 3"  maxLength="100"  [(ngModel)]="uploadedFile.parsed.P_T3" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
+										<mat-form-field class="form-app-data-input" *ngIf="uploadedFile.P_NUMTEC>2">
+											<input placeholder="Tech. 3"  maxLength="100"  [(ngModel)]="uploadedFile.P_T3" [ngModelOptions]="{standalone: true}" disabled matInput type="text">
 										</mat-form-field>
 										<br>
 										
@@ -117,9 +117,9 @@
 							    </p-tabPanel>
 							    <p-tabPanel header="Factories">
 							    <!-- Formulario	<-	FACTORY_DATA  -->
-							    <div  *ngIf="uploadedFile.parsed.FACTORY_DATA">
+							    <div  *ngIf="uploadedFile.FACTORY_DATA">
 								        <form  #f="ngForm" novalidate class="example-form">
-											<div *ngFor="let so of uploadedFile.parsed.soData">	
+											<div *ngFor="let so of uploadedFile.soData">	
 												<p-fieldset legend="{{so.F_NAM}}" [toggleable]="true" [collapsed]="true" class="group-of-fields">
 													<!-- Factory Name	<-	F_NAM  -->
 													<mat-form-field class="form-app-data-input">
@@ -141,15 +141,15 @@
 											</div>
 										</form> 
 									</div>
-									<div  *ngIf="! uploadedFile.parsed.FACTORY_DATA">
+									<div  *ngIf="! uploadedFile.FACTORY_DATA">
 										No Factories Data
 									</div>
 							    </p-tabPanel>
 							    <p-tabPanel header="Additional Lab Users">
 							    <!-- Formulario	<-	LABUSER_DATA  -->
-							    	<div *ngIf="uploadedFile.parsed.LABUSER_DATA">
+							    	<div *ngIf="uploadedFile.LABUSER_DATA">
 								        <form  #f="ngForm" novalidate class="example-form">
-											<div *ngFor="let lab of uploadedFile.parsed.labUsersData">	
+											<div *ngFor="let lab of uploadedFile.labUsersData">	
 												<p-fieldset legend="{{lab.LAB_UFN + ' ' + lab.LAB_USN}}" [toggleable]="true" [collapsed]="true" class="group-of-fields">
 													<!-- ID			<-	LAB_UID  -->
 													<mat-form-field class="form-app-data-input">
@@ -176,7 +176,7 @@
 									</div>    
 							    </p-tabPanel>
 							    <p-tabPanel header="Raw File Data">
-							        {{uploadedFile.parsedStr}}
+							        {{uploadedFile.parsed}}
 							    </p-tabPanel>
 							</p-tabView>
 						</mat-card-content> 
@@ -184,7 +184,7 @@
 							<button type="text" (click)="confirmCreate()" pButton icon="fa-check" label="Create Infra"></button>
 							<button type="text" (click)="confirmDelete()" pButton icon="fa-check" label="Delete Temporal File"></button>
 							<button type="text" (click)="updateGraphData()" pButton icon="fa-check" label="Test Chart"></button>
-							<button type="text"  (click)="confirmSaveTempFile()" pButton icon="fa-check" label="Save {{uploadedFile.fileConf.curName}} "></button>
+							<button type="text"  (click)="confirmSaveTempFile()" pButton icon="fa-check" label="Save {{uploadedFile.curSASTId}} "></button>
 <!-- 							<button mat-button>Create Infra for Application</button> -->
 <!-- 							<button mat-button>Delete Temporal File</button> -->
 						</mat-card-actions>
@@ -230,7 +230,7 @@
 							        <div class="node-content">
 							        	<img src="assets/todo.png" width="32">
 							        	<div style="text-align: left; align-content: left;">
-								           <div class="spacer"><b>Application:</b></div><div>{{node.data.app}}</div>
+								           <div><b>Application:</b><span style="width : 100%;"></span>{{node.data.app}}</div>
 								           <div><b>Project:</b>{{node.data.projectZ}}</div>
 								           <div><b>Client:</b>{{node.data.client}}</div>
 								           <div><b>Provider:</b>{{node.data.provider}}</div>

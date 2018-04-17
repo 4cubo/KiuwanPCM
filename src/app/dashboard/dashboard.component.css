@@ -35,6 +35,10 @@ a {
 	width: 25%;
 }
 
+.col-1-2 {
+	width: 50%;
+}
+
 .module {
 	padding: 20px;
 	text-align: center;
@@ -57,6 +61,7 @@ a {
 
 .grid-pad>[class*='col-']:last-of-type {
 	padding-right: 20px;
+	
 }
 
 @media ( max-width : 600px) {
@@ -77,6 +82,13 @@ a {
 
 
 /* card styles */
+/* card styles */
+.graph-card {
+  min-width: 350px;
+  max-width: 350px;
+  span : 10px;
+}
+
 .example-card {
   min-width: 400px;
   max-width: 400px;
