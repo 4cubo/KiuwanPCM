@@ -76,7 +76,11 @@ export class ApplicationListComponent implements OnInit, AfterViewInit  {
   }
 
   getApplicationsCB( appList: Kiuwanapplication[]  ): void {
-    
+    //    for (let i =0; i < appList.length; i++ ){
+//      if(appList[i]._isValidProyect){
+//        this.applications.push( appList[i] as Kiuwanapplication );
+//      }
+//    }
     
     
     this.applications = appList;
