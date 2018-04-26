@@ -4,9 +4,9 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormsModule, React
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { ApplicationsComponent } from './applications/applications.component';
-import { ApplicationDetailComponent } from './application-detail/application-detail.component';
-import { ApplicationProviderService } from './_services/applicationprovider.service';
+import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
+import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail/kiuwan-application-detail.component';
+import { KiuwanApplicationService } from './_services/kiuwan.application.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -47,8 +47,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     AppComponent,
-    ApplicationsComponent,
-    ApplicationDetailComponent,
+    ApplicationListComponent,
+    KiuwanApplicationDetailComponent,
     MessagesComponent,
     DashboardComponent,
     AlertComponent,
@@ -92,7 +92,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     AuthGuard,
     JwtInterceptorProvider,
     UserService,
-    ApplicationProviderService,
+    KiuwanApplicationService,
     MessageService,
     AlertService,
     AuthenticationService,

@@ -8,7 +8,7 @@ import { appConfig } from '../app.config';
 @Injectable()
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
- 
+
     login(username: string, password: string) {
         console.log( "AuthenticationService.login user= " + username + " pwd=" + password );
         return this.http.post<any>(appConfig.apiUrl + '/users/authenticate', { username: username, password: password })
@@ -18,11 +18,10 @@ export class AuthenticationService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                 }
- 
                 return user;
             });
     }
- 
+
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');

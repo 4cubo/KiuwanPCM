@@ -1,0 +1,118 @@
+<h3>SAST Light Applications List</h3>
+
+<div class="example-container mat-elevation-z8" matSort>
+
+<!-- 	<div class="spinner-container" *ngIf="applications && applications.length<=0"> -->
+<!-- 		<mat-spinner></mat-spinner> -->
+<!-- 	</div> -->
+
+	<div class="example-header">
+		<mat-form-field> <input matInput
+			(keyup)="applyFilter($event.target.value)" placeholder="Filter">
+		</mat-form-field>
+	</div>
+
+	<mat-table #table [dataSource]="dataSource">
+
+	<!-- Checkbox Column -->
+<!-- 	<ng-container matColumnDef="select"> -->
+<!-- 		<mat-header-cell *matHeaderCellDef> -->
+<!-- 		  <mat-checkbox (change)="$event ? masterToggle() : null" -->
+<!-- 		                [checked]="selection.hasValue() && isAllSelected()" -->
+<!-- 		                [indeterminate]="selection.hasValue() && !isAllSelected()"> -->
+<!-- 		  </mat-checkbox> -->
+<!-- 		</mat-header-cell> -->
+<!-- 		<mat-cell *matCellDef="let row"> -->
+<!-- 		  <mat-checkbox (click)="$event.stopPropagation()" -->
+<!-- 		                (change)="$event ? selection.toggle(row) : null" -->
+<!-- 		                [checked]="selection.isSelected(row)"> -->
+<!-- 		  </mat-checkbox> -->
+<!-- 		</mat-cell> -->
+<!-- 	</ng-container> -->
+		<!-- id Column -->
+		<ng-container matColumnDef="id">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Id. </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app.id}} </mat-cell>
+		</ng-container>
+		
+		<!-- Name Column -->
+		<ng-container matColumnDef="name">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app.name}} </mat-cell>
+		</ng-container>
+		
+		<!-- Descriptcion Column -->
+		<ng-container matColumnDef="descriptcion">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Desc. </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app.description}} </mat-cell>
+		</ng-container>
+		
+		<!-- applicationBusinessValue Column -->
+		<ng-container matColumnDef="applicationBusinessValue">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> B.Value </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app.applicationBusinessValue}} </mat-cell>
+		</ng-container>
+		
+		<!-- applicationProvider Column -->
+		<ng-container matColumnDef="applicationProvider">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Provider </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app.applicationProvider}} </mat-cell>
+		</ng-container>
+		
+		<!-- _portfolio_Business_Area Column -->
+		<ng-container matColumnDef="_portfolio_Business_Area">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Buss. Area </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._portfolio_Business_Area}} </mat-cell>
+		</ng-container>
+		<!-- _portfolio_Cliente Column -->
+		<ng-container matColumnDef="_portfolio_Cliente">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Client </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._portfolio_Cliente}} </mat-cell>
+		</ng-container>
+		<!-- _portfolio_Functional_Community Column -->
+		<ng-container matColumnDef="_portfolio_Functional_Community">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Func. Community </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._portfolio_Functional_Community}} </mat-cell>
+		</ng-container>
+		<!-- _portfolio_Main_Projet Column -->
+		<ng-container matColumnDef="_portfolio_Main_Projet">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Main Project </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._portfolio_Main_Projet}} </mat-cell>
+		</ng-container>
+		<!-- _portfolio_Proyecto Column -->
+		<ng-container matColumnDef="_portfolio_Proyecto">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Proyect </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._portfolio_Proyecto}} </mat-cell>
+		</ng-container>
+		<!-- _portfolio_Aplicacion Column -->
+		<ng-container matColumnDef="_portfolio_Aplicacion">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Func. App. </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._portfolio_Aplicacion}} </mat-cell>
+		</ng-container>
+		<!-- _portfolio_Tecnologia Column -->
+		<ng-container matColumnDef="_portfolio_Tecnologia">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> Tech. </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._portfolio_Tecnologia}} </mat-cell>
+		</ng-container>
+		
+		<!-- _isValidProyect Column -->
+		<ng-container matColumnDef="_isValidProyect">
+		  <mat-header-cell *matHeaderCellDef mat-sort-header> S-SDLC </mat-header-cell>
+		  <mat-cell *matCellDef="let app"> {{app._isValidProyect}} </mat-cell>
+		</ng-container>
+		
+		
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		
+		<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)" >
+		</mat-row>
+		
+	</mat-table>
+	
+	<mat-paginator #paginator
+	               [pageSize]="5"
+	               [pageSizeOptions]="[5, 10, 20]"
+	               [showFirstLastButtons]="false">
+	</mat-paginator>
+</div>

@@ -1,10 +1,3 @@
-<!-- @aaa sin usar router, se indican los componentes a cargar 
-<div style="text-align:left">
-  <h1>{{ title }}</h1>
-  <app-applications></app-applications>
-  <app-messages></app-messages>
-</div> -->
-
 <mat-toolbar color="accent"  class="app-toolbar">
   <mat-toolbar-row>
 	<span>{{title}}&nbsp;&nbsp;<h5 *ngIf="currentUser">{{currentUser.firstName}}&nbsp;{{currentUser.lastName}}</h5></span>
@@ -13,39 +6,19 @@
 	<mat-icon *ngIf="currentUser" class="example-icon" aria-hidden="true" routerLink="/admu">face</mat-icon>
 	<mat-icon *ngIf="currentUser" class="example-icon" aria-hidden="true" (click)="logout()">power_settings_new</mat-icon>
   </mat-toolbar-row>
+  <mat-toolbar-row style="background: white;">
+	  <mat-chip-list>
+		    <mat-chip color="accent" selected="false" routerLink="/dashboard">Dashboard</mat-chip>
+		    <mat-chip color="accent" selected="false" routerLink="/srequest">Request</mat-chip>
+		    <mat-chip color="accent" selected="false" routerLink="/kiuwan">Kiuwan</mat-chip>
+		</mat-chip-list>
+	  </mat-toolbar-row>
 </mat-toolbar>
-
-<div class="nav">
-	<mat-chip-list>
-	    <mat-chip color="accent" selected="false" routerLink="/dashboard">Dashboard</mat-chip>
-	    <mat-chip color="accent" selected="false" routerLink="/applications">Applicationssss</mat-chip>
-	    <mat-chip color="accent" selected="false" routerLink="/srequest">Request</mat-chip>
-	</mat-chip-list>
-</div>    
- 
-<!-- <nav> -->
-<!--   <mat-chip-list> -->
-<!--         <mat-chip color="accent" selected="false" routerLink="/dashboard">Dashboard</mat-chip> -->
-<!--         <mat-chip color="accent" selected="false" routerLink="/applications">Applicationssss</mat-chip> -->
-<!--         <mat-chip color="accent" selected="false" routerLink="/srequest">Request</mat-chip> -->
-<!--     </mat-chip-list>   -->
-<!-- </nav> -->
-
-<!-- <button type="text" routerLink="/dashboard" pButton label="Dashboard"></button> -->
-<!-- <button type="text" routerLink="/applications" pButton label="Applications"></button> -->
-<!-- <button type="text" routerLink="/srequest" pButton label="Request"></button> -->
-							
-
-<!-- <div class="jumbotron"> -->
-<!--     <div class="container"> -->
-<!--         <div class="col-sm-8 col-sm-offset-2"> -->
-<!--             <alert></alert> -->
-<!--             <router-outlet></router-outlet> -->
-<!--         </div> -->
-<!--     </div> -->
-<!-- </div> -->
 
 
 <alert></alert>
 <router-outlet></router-outlet>
-<app-messages></app-messages>
+<!-- <div class="footer"> -->
+<div>
+	<app-messages></app-messages>
+</div>

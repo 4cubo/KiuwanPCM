@@ -197,10 +197,11 @@
 							</mat-card-title>
 						</mat-card-header>
 						<mat-card-content>
+<!-- 						[(selection)]="selectedNode" -->
 							<p-organizationChart 
 									[value]="data1"
 									selectionMode="single"
-									[(selection)]="selectedNode"
+									
 									(onNodeSelect)="onNodeSelect($event)"
 									styleClass="company">
 							    

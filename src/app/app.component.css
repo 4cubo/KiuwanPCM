@@ -12,7 +12,7 @@
 /* } */
 
 .nav  {
-/* 	padding: 5px 10px; */
+	padding: 0px 10px;
 	text-decoration: none;
 	margin-top: 10px;
 	display: inline-block;
@@ -38,4 +38,17 @@
 	display: inline-block;
 	background-color : #E40014;
 	border-radius: 2px;  /*4px;*/
+	width: 100%;
 }
+
+/* .footer { */
+/*   position: absolute; */
+/*   right: 0; */
+/*   bottom: 0; */
+/*   left: 0; */
+/*   padding: 1rem; */
+/*   background-color: #efefef; */
+/*   text-align: left; */
+/*   height : 150px; */
+/*   scroll : auto; */
+/* } */

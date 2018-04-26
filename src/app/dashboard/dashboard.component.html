@@ -1,79 +1,19 @@
-<div>
-<!-- 	<div> -->
-<!-- 		<h3>Hi {{currentUser.firstName}}!&nbsp;&nbsp;[<a [routerLink]="['/login']">Logout!</a>]</h3> -->
-<!-- 	</div> -->
-	
-<!-- 	<h2>SAST Light Applications List</h2> -->
-<!-- 	<div class="grid grid-pad">  -->
-	
-<!-- 		<div class="col-1-2"> -->
-			
-<!-- 		</div> -->
-<!-- 		<div class="col-1-2"> -->
-<!-- 			<mat-card class="graph-card">  -->
-<!-- 				<mat-card-header> -->
-<!-- 					<mat-card-title>Request</mat-card-title>  -->
-<!-- 					<mat-card-subtitle>Ordered by Area</mat-card-subtitle>  -->
-<!-- 				</mat-card-header> -->
-<!-- 				<mat-card-content> -->
-				
-<!-- 					<div [hidden]="!chart2"> -->
-<!-- 						<canvas id="canvas2">{{ chart2 }}</canvas> -->
-<!-- 					</div> -->
-					
-<!-- 				</mat-card-content>  -->
-<!-- 				<mat-card-actions> -->
-<!-- 					<button mat-button routerLink="/detail/">Details</button> -->
-<!-- 					<button mat-button>Releasses</button> -->
-<!-- 				</mat-card-actions>  -->
-<!-- 			</mat-card> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-
-
-	
-
-	<mat-grid-list cols="3" rowHeight="2:1"  rowWidth="400px">
-	
-<!-- 	  <mat-grid-tile> -->
-<!-- 	  	<mat-card class="graph-card">  -->
-<!-- 			<mat-card-header> -->
-<!-- 				<mat-card-title>Request</mat-card-title>  -->
-<!-- 				<mat-card-subtitle>Ordered by Area</mat-card-subtitle>  -->
-<!-- 			</mat-card-header> -->
-<!-- 			<mat-card-content> -->
-			
-<!-- 				<div [hidden]="!chart"> -->
-<!-- 					<canvas id="canvas">{{ chart }}</canvas> -->
-<!-- 				</div> -->
-				
-<!-- 			</mat-card-content>  -->
-<!-- 			<mat-card-actions> -->
-<!-- 				<button mat-button routerLink="/detail/">Details</button> -->
-<!-- 				<button mat-button>Releasses</button> -->
-<!-- 			</mat-card-actions>  -->
-<!-- 		</mat-card> -->
-<!-- 	  </mat-grid-tile> -->
-
-	  
-	  
-	  <mat-grid-tile *ngFor="let chart of graphsInfo; let i = index">
-	  	<mat-card  [hidden]="!SHOW_CHARTS" class="graph-card"> 
-			<mat-card-header>
-				<mat-card-title>Test</mat-card-title> 
-				<mat-card-subtitle>Test</mat-card-subtitle> 
-			</mat-card-header>
-			<mat-card-content>
-				<div>
-					<canvas [attr.id]="'iCanvas_' + chart.index">{{ chart2 }}</canvas>
-				</div>
-			</mat-card-content> 
-		</mat-card>
-	  </mat-grid-tile>
-	  
-	  
-	  
-	   
-	</mat-grid-list>
+<!--  border-top:50px; -->
+<div [hidden]="SHOW_CHARTS"
+	style="position: absolute; width: 100%; top: 0; left: 0; opacity: 0.5; z-index: 5000; background-color: #E40014;">
+</div>
+<div style="background-color: #E40014;">
+	<!-- 	 rowWidth="400px" rowWidth="400px"  -->
+	<mat-grid-list [hidden]="!SHOW_CHARTS" cols="3" rowWidth="100%"
+		rowHeight="5:3"> <mat-grid-tile
+		[hidden]="!SHOW_CHARTS"
+		*ngFor="let chart of graphsInfo; let i = index"> <mat-card
+		class="graph-card"> <mat-card-header> <mat-card-title>
+	<h4>{{chart.title}}</h4>
+	</mat-card-title> <mat-card-subtitle>{{chart.subtitle}}</mat-card-subtitle> </mat-card-header> <mat-card-content>
+	<div>
+		<canvas [attr.id]="'iCanvas_' + chart.index"></canvas>
+	</div>
+	</mat-card-content> </mat-card> </mat-grid-tile> </mat-grid-list>
 
 </div>

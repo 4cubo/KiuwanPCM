@@ -5,7 +5,6 @@ export class ClientRequest {
   reponsable: {
     uid: string;
     firstName: string;
-    lastName: string; 
+    lastName: string;
   };
-
 }

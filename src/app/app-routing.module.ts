@@ -5,8 +5,8 @@ import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ApplicationDetailComponent } from './application-detail/application-detail.component';
-import { ApplicationsComponent } from './applications/applications.component';
+import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail/kiuwan-application-detail.component';
+import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
 import { ServiceRequestComponent } from './_sastlight-client-requests/client-request.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -16,8 +16,8 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'detail/:id', component: ApplicationDetailComponent, canActivate: [AuthGuard] },
-  { path: 'applications', component: ApplicationsComponent, canActivate: [AuthGuard] },
+  { path: 'detail/:name', component: KiuwanApplicationDetailComponent, canActivate: [AuthGuard] },
+  { path: 'kiuwan', component: ApplicationListComponent, canActivate: [AuthGuard] },
   { path: 'srequest', component: ServiceRequestComponent, canActivate: [AuthGuard] },
   { path: 'nrequest', component: NewSastlightClientRequestComponent, canActivate: [AuthGuard] },
 
