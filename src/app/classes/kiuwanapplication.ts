@@ -44,9 +44,42 @@ export class Kiuwanapplication {
       (item.applicationPortfolios['Proyecto']) ? item.applicationPortfolios['Proyecto'] : null;
     item._portfolio_Tecnologia =
       (item.applicationPortfolios['Tecnologia']) ? item.applicationPortfolios['Tecnologia'] : null;
+    
     item._isValidProyect = ( item._portfolio_Aplicacion && item._portfolio_Business_Area && item._portfolio_Cliente &&
                              item._portfolio_Functional_Community && item._portfolio_Main_Projet && item._portfolio_Proyecto &&
                              item._portfolio_Tecnologia ) ? 'S-SDLC' : 'POC';
   }
 
+}
+
+
+
+export class KiuwanApplicationAnalisys {
+  code : string;
+  label: string;
+  creationDate: string;
+  qualityModel: string;
+  encoding: string;
+  invoker: string;
+  status: string;
+  analysisScope: string;
+  analysisProvider:string;
+  unparsedFiles:[{
+    file: string;
+    cause: string
+  }];
+  analysisPortfolios: [{
+    name: string;
+    value: string
+  }];
+  
+}
+
+
+export class KiuwanApplicationDelivery  extends KiuwanApplicationAnalisys {
+  crstatus : string;
+  changeRequest: string;
+  changeRequestStatus: string;
+  branchName: string;
+  auditResult: string;
 }

@@ -1,21 +1,214 @@
-<h2>Application Detail</h2>
+
 <div *ngIf="app">
 	
-	
-	<mat-card>
-	
-		<h2>{{ app.name | uppercase }} Details</h2>
-		
-		<div>
-			<span>id: </span>{{app.id}}
-		</div>
-		<div>
-			<label>name: <input [(ngModel)]="app.name" placeholder="name"></label>
-		</div>
-		<div>
-			<label>description: <input [(ngModel)]="app.description" placeholder="description"></label>
-		</div>
+	<mat-card class="title-card">
+		<mat-card-header>
+			<mat-card-title>
+				<h2>Application Detail</h2>
+			</mat-card-title>
+			<mat-card-subtitle>
+				<h2>{{ app.name | uppercase }} Details</h2>
+				<p>{{app.name}}</p>
+				<p>{{app.description}}</p>
+			</mat-card-subtitle>
+		</mat-card-header>
+
+		<mat-card-content> <!-- rowHeight="4:3" -->
+			
+			<p>Application: <b>{{app._portfolio_Aplicacion}}</b></p>
+			<p>Business Area: <b>{{app._portfolio_Business_Area}}</b></p>
+			<p>Client: <b>{{app._portfolio_Cliente}}</b></p>
+			<p>Functional Domain: <b>{{app._portfolio_Functional_Community}}</b></p>
+			<p>Main Projet: <b>{{app._portfolio_Main_Projet}}</b></p>
+			<p>Project: <b>{{app._portfolio_Proyecto}}</b></p>
+			<p>Technology: <b>{{app._portfolio_Tecnologia}}</b></p>
+
+			
+		</mat-card-content>
 	</mat-card>
-	
+
+	<mat-card class="title-card">
+		<mat-card-header>
+			<mat-card-title>
+				<h2>Application Baselines Analysis[{{app.ANALISYS.length}}]</h2>
+			</mat-card-title>
+		</mat-card-header>
+
+		<mat-card-content> <!-- rowHeight="4:3" -->
+			<mat-grid-list cols="3" rowWidth="95%" rowHeight="4:3">
+				<mat-grid-tile *ngFor="let analisys of app.ANALISYS">
+					<mat-card class="graph-card">
+						<mat-card-header>
+							<div *ngIf="analisys.status === 'SUCCESS' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ok.png');"></div>
+							<div *ngIf="analisys.status === 'FAIL' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ko.png');"></div>
+							<mat-card-title>
+								<h4>{{analisys.label}}&nbsp;</h4>
+							</mat-card-title>
+							<mat-card-subtitle>
+								{{analisys.creationDate}}&nbsp;
+							</mat-card-subtitle>
+						</mat-card-header>
+
+						<mat-card-content>
+							<p>
+								Code: <b>{{analisys.code}}</b>
+							</p>
+							<p>
+								Provider: <b>{{analisys.analysisProvider}}</b>
+							</p>
+							<p>
+								Status: <b>{{analisys.status}}</b>
+							</p>
+							<p>
+								Scope: <b>{{analisys.analysisScope}}</b>
+							</p>
+							<!-- <div>
+									<span>Scope:</span>
+									<span class="card-text-spacer"></span>
+									<span><b>{{analisys.analisysScope}}</b></span>
+							</div> -->
+							<p>
+								Invoker: <b>{{analisys.invoker}}</b>
+							</p>
+
+							<p *ngIf="analisys.unparsedFiles && analisys.unparsedFiles.length > 0" style="align-self: right;">
+								Unparsed files: <span style="color: red; font-style : oblique;"><b>{{analisys.unparsedFiles.length}}</b></span>
+							</p>
+							<p *ngIf="app._portfolio_Tecnologia == 'iOs'">
+								<img src="/assets/ios.png" width="32">
+							</p>
+							<p *ngIf="app._portfolio_Tecnologia == 'Android'">
+								<img src="/assets/android.png" width="32">
+							</p>
+						</mat-card-content>
+					</mat-card>
+				</mat-grid-tile>
+			</mat-grid-list>
+		
+		</mat-card-content>
+	</mat-card>
+
+
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>
+				<h2>Application Baselines Deliveries[{{app.DELIVERIES.length}}]</h2>
+			</mat-card-title>
+		</mat-card-header>
+
+		<mat-card-content> <!-- rowHeight="4:3" -->
+			<mat-grid-list cols="3" rowWidth="95%" rowHeight="4:3">
+				<mat-grid-tile *ngFor="let analisys of app.DELIVERIES">
+					<mat-card class="graph-card">
+						<mat-card-header>
+							<div *ngIf="analisys.status === 'SUCCESS' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ok.png');"></div>
+							<div *ngIf="analisys.status === 'FAIL' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ko.png');"></div>
+							<mat-card-title>
+								<h4>{{analisys.label}}&nbsp;</h4>
+							</mat-card-title>
+							<mat-card-subtitle>
+								{{analisys.creationDate}}&nbsp;
+							</mat-card-subtitle>
+						</mat-card-header>
+
+						<mat-card-content>
+							<p>
+								Code: <b>{{analisys.code}}</b>
+							</p>
+							<p>
+								Provider: <b>{{analisys.analysisProvider}}</b>
+							</p>
+							<p>
+								Status: <b>{{analisys.status}}</b>
+							</p>
+							<p>
+								Scope: <b>{{analisys.analysisScope}}</b>
+							</p>
+							<!-- <div>
+									<span>Scope:</span>
+									<span class="card-text-spacer"></span>
+									<span><b>{{analisys.analisysScope}}</b></span>
+							</div> -->
+							<p>
+								Invoker: <b>{{analisys.invoker}}</b>
+							</p>
+
+							<p *ngIf="analisys.unparsedFiles && analisys.unparsedFiles.length > 0" style="align-self: right;">
+								Unparsed files: <span style="color: red; font-style : oblique;"><b>{{analisys.unparsedFiles.length}}</b></span>
+							</p>
+							<p *ngIf="app._portfolio_Tecnologia == 'iOs'">
+								<img src="/assets/ios.png" width="32">
+							</p>
+							<p *ngIf="app._portfolio_Tecnologia == 'Android'">
+								<img src="/assets/android.png" width="32">
+							</p>
+						</mat-card-content>
+					</mat-card>
+				</mat-grid-tile>
+			</mat-grid-list>
+		
+		</mat-card-content>
+	</mat-card>
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300,200,100,900' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'> -->
+
+	<!-- <mat-card-content>
+		<mat-grid-list cols="3" rowWidth="100%" rowHeight="4:3">
+			<mat-grid-tile>1</mat-grid-tile>
+			<mat-grid-tile>
+				<div style="width: 800px; align-self: center; align: center; background-color: aquamarine;">
+
+
+					<ul id="categories" class="clr">
+
+						<li class="pusher">Pusher</li>
+
+						<li>
+							<div>
+								<img src="https://farm3.staticflickr.com/2878/10944255073_973d2cd25c.jpg" alt="" /> 
+								<h1>Very Hight</h1>
+								<p>Categories</p>
+								<div style="background-color:blue; position: absolute; top: 30px;">Very Hight</div>
+								<br>
+							</div>
+						</li>
+
+						<li>
+							<div>
+								<img src="https://farm9.staticflickr.com/8461/8048823381_0fbc2d8efb.jpg" alt="" />
+								<h1>This is a title</h1>
+								<p>Some sample text about the article this hexagon leads to</p>
+							</div>
+						</li>
+
+						
+						<li class="pusher"></li>
+						<li>
+							<div>
+								<img src="https://farm5.staticflickr.com/4144/5053682635_b348b24698.jpg" alt="" />
+								<h1>This is a title</h1>
+								<p>Some sample text about the article this hexagon leads to</p>
+							</div>
+						</li>
+
+						<li>
+							<div>
+								<img src="https://farm3.staticflickr.com/2827/10384422264_d9c7299146.jpg" alt="" />
+								<h1>This is a title</h1>
+								<p>Some sample text about the article this hexagon leads to</p>
+							</div>
+						</li>
+
+						<li class="pusher"></li>
+						
+					</ul>
+				</div>
+			</mat-grid-tile>
+			<mat-grid-tile>3</mat-grid-tile>
+		</mat-grid-list>
+	</mat-card-content> -->
+
 	<button (click)="goBack()">go back</button>
 </div>

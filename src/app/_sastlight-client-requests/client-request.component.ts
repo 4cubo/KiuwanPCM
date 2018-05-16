@@ -70,9 +70,9 @@ export class ServiceRequestComponent implements OnInit, AfterViewInit  {
   }
 
   getRequestList_CB( reqList: SASTRequest[]  ): void {
-    for ( let i = 0; i < reqList.length; i++ ){
+    /*for ( let i = 0; i < reqList.length; i++ ){
         console.log ("----------_>"+JSON.stringify(reqList[i]));
-    }
+    }*/
     this.requestList = reqList;
     this.dataSource.data = reqList;
   }

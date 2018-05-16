@@ -1,19 +1,36 @@
 <!--  border-top:50px; -->
-<div [hidden]="SHOW_CHARTS"
-	style="position: absolute; width: 100%; top: 0; left: 0; opacity: 0.5; z-index: 5000; background-color: #E40014;">
-</div>
-<div style="background-color: #E40014;">
-	<!-- 	 rowWidth="400px" rowWidth="400px"  -->
-	<mat-grid-list [hidden]="!SHOW_CHARTS" cols="3" rowWidth="100%"
-		rowHeight="5:3"> <mat-grid-tile
-		[hidden]="!SHOW_CHARTS"
-		*ngFor="let chart of graphsInfo; let i = index"> <mat-card
-		class="graph-card"> <mat-card-header> <mat-card-title>
-	<h4>{{chart.title}}</h4>
-	</mat-card-title> <mat-card-subtitle>{{chart.subtitle}}</mat-card-subtitle> </mat-card-header> <mat-card-content>
-	<div>
-		<canvas [attr.id]="'iCanvas_' + chart.index"></canvas>
+<router-outlet></router-outlet>
+<div [hidden]="route.children.length > 0">
+	<div [hidden]="SHOW_CHARTS"
+		style="position: absolute; width: 100%; top: 0; left: 0; opacity: 0.5; z-index: 5000; background-color: #E40014;">
 	</div>
-	</mat-card-content> </mat-card> </mat-grid-tile> </mat-grid-list>
 
+	<div>
+		<button [disabled]="dataToShow === 'REQUEST'"  (click)="changeData()">SAST Light Request</button> <!-- *ngIf="dataToShow === 'REQUEST'"  -->
+		<button [disabled]="dataToShow === 'KIUWAN_APPS'"  (click)="changeData()">Kiuwan Applications</button>
+		<div class="example-selected-value">Selected value: {{dataToShow}}</div>
+	</div>
+
+	<div style="background-color: #E40014;">
+		<!-- 	 rowWidth="400px" rowWidth="400px"  -->
+		<mat-grid-list [hidden]="SHOW_CHARTS" cols="4" rowWidth="100%" rowHeight="4:3"> 
+			<mat-grid-tile [hidden]="SHOW_CHARTS" *ngFor="let chart of graphsInfo; let i = index"> 
+				<mat-card class="graph-card">
+					<mat-card-header>
+						<mat-card-title>
+							<h4>{{chart.title}}</h4>
+						</mat-card-title>
+						<mat-card-subtitle (click)="showDetailGraph(chart.title)">
+							{{this.dataToShow + chart.subtitle}}
+						</mat-card-subtitle> 
+					</mat-card-header> 
+					<mat-card-content>
+						<div>
+							<canvas border="2" bordercolor=black [attr.id]="'iCanvas_' + chart.index"></canvas>
+						</div>
+					</mat-card-content> 
+				</mat-card> 
+			</mat-grid-tile> 
+		</mat-grid-list>
+	</div>
 </div>

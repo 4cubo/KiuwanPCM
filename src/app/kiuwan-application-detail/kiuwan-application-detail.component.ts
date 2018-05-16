@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Kiuwanapplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService} from '../_services/kiuwan.application.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MessageService} from '../message.service';
 
@@ -13,31 +13,49 @@ import {MessageService} from '../message.service';
 
 export class KiuwanApplicationDetailComponent implements OnInit {
 
-  @Input() app: Kiuwanapplication;
+  @Input() name: string;
+  
+  app: Kiuwanapplication;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private appProvService: KiuwanApplicationService,
     private location: Location,
     private messageService: MessageService
   ) {
-    console.log("Constructor de ApplicationDetailComponent"); //@aaa delete
-
+    
+    this.route.params.subscribe( params => {
+        this.name = params['name'];
+        //this.getApplicationDetail();
+      });
   }
 
   getApplicationDetail(): void {
-    const name = this.route.snapshot.paramMap.get('name');
-    this.messageService.add('ApplicationDetailComponent:getApplicationDeatil name:' + name );
-    this.appProvService.getApplication( name )
-      .subscribe(app => {this.app = app;console.log("    App=" , this.app ); });
+    
+    //const name = this.route.snapshot.paramMap.get('name');
+
+    this.messageService.add('ApplicationDetailComponent:getApplicationDeatil name:' + this.name);
+    
+    this.appProvService.getApplication(this.name)
+      .subscribe(
+        app => { 
+          this.app = app; console.log("  App details=", this.app); 
+        }
+      );
+    
   }
 
   goBack(): void {
-    this.location.back();
+    //this.location.back();
+    //this.router.navigate(['/kiuwan'], { relativeTo: this.route } );
+    this.router.navigate(['/kiuwan'] );
+    
   }
 
   ngOnInit() {
     this.getApplicationDetail();
+    //this.getApplicationDetail();
   }
 
 

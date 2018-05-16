@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable } from 'rxjs';
-import {ViewChild, AfterViewInit} from '@angular/core';
-import {Router } from '@angular/router';
+import {Observable} from 'rxjs';
+import {ViewChild, ViewChildren, ViewChildrenDecorator, AfterViewInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {MessageService} from '../message.service';
 import {Kiuwanapplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService} from '../_services/kiuwan.application.service';
 import {MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
 import {DataSource, SelectionModel} from '@angular/cdk/collections';
+import { KiuwanApplicationTableListComponent } from './kiuwan-applications-table.component';
 
 
 
@@ -15,8 +16,8 @@ import {DataSource, SelectionModel} from '@angular/cdk/collections';
   templateUrl: './kiuwan-applications.component.html',
   styleUrls: ['./kiuwan-applications.component.css']
 })
-  
-export class ApplicationListComponent implements OnInit, AfterViewInit  {
+
+export class ApplicationListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private appProv: KiuwanApplicationService,
@@ -30,92 +31,93 @@ export class ApplicationListComponent implements OnInit, AfterViewInit  {
   userPasswd = "q0q=tnJsV1Isn9HUECaR";
 
   applications: Kiuwanapplication[];
-  dataSource = new MatTableDataSource<Kiuwanapplication>(this.applications);
-  displayedColumns = [ 'name', 'descriptcion', 'applicationBusinessValue', 'applicationProvider',
-    '_portfolio_Aplicacion',
-    '_portfolio_Business_Area',
-    '_portfolio_Cliente',
-    '_portfolio_Functional_Community',
-    '_portfolio_Main_Projet',
-    '_portfolio_Proyecto',
-    '_portfolio_Tecnologia',
-    '_isValidProyect'
+  applications_POC: Kiuwanapplication[];
+
   
-  ]; //'select', 'id',
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  /** Row selection setup */
-  selection = new SelectionModel<Kiuwanapplication>(true, []);
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-    this.selection.clear() :
-    this.dataSource.data.forEach(row => this.selection.select(row));
-  }
+  //@ViewChild(ApplicationTableListComponent) appTableList: ApplicationTableListComponent;
+  @ViewChildren(KiuwanApplicationTableListComponent) items;
+  //@ViewChild(ApplicationTableListComponent) appTableList2: ApplicationTableListComponent;
   
-  
-  onRowClicked(row) {
-    console.log('ApplicationsComponent.onRowClicked  clicked: ', row.name);
-    this.router.navigate(['/detail/' + row.name]);
-    
-  }
- 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
+  appTableList : KiuwanApplicationTableListComponent;
+  appTableList2: KiuwanApplicationTableListComponent;
 
-  getApplicationsCB( appList: Kiuwanapplication[]  ): void {
-    //    for (let i =0; i < appList.length; i++ ){
-//      if(appList[i]._isValidProyect){
-//        this.applications.push( appList[i] as Kiuwanapplication );
-//      }
-//    }
+  dataLoaded: boolean = false;
+
+  color = 'warn'; // primary warn  accent
+  mode = 'indeterminate'; // indeterminate determinate
+  value = 0;
+  loadingText  = 'Loading Kiuwan Applications'
+
+
+  getApplicationsCB(appList: Kiuwanapplication[]): void {
+    this.applications = new Array<Kiuwanapplication>();
+    this.applications_POC = new Array<Kiuwanapplication>();
+
+    for (var i = 0; i < appList.length; i++) {
+      this.value = (i * 100 ) / appList.length;
+      let item: Kiuwanapplication = appList[i] as Kiuwanapplication;
+      Kiuwanapplication.explodeData(item);
+      
+      
+      if (item._isValidProyect && item._isValidProyect === 'S-SDLC') {
+        this.applications.push(item);
+        //console.log('         added: ', typeof item, item);
+      } else {
+        this.applications_POC.push(item);
+        //console.log('         -----------_>added POC: ', typeof item, item);
+      }
+    };
+
+    // @aaa @TODO  Esto hay que quitarlo de aquí o gestionarlo bien, esta salvando siempre aunque ya esté hecho el trabajo en la carga anterior
+    localStorage.setItem('KiuwanApplications', JSON.stringify(appList));
+
+    this.dataLoaded = true;
+    this.appTableList.dataSource.data = this.applications;
+    this.appTableList2.dataSource.data = this.applications_POC;
     
     
-    this.applications = appList;
-    this.dataSource.data = appList;
-    
-//    for (let i =0; i < appList.length; i++ ){
-//      if(appList[i]._isValidProyect){
-//        this.applications.push( appList[i] as Kiuwanapplication );
-//      }
-//    }
-//    this.dataSource.data = this.applications;
-//    
   }
 
   getApplications(): void {
+
+    this.color = 'warn'; // primary warn  accent
+    this.mode = 'indeterminate'; // indeterminate determinate
+    //this.value = 0;
+
+
+//     @aaa @TODO Do not use LocalStorage in the future, session storage or server mongo instead
+//    let apps: Kiuwanapplication[] =
+//      JSON.parse(localStorage.getItem('KiuwanApplications'));
+//    if (apps) {
+//      this.applications = apps;
+//      return;
+//    }
+
     this.appProv.getApplications()
       .subscribe(
-        apps => {
-            //console.log ( 'getApplications->', apps );
-            this.getApplicationsCB(apps as Kiuwanapplication[]);
-        },
-        error => {
-            console.log ( 'getApplications->ERROR', error );
-        } );
+      apps => {
+        //console.log ( 'getApplications->', apps );
+        this.color = 'accent'; // primary warn  accent
+        this.mode = 'determinate'; // indeterminate determinate
+        this.value = 0;
+
+        this.getApplicationsCB(apps as Kiuwanapplication[]);
+      },
+      error => {
+        console.log('getApplications->ERROR', error);
+      });
   }
 
- 
+
   ngOnInit() {
-    this.appProv.setCredentials ( this.userName, this.userPasswd );
-    this.getApplications();
+    this.appProv.setCredentials(this.userName, this.userPasswd);
+    
   }
-  
+
   ngAfterViewInit() {
-    this.paginator._intl.itemsPerPageLabel = "Apps per page";
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.appTableList =  this.items.toArray()[0];
+    this.appTableList2 =  this.items.toArray()[1];
+    this.getApplications();
+    // this.appTableList.getApplications();
   }
 }

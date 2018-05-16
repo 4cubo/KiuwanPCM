@@ -2,6 +2,10 @@ import { UserService, AlertService } from '../_services/index';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { FormsModule, FormControl, FormGroupDirective, NgForm, Validators, NgModel} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material';
+
+import { ReactiveFormsModule} from '@angular/forms'; 
 
 @Component({
   moduleId: module.id,

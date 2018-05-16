@@ -14,7 +14,7 @@ import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '
 
 export class AppComponent implements OnInit {
   currentUser: User;
-  title = 'Isban Application Security Management';
+  title = 'SAST PaceMaker';
 
   constructor(
     private router: Router,

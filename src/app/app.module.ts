@@ -5,6 +5,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormsModule, React
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
+//import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
 import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail/kiuwan-application-detail.component';
 import { KiuwanApplicationService } from './_services/kiuwan.application.service';
 import { MessagesComponent } from './messages/messages.component';
@@ -12,8 +13,8 @@ import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-/* @aaa Angular Material */
-import { MatTableModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule} from '@angular/material';
+/* @aaa Angular Material , MatButtonToggleGroup, */
+import { MatTableModule,  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule} from '@angular/material';
 import { MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule, MatFormFieldModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -43,11 +44,16 @@ import { ServiceRequestComponent } from './_sastlight-client-requests/client-req
 import { NewSastlightClientRequestComponent } from './_sastlight-client-request/new-sastlight-client-request.component';
 import { ClientRequestProviderService } from './_services/clientrequestprovider.service';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { KiuwanApplicationTableListComponent } from './kiuwan-applications/kiuwan-applications-table.component';
+import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.component';
+import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
+import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ApplicationListComponent,
+    KiuwanApplicationTableListComponent,
     KiuwanApplicationDetailComponent,
     MessagesComponent,
     DashboardComponent,
@@ -57,6 +63,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     AdminUserComponent,
     ServiceRequestComponent,
     NewSastlightClientRequestComponent,
+    DashBoardPanelComponent,
+    KiuwanDataComponent,
+    DashboardDetailGraphComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +81,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+
     MatChipsModule,
     NoopAnimationsModule,
     HttpClientModule,

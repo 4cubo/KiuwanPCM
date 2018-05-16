@@ -1,0 +1,8 @@
+<p>Id : {{kiuwanDataStatus.id}}</p>
+<p>status : {{kiuwanDataStatus.status}}</p>
+<p>startload : {{kiuwanDataStatus.startload}}</p>
+<p>endload : {{kiuwanDataStatus.endload}}</p>
+
+<button *ngIf="kiuwanDataStatus.status ===   'notloaded'"  (click)="loadData()">load kiuwan data</button>
+<button  (click)="getStatus()">refresh</button>
+

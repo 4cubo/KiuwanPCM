@@ -1,39 +1,84 @@
-<div class="col-md-4 col-md-offset-3">
-    <h2>Register</h2>
-    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+<div class="example-container">
+        <mat-form-field>
+                <input matInput placeholder="Input">
+              </mat-form-field>
+    <!-- <h2>Register</h2> -->
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate class="example-form">
+    
+      
+        <!-- 
+             <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+     
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="firstName">First Name</label>
             <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
             <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        </div> 
+        -->
+
+        <mat-form-field class="full-width">
+           
+            <input  appearance="legacy" matInput type="text"  placeholder="First Name"  maxLength="100" required 
+                [(ngModel)]="model.firstName"  [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">
+            <mat-hint>Please, insert fisrt name</mat-hint>
+            <mat-error *ngIf="firstNameFormControl.hasError('required')">
+                    First Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <br>
+
+       <!--  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="lastName">Last Name</label>
             <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
-            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+            <div *ngIf="f.submitted && !secondName.valid" class="help-block">Last Name is required</div>
         </div>
-        
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <br> -->
+
+        <mat-form-field class="full-width">
+            <input matInput type="text"  placeholder="Last Name"  maxLength="100" required 
+                [(ngModel)]="model.lastName"   [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">
+            <mat-hint>Please, insert last name</mat-hint>
+            <mat-error *ngIf="lastNameFormControl.hasError('required')">
+                   Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <!-- <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="username">Username</label>
             <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
             <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
-        </div>
+        </div> -->
+        <mat-form-field class="full-width">
+            <input matInput type="text"  placeholder="User name"  maxLength="100" required
+                [(ngModel)]="model.username"   [formControl]="userNameFormControl" [errorStateMatcher]="matcher">
+            <mat-hint>Please, insert a valid user name</mat-hint>
+            <mat-error *ngIf="userNameFormControl.hasError('required')">
+                        User name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <br>
+              
+             
         
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <!-- <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-        </div>
+        </div> -->
+        <mat-form-field class="full-width">
+            <input matInput  type="password" placeholder="Password"  maxLength="100"  required 
+                [(ngModel)]="model.password"  [formControl]="passwdFormControl" [errorStateMatcher]="matcher">
+            <mat-hint>Please, insert a valid password</mat-hint>
+            <mat-error *ngIf="passwdFormControl.hasError('required')">
+                        Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
         
-	    <mat-form-field>
-	  	   <input matInput placeholder="Kiuwan User Name" value="Sushi">
-	    </mat-form-field>
-        
-        
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !kpassword.valid }">
+        <!-- <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !kpassword.valid }">
             <label for="kpassword">Kiuwan Password</label>
             <input type="password" class="form-control" name="kpassword" [(ngModel)]="model.kpassword" #kpassword="ngModel" required />
             <div *ngIf="f.submitted && !password.valid" class="help-block">Kiuwan password is required</div>
-        </div>
+        </div> -->
         
         
         
@@ -44,4 +89,5 @@
         </div>
         
     </form>
+   	
 </div>

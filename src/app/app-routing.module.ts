@@ -11,13 +11,31 @@ import { ServiceRequestComponent } from './_sastlight-client-requests/client-req
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.component';
+import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
+import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    children: [ {
+      path: 'detail/:name',
+      component: DashboardDetailGraphComponent
+    }]
+  }, 
   { path: 'detail/:name', component: KiuwanApplicationDetailComponent, canActivate: [AuthGuard] },
-  { path: 'kiuwan', component: ApplicationListComponent, canActivate: [AuthGuard] },
+  { path: 'kiuwan', component: ApplicationListComponent, canActivate: [AuthGuard], 
+    children: [ {
+      path: 'detail/:name',
+      component: KiuwanApplicationDetailComponent
+    }]
+  },
+  { path: 'kiuwandata', component: KiuwanDataComponent, canActivate: [AuthGuard], 
+    children: [ { //OK
+      path: 'detail/:name',
+      component: KiuwanApplicationDetailComponent
+    }]
+  },
   { path: 'srequest', component: ServiceRequestComponent, canActivate: [AuthGuard] },
   { path: 'nrequest', component: NewSastlightClientRequestComponent, canActivate: [AuthGuard] },
 
@@ -31,7 +49,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes), RouterModule.forChild(routes)  ],
   exports: [ RouterModule ]
 })
 
