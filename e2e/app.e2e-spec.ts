@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('isban-asm App', () => {
+describe('kiuwan-asm App', () => {
   let page: AppPage;
 
   beforeEach(() => {

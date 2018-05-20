@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ViewChild, ViewChildren, ViewChildrenDecorator, AfterViewInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {MessageService} from '../message.service';
 import {Kiuwanapplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService} from '../_services/kiuwan.application.service';
@@ -22,13 +22,11 @@ export class ApplicationListComponent implements OnInit, AfterViewInit {
   constructor(
     private appProv: KiuwanApplicationService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     console.log("Constructor de ApplicationsComponent"); //@aaa delete
   }
-
-  userName = "poc.isban.alvaro.alonso";
-  userPasswd = "q0q=tnJsV1Isn9HUECaR";
 
   applications: Kiuwanapplication[];
   applications_POC: Kiuwanapplication[];

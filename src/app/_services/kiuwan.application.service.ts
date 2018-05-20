@@ -73,29 +73,34 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
 
   }
 
-  getApplication(name: string): Observable<Kiuwanapplication> {
-    // Todo: send the message _after_ fetching the hero
-    this.messageService.add(`ApplicationProviderService: fetched application name=${name}`);
-    //    return of(MOCK_APPLICATIONS.find(app => app.id === id));
-
+  getApplicationAndReports(name: string): Observable<Kiuwanapplication> {
     let result: Kiuwanapplication;
     //let analisys: KiuwanApplicationAnalisys[];
 
     this.getApplications().subscribe(
       apps => {
         result =  apps.find(app => app.name === name);
+      },
+      ()=>{
+        this.messageService.add(`KiuwanApplicationService:getApplication: fetched application name=${name}`);
       }
     );
 
     this.getApplicationsAnalisys(name).subscribe(
       appAna => {
-        result['ANALISYS']=  appAna;
+        result.ANALISYS=  appAna;
+      },
+      ()=>{
+        this.messageService.add(`KiuwanApplicationService:getApplication: fetched application analisys name=${name}`);
       }
     );
 
     this.getApplicationDeliverys(name).subscribe(
       appAna => {
-        result['DELIVERIES']=  appAna;
+        result.DELIVERIES=  appAna;
+      },
+      ()=>{
+        this.messageService.add(`KiuwanApplicationService:getApplication: fetched application delivery  name=${name}`);
       }
     );
     
@@ -114,12 +119,11 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
     
     let appAnalisys: KiuwanApplicationAnalisys[]=
       JSON.parse(localStorage.getItem('KiuwanApplicationAnalisys_' + encodeURI(appName)));
-    if (appAnalisys) {
-      console.log('----------------------------_>Recuperando anlaisis de la app. kiuwan ', appName ,' de local storage');
+    
+      if (appAnalisys) {
+      this.messageService.add('getApplicationsAnalisys: Getting  ' + appName + ' analisys from local storage');
       return of(appAnalisys);
     }
-
-    console.log('----------------------------_>Recuperando analisis app[', appName,'] de kiuwan');
 
     let data = {
       method: 'GET',

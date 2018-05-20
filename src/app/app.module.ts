@@ -48,6 +48,7 @@ import { KiuwanApplicationTableListComponent } from './kiuwan-applications/kiuwa
 import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.component';
 import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
 import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboar
 
     MatChipsModule,
     NoopAnimationsModule,
+    FlexLayoutModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

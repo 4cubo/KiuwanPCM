@@ -4,9 +4,12 @@
 
 
 .title-card {
-  width: 100%%;
+  width: 90%;
 }
 
+.header-spacer {
+	flex: 1 1 auto ;
+  }
 
 button {
 	margin-top: 20px;
@@ -29,21 +32,28 @@ button:disabled {
 	cursor: auto;
 }
 
-.graph-card {
-	width: 80%; 
-	align-self : center;
-	 /* span: 5px; */
+.report-card {
+	width: 95%; 
+	height: 80%;
+	align-self : top;
 	padding: 2px;
-	
 }
 
+.analisys-picture {
+	width: 31%;
+	margin-bottom: 2%;
+}
+
+.card-picture {
+	width: 23%;
+	margin-bottom: 2%;
+  }
 /* Hexagons */
 
-
-*{
+/* *{
 	margin:0;
 	padding:0;
-}
+} */
 #categories{
 	overflow:hidden;
 	width:90%;

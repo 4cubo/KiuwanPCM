@@ -23,9 +23,6 @@ export class KiuwanDataComponent implements OnInit, AfterViewInit {
     endload : ''
   };
 
-  userName = "poc.isban.alvaro.alonso";
-  userPasswd = "q0q=tnJsV1Isn9HUECaR";
-
   STATISTICS = {};
 
   ngOnInit() {

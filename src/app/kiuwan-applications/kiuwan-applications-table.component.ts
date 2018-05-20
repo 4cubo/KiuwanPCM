@@ -26,8 +26,6 @@ export class KiuwanApplicationTableListComponent implements OnInit, AfterViewIni
     console.log("Constructor de ApplicationsComponent"); //@aaa delete
   }
 
-  userName = "poc.isban.alvaro.alonso";
-  userPasswd = "q0q=tnJsV1Isn9HUECaR";
 
   applications: Kiuwanapplication[];
   dataSource = new MatTableDataSource<Kiuwanapplication>(this.applications);

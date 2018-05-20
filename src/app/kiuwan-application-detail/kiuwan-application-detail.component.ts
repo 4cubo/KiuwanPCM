@@ -13,7 +13,7 @@ import {MessageService} from '../message.service';
 
 export class KiuwanApplicationDetailComponent implements OnInit {
 
-  @Input() name: string;
+  @Input() appName: string;
   
   app: Kiuwanapplication;
 
@@ -26,21 +26,48 @@ export class KiuwanApplicationDetailComponent implements OnInit {
   ) {
     
     this.route.params.subscribe( params => {
-        this.name = params['name'];
+        this.appName = params['name'];
         //this.getApplicationDetail();
       });
   }
 
   getApplicationDetail(): void {
-    
-    //const name = this.route.snapshot.paramMap.get('name');
-
-    this.messageService.add('ApplicationDetailComponent:getApplicationDeatil name:' + this.name);
-    
-    this.appProvService.getApplication(this.name)
+    this.appProvService.getApplicationAndReports(this.appName)
       .subscribe(
         app => { 
-          this.app = app; console.log("  App details=", this.app); 
+          this.app = app; 
+          //console.log("  App details=", this.app); 
+          //console.log('----------ADADADADADD---------------------------> : getApplicationDetail DATA FINISHED LOADING');
+          for (let iAux = 0; iAux < this.app.ANALISYS.length; iAux++){
+            this.app.ANALISYS[iAux]._secRating = 5;
+            if( this.app.ANALISYS[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 4'] > 0) 
+              this.app.ANALISYS[iAux]._secRating = 4;
+            if( this.app.ANALISYS[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 3'] > 0) 
+              this.app.ANALISYS[iAux]._secRating = 3;
+            if( this.app.ANALISYS[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 2'] > 0) 
+              this.app.ANALISYS[iAux]._secRating = 2;
+            if( this.app.ANALISYS[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 1'] > 0) 
+              this.app.ANALISYS[iAux]._secRating = 1;
+          }
+          for (let iAux = 0; iAux < this.app.DELIVERIES.length; iAux++){
+            this.app.DELIVERIES[iAux]._secRating = 5;
+            if( this.app.DELIVERIES[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 4'] > 0) 
+              this.app.DELIVERIES[iAux]._secRating = 4;
+            if( this.app.DELIVERIES[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 3'] > 0) 
+              this.app.DELIVERIES[iAux]._secRating = 3;
+            if( this.app.DELIVERIES[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 2'] > 0) 
+              this.app.DELIVERIES[iAux]._secRating = 2;
+            if( this.app.DELIVERIES[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 1'] > 0) 
+              this.app.DELIVERIES[iAux]._secRating = 1;
+          }
+          /*
+          1 VH  >   1s
+          1 H   >   2s
+          1 M   >   3s
+          1 L   >   4s
+          0 *   >   5z 
+          */
+          this.messageService.add('ApplicationDetailComponent:getApplicationDeatil name:' + JSON.stringify( this.appName ));
         }
       );
     
@@ -49,6 +76,7 @@ export class KiuwanApplicationDetailComponent implements OnInit {
   goBack(): void {
     //this.location.back();
     //this.router.navigate(['/kiuwan'], { relativeTo: this.route } );
+    window.scroll(0,0);
     this.router.navigate(['/kiuwan'] );
     
   }

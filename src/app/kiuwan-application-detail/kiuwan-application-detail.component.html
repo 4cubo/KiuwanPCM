@@ -1,20 +1,22 @@
 
 <div *ngIf="app">
 	
-	<mat-card class="title-card">
-		<mat-card-header>
+	<mat-card >
+		<mat-card-header style="background-color : #E40014; color: white;">
 			<mat-card-title>
-				<h2>Application Detail</h2>
-			</mat-card-title>
-			<mat-card-subtitle>
 				<h2>{{ app.name | uppercase }} Details</h2>
-				<p>{{app.name}}</p>
-				<p>{{app.description}}</p>
+			</mat-card-title>
+			<mat-card-subtitle style="background-color : #E40014; color: white;">
+				<div style="flex: 1 1 auto;">
+					<span></span>
+					<span>{{app.name}}</span>
+					<span style="flex: 1 1 auto;"><b>{{app.description}}</b></span>
+				</div>
 			</mat-card-subtitle>
 		</mat-card-header>
 
 		<mat-card-content> <!-- rowHeight="4:3" -->
-			
+			<br>
 			<p>Application: <b>{{app._portfolio_Aplicacion}}</b></p>
 			<p>Business Area: <b>{{app._portfolio_Business_Area}}</b></p>
 			<p>Client: <b>{{app._portfolio_Cliente}}</b></p>
@@ -26,8 +28,17 @@
 			
 		</mat-card-content>
 	</mat-card>
-
-	<mat-card class="title-card">
+	<br>
+	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+		<mat-card class="card-picture" *ngFor="let analisys of app.ANALISYS">
+			<mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+			<span fxFlex="80%">{{analisys.label}}</span>
+			<mat-icon fxFlex="10%">mode_edit</mat-icon>
+			<mat-icon fxFlex="10%">delete</mat-icon>
+			</mat-card-title>
+s		</mat-card>
+	</div>
+	<mat-card>
 		<mat-card-header>
 			<mat-card-title>
 				<h2>Application Baselines Analysis[{{app.ANALISYS.length}}]</h2>
@@ -35,60 +46,74 @@
 		</mat-card-header>
 
 		<mat-card-content> <!-- rowHeight="4:3" -->
-			<mat-grid-list cols="3" rowWidth="95%" rowHeight="4:3">
+			<!-- <mat-grid-list cols="3" rowWidth="95%" rowHeight="4:2">
 				<mat-grid-tile *ngFor="let analisys of app.ANALISYS">
-					<mat-card class="graph-card">
-						<mat-card-header>
-							<div *ngIf="analisys.status === 'SUCCESS' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ok.png');"></div>
-							<div *ngIf="analisys.status === 'FAIL' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ko.png');"></div>
-							<mat-card-title>
-								<h4>{{analisys.label}}&nbsp;</h4>
-							</mat-card-title>
-							<mat-card-subtitle>
-								{{analisys.creationDate}}&nbsp;
-							</mat-card-subtitle>
-						</mat-card-header>
+					<mat-card class="report-card"> -->
+			
+			<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+				<mat-card class="analisys-picture" *ngFor="let analisys of app.ANALISYS">
+					<!-- <mat-card-header> -->
+						<mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+							<span fxFlex="20%">
+								<div *ngIf="analisys.status === 'SUCCESS' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ok.png');"></div>
+								<div *ngIf="analisys.status === 'FAIL' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ko.png');"></div>
+							</span>
+							<span fxFlex="80%"><h4>{{analisys.label}}&nbsp;</h4></span>
+						</mat-card-title>
+						<mat-card-subtitle>
+							{{analisys.creationDate}}&nbsp;
+						</mat-card-subtitle>
+					<!-- </mat-card-header> -->
+					<mat-card-content>
+						<p>
+							Code: <b>{{analisys.code}}</b>
+						</p>
+						<p>
+							Provider: <b>{{analisys.analysisProvider}}</b>
+						</p>
+						<p>
+							Status: <b>{{analisys.status}}</b>
+						</p>
+						<p>
+							Scope: <b>{{analisys.analysisScope}}</b>
+						</p>
+						<!-- <div>
+								<span>Scope:</span>
+								<span class="card-text-spacer"></span>
+								<span><b>{{analisys.analisysScope}}</b></span>
+						</div> -->
+						<p>
+							Invoker: <b>{{analisys.invoker}}</b>
+						</p>
 
-						<mat-card-content>
-							<p>
-								Code: <b>{{analisys.code}}</b>
-							</p>
-							<p>
-								Provider: <b>{{analisys.analysisProvider}}</b>
-							</p>
-							<p>
-								Status: <b>{{analisys.status}}</b>
-							</p>
-							<p>
-								Scope: <b>{{analisys.analysisScope}}</b>
-							</p>
-							<!-- <div>
-									<span>Scope:</span>
-									<span class="card-text-spacer"></span>
-									<span><b>{{analisys.analisysScope}}</b></span>
-							</div> -->
-							<p>
-								Invoker: <b>{{analisys.invoker}}</b>
-							</p>
+						<p>
+							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 1']}}</b>&nbsp;
+							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 2']}}</b>&nbsp;
+							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 3']}}</b>&nbsp;
+							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 4']}}</b>&nbsp;
+							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 5']}}</b>&nbsp;
+						</p>
+						<p>
+							Security Rating: <b>{{analisys._secRating}}</b>
+						</p>
 
-							<p *ngIf="analisys.unparsedFiles && analisys.unparsedFiles.length > 0" style="align-self: right;">
-								Unparsed files: <span style="color: red; font-style : oblique;"><b>{{analisys.unparsedFiles.length}}</b></span>
-							</p>
-							<p *ngIf="app._portfolio_Tecnologia == 'iOs'">
-								<img src="/assets/ios.png" width="32">
-							</p>
-							<p *ngIf="app._portfolio_Tecnologia == 'Android'">
-								<img src="/assets/android.png" width="32">
-							</p>
-						</mat-card-content>
-					</mat-card>
-				</mat-grid-tile>
-			</mat-grid-list>
-		
+						<p *ngIf="analisys.unparsedFiles && analisys.unparsedFiles.length > 0" style="align-self: right;">
+							Unparsed files: <span style="color: red; font-style : oblique;"><b>{{analisys.unparsedFiles.length}}</b></span>
+						</p>
+						<p *ngIf="app._portfolio_Tecnologia == 'iOs'">
+							<img src="/assets/ios.png" width="32">
+						</p>
+						<p *ngIf="app._portfolio_Tecnologia == 'Android'">
+							<img src="/assets/android.png" width="32">
+						</p>
+					</mat-card-content>
+				</mat-card>
+				<!-- </mat-grid-tile>
+			</mat-grid-list> -->
+			</div>
 		</mat-card-content>
 	</mat-card>
-
-
+	<br>
 	<mat-card>
 		<mat-card-header>
 			<mat-card-title>
@@ -97,9 +122,9 @@
 		</mat-card-header>
 
 		<mat-card-content> <!-- rowHeight="4:3" -->
-			<mat-grid-list cols="3" rowWidth="95%" rowHeight="4:3">
+			<mat-grid-list cols="3" rowWidth="95%" rowHeight="3:2">
 				<mat-grid-tile *ngFor="let analisys of app.DELIVERIES">
-					<mat-card class="graph-card">
+					<mat-card class="report-card">
 						<mat-card-header>
 							<div *ngIf="analisys.status === 'SUCCESS' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ok.png');"></div>
 							<div *ngIf="analisys.status === 'FAIL' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ko.png');"></div>
@@ -130,8 +155,19 @@
 									<span><b>{{analisys.analisysScope}}</b></span>
 							</div> -->
 							<p>
-								Invoker: <b>{{analisys.invoker}}</b>
+								Invoke: <b>{{analisys.invoker}}</b>
 							</p>
+							<p>
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 1']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 2']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 3']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 4']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 5']}}</b>&nbsp;
+							</p>				
+							<p>
+								Security Rating: <b>{{analisys._secRating}}</b>
+							</p>
+
 
 							<p *ngIf="analisys.unparsedFiles && analisys.unparsedFiles.length > 0" style="align-self: right;">
 								Unparsed files: <span style="color: red; font-style : oblique;"><b>{{analisys.unparsedFiles.length}}</b></span>
@@ -142,6 +178,57 @@
 							<p *ngIf="app._portfolio_Tecnologia == 'Android'">
 								<img src="/assets/android.png" width="32">
 							</p>
+
+							<div style="width:100%; height:240px; align-self: center; background-color: aquamarine;">
+
+
+								<ul id="categories" class="clr">
+			
+									<!-- <li class="pusher">Pusher</li> -->
+			
+									<li>
+										<div>
+											<img src="https://farm3.staticflickr.com/2878/10944255073_973d2cd25c.jpg" alt="" /> 
+											<h1>Very Hight</h1>
+											<p>Categories</p>
+											<div style="background-color:blue; position: absolute; top: 30px;">Very Hight</div>
+											<br>
+										</div>
+									</li>
+			
+									<li>
+										<div>
+											<img src="https://farm9.staticflickr.com/8461/8048823381_0fbc2d8efb.jpg" alt="" />
+											<h1>This is a title</h1>
+											<p>Some sample text about the article this hexagon leads to</p>
+										</div>
+									</li>
+			
+									
+									<li class="pusher"></li>
+									<li>
+										<div>
+											<img src="https://farm5.staticflickr.com/4144/5053682635_b348b24698.jpg" alt="" />
+											<h1>This is a title</h1>
+											<p>Some sample text about the article this hexagon leads to</p>
+										</div>
+									</li>
+			
+									<li>
+										<div>
+											<img src="https://farm3.staticflickr.com/2827/10384422264_d9c7299146.jpg" alt="" />
+											<h1>This is a title</h1>
+											<p>Some sample text about the article this hexagon leads to</p>
+										</div>
+									</li>
+			
+									<li class="pusher"></li>
+									
+								</ul>
+							</div>
+
+
+
 						</mat-card-content>
 					</mat-card>
 				</mat-grid-tile>
@@ -149,7 +236,7 @@
 		
 		</mat-card-content>
 	</mat-card>
-
+	<br>
 	<!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300,200,100,900' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'> -->

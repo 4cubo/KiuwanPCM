@@ -1,19 +1,20 @@
 <router-outlet></router-outlet>
-<h4>SAST Light Applications List</h4>
-<mat-card *ngIf="!dataLoaded">
-  <mat-card-content>
-    <h2 class="example-h2">{{loadingText}}</h2>
+<div [hidden]="route.children.length > 0">
+  <h4>SAST Light Applications List</h4>
+  <mat-card *ngIf="!dataLoaded">
+    <mat-card-content>
+      <h2 class="example-h2">{{loadingText}}</h2>
 
-    <mat-progress-spinner
-        class="example-margin"
-        [color]="color"
-        [mode]="mode"
-        [value]="value">
-    </mat-progress-spinner>
-  </mat-card-content>
-</mat-card>
-<h5>S-SLDC RollOut</h5>
-<kiuwan-applications-table></kiuwan-applications-table>
-<h5>POCs</h5>
-<kiuwan-applications-table></kiuwan-applications-table>
-
+      <mat-progress-spinner
+          class="example-margin"
+          [color]="color"
+          [mode]="mode"
+          [value]="value">
+      </mat-progress-spinner>
+    </mat-card-content>
+  </mat-card>
+  <h5>S-SLDC RollOut</h5>
+  <kiuwan-applications-table></kiuwan-applications-table>
+  <h5>POCs</h5>
+  <kiuwan-applications-table></kiuwan-applications-table>
+</div>

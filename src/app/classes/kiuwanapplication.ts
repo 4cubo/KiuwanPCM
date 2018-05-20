@@ -9,6 +9,9 @@ export class Kiuwanapplication {
     value: string
   }];
 
+  DELIVERIES : KiuwanApplicationDelivery[];
+  ANALISYS : KiuwanApplicationAnalisys[];
+
   //  Aditional fields
   _id: string; // Mongo id
   // Info extracted from portfolios
@@ -72,7 +75,24 @@ export class KiuwanApplicationAnalisys {
     name: string;
     value: string
   }];
+  metrics : [{
+/*     'com.optimyth.CQM.defectsByPriority.Priority 1' : number;
+    'com.optimyth.CQM.defectsByPriority.Priority 2' : number;
+    'com.optimyth.CQM.defectsByPriority.Priority 3' : number;
+    'com.optimyth.CQM.defectsByPriority.Priority 4' : number;
+    'com.optimyth.CQM.defectsByPriority.Priority 5' : number; */
+    'com.optimyth.CQM.securityDefectsByPriority.Priority 1' : number;
+    'com.optimyth.CQM.securityDefectsByPriority.Priority 2' : number;
+    'com.optimyth.CQM.securityDefectsByPriority.Priority 3' : number;
+    'com.optimyth.CQM.securityDefectsByPriority.Priority 4' : number;
+    'com.optimyth.CQM.securityDefectsByPriority.Priority 5' : number;
+  }]
   
+  _secRating : number;
+
+  constructor(){
+    console.log("---------------------------IIIIIIIIIIIIIIIIII--------->KiuwanApplicationAnalisys");
+  }
 }
 
 
