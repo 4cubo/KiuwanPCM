@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.component';
 import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
 import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
+import { FortifyOnDemandComponent } from './fortify-on-demand/fortify-on-demand.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full' },
@@ -38,12 +39,15 @@ const routes: Routes = [
   },
   { path: 'srequest', component: ServiceRequestComponent, canActivate: [AuthGuard] },
   { path: 'nrequest', component: NewSastlightClientRequestComponent, canActivate: [AuthGuard] },
-
+  
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admu', component: AdminUserComponent, canActivate: [AuthGuard] }, /* @aaa TODO add AdminGuard to access this functionality */
 
+  { path: 'fod', component: FortifyOnDemandComponent, canActivate: [AuthGuard] },
+
+  
   { path: '**', redirectTo: '' }
 ];
 

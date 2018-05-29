@@ -3,6 +3,6 @@
 <p>startload : {{kiuwanDataStatus.startload}}</p>
 <p>endload : {{kiuwanDataStatus.endload}}</p>
 
-<button *ngIf="kiuwanDataStatus.status ===   'notloaded'"  (click)="loadData()">load kiuwan data</button>
+<button *ngIf="kiuwanDataStatus.status ===   'notloaded'"  (click)="loadKiuwanData()">load kiuwan data</button>
 <button  (click)="getStatus()">refresh</button>
 

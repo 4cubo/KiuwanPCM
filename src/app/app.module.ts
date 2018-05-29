@@ -8,6 +8,7 @@ import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applicati
 //import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
 import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail/kiuwan-application-detail.component';
 import { KiuwanApplicationService } from './_services/kiuwan.application.service';
+
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -49,6 +50,8 @@ import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.com
 import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
 import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FortifyOnDemandComponent } from './fortify-on-demand/fortify-on-demand.component';
+import { FoDService } from './_services/fortify.service';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DashBoardPanelComponent,
     KiuwanDataComponent,
     DashboardDetailGraphComponent,
+    FortifyOnDemandComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,6 +109,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     JwtInterceptorProvider,
     UserService,
     KiuwanApplicationService,
+    FoDService,
     MessageService,
     AlertService,
     AuthenticationService,

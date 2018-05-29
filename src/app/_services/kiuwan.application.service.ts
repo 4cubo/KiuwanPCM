@@ -193,8 +193,6 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
       return result;
     });
   }
-  
-  
 
   getCompleteKiuwanStatistics( ) {
     return Observable.forkJoin(
@@ -212,7 +210,6 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
   }
 
 }
-
 
 export  class KiuwanStatisticData{
   _id : String;
