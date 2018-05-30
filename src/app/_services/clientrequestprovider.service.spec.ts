@@ -1,5 +1,5 @@
-import { ClientRequestProviderService } from './clientrequestprovider.service2';
 import { TestBed, inject } from '@angular/core/testing';
+import { ClientRequestProviderService } from './clientrequestprovider.service';
 
 
 describe('ClientRequestProviderService', () => {

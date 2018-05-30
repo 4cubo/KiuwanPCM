@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ApplicationProviderService } from './applicationprovider.service';
+import { KiuwanApplicationService } from './kiuwan.application.service';
 
-describe('ApplicationProviderService', () => {
+describe('KiuwanApplicationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ApplicationProviderService]
+      providers: [KiuwanApplicationService]
     });
   });
 
-  it('should be created', inject([ApplicationProviderService], (service: ApplicationProviderService) => {
+  it('should be created', inject([KiuwanApplicationService], (service: KiuwanApplicationService) => {
     expect(service).toBeTruthy();
   }));
 });

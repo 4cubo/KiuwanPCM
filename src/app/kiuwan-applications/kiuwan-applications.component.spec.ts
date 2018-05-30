@@ -1,20 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { KiuwanApplicationListComponent } from './kiuwan-applications.component';
 
-import { ApplicationsComponent } from './applications.component';
+//import { ApplicationsComponent } from './applications.component';
 
-describe('ApplicationsComponent', () => {
-  let component: ApplicationsComponent;
-  let fixture: ComponentFixture<ApplicationsComponent>;
+describe('ApplicationListComponent', () => {
+  let component: KiuwanApplicationListComponent;
+  let fixture: ComponentFixture<KiuwanApplicationListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicationsComponent ]
+      declarations: [ KiuwanApplicationListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplicationsComponent);
+    fixture = TestBed.createComponent(KiuwanApplicationListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

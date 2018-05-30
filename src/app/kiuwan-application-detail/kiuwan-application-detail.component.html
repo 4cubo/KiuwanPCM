@@ -29,6 +29,7 @@
 		</mat-card-content>
 	</mat-card>
 	<br>
+	<!--
 	<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 		<mat-card class="card-picture" *ngFor="let analisys of app.ANALISYS">
 			<mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
@@ -36,8 +37,9 @@
 			<mat-icon fxFlex="10%">mode_edit</mat-icon>
 			<mat-icon fxFlex="10%">delete</mat-icon>
 			</mat-card-title>
-s		</mat-card>
+		</mat-card>
 	</div>
+	-->
 	<mat-card>
 		<mat-card-header>
 			<mat-card-title>
@@ -45,72 +47,66 @@ s		</mat-card>
 			</mat-card-title>
 		</mat-card-header>
 
-		<mat-card-content> <!-- rowHeight="4:3" -->
-			<!-- <mat-grid-list cols="3" rowWidth="95%" rowHeight="4:2">
+		<mat-card-content> 
+			<mat-grid-list cols="3" rowWidth="95%" rowHeight="3:4">
 				<mat-grid-tile *ngFor="let analisys of app.ANALISYS">
-					<mat-card class="report-card"> -->
-			
-			<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-				<mat-card class="analisys-picture" *ngFor="let analisys of app.ANALISYS">
-					<!-- <mat-card-header> -->
-						<mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-							<span fxFlex="20%">
+					<mat-card class="report-card" >
+						<mat-card-header>
+							<mat-card-title>
 								<div *ngIf="analisys.status === 'SUCCESS' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ok.png');"></div>
 								<div *ngIf="analisys.status === 'FAIL' " mat-card-avatar style="background-size: cover; background-image: url('/assets/ko.png');"></div>
-							</span>
-							<span fxFlex="80%"><h4>{{analisys.label}}&nbsp;</h4></span>
-						</mat-card-title>
-						<mat-card-subtitle>
-							{{analisys.creationDate}}&nbsp;
-						</mat-card-subtitle>
-					<!-- </mat-card-header> -->
-					<mat-card-content>
-						<p>
-							Code: <b>{{analisys.code}}</b>
-						</p>
-						<p>
-							Provider: <b>{{analisys.analysisProvider}}</b>
-						</p>
-						<p>
-							Status: <b>{{analisys.status}}</b>
-						</p>
-						<p>
-							Scope: <b>{{analisys.analysisScope}}</b>
-						</p>
-						<!-- <div>
-								<span>Scope:</span>
-								<span class="card-text-spacer"></span>
-								<span><b>{{analisys.analisysScope}}</b></span>
-						</div> -->
-						<p>
-							Invoker: <b>{{analisys.invoker}}</b>
-						</p>
+								<h4>{{analisys.label}}&nbsp;</h4>
+							</mat-card-title>
+							<mat-card-subtitle>
+								{{analisys.creationDate}}&nbsp;
+							</mat-card-subtitle>
+						</mat-card-header>
+						<mat-card-content>
+							<p>
+								Code: <b>{{analisys.code}}</b>
+							</p>
+							<p>
+								Provider: <b>{{analisys.analysisProvider}}</b>
+							</p>
+							<p>
+								Status: <b>{{analisys.status}}</b>
+							</p>
+							<p>
+								Scope: <b>{{analisys.analysisScope}}</b>
+							</p>
+							<!-- <div>
+									<span>Scope:</span>
+									<span class="card-text-spacer"></span>
+									<span><b>{{analisys.analisysScope}}</b></span>
+							</div> -->
+							<p>
+								Invoker: <b>{{analisys.invoker}}</b>
+							</p>
 
-						<p>
-							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 1']}}</b>&nbsp;
-							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 2']}}</b>&nbsp;
-							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 3']}}</b>&nbsp;
-							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 4']}}</b>&nbsp;
-							<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 5']}}</b>&nbsp;
-						</p>
-						<p>
-							Security Rating: <b>{{analisys._secRating}}</b>
-						</p>
+							<p>
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 1']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 2']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 3']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 4']}}</b>&nbsp;
+								<b>{{analisys.metrics['com.optimyth.CQM.securityDefectsByPriority.Priority 5']}}</b>&nbsp;
+							</p>
+							<p>
+								Security Rating: <b>{{analisys._secRating}}</b>
+							</p>
 
-						<p *ngIf="analisys.unparsedFiles && analisys.unparsedFiles.length > 0" style="align-self: right;">
-							Unparsed files: <span style="color: red; font-style : oblique;"><b>{{analisys.unparsedFiles.length}}</b></span>
-						</p>
-						<p *ngIf="app._portfolio_Tecnologia == 'iOs'">
-							<img src="/assets/ios.png" width="32">
-						</p>
-						<p *ngIf="app._portfolio_Tecnologia == 'Android'">
-							<img src="/assets/android.png" width="32">
-						</p>
-					</mat-card-content>
-				</mat-card>
-				<!-- </mat-grid-tile>
-			</mat-grid-list> -->
-			</div>
+							<p *ngIf="analisys.unparsedFiles && analisys.unparsedFiles.length > 0" style="align-self: right;">
+								Unparsed files: <span style="color: red; font-style : oblique;"><b>{{analisys.unparsedFiles.length}}</b></span>
+							</p>
+							<p *ngIf="app._portfolio_Tecnologia == 'iOs'">
+								<img src="/assets/ios.png" width="32">
+							</p>
+							<p *ngIf="app._portfolio_Tecnologia == 'Android'">
+								<img src="/assets/android.png" width="32">
+							</p>
+						</mat-card-content>
+					</mat-card>
+				</mat-grid-tile>
+			</mat-grid-list> 
 		</mat-card-content>
 	</mat-card>
 	<br>
@@ -121,8 +117,8 @@ s		</mat-card>
 			</mat-card-title>
 		</mat-card-header>
 
-		<mat-card-content> <!-- rowHeight="4:3" -->
-			<mat-grid-list cols="3" rowWidth="95%" rowHeight="3:2">
+		<mat-card-content> 
+			<mat-grid-list cols="3" rowWidth="95%" rowHeight="3:4">
 				<mat-grid-tile *ngFor="let analisys of app.DELIVERIES">
 					<mat-card class="report-card">
 						<mat-card-header>

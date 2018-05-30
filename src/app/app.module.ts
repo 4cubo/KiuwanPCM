@@ -4,7 +4,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormsModule, React
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
+import { KiuwanApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
 //import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
 import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail/kiuwan-application-detail.component';
 import { KiuwanApplicationService } from './_services/kiuwan.application.service';
@@ -53,7 +53,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
-    ApplicationListComponent,
+    KiuwanApplicationListComponent,
     KiuwanApplicationTableListComponent,
     KiuwanApplicationDetailComponent,
     MessagesComponent,

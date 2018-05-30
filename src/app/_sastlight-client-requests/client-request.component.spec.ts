@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ClientRequestComponent } from './client-request.component';
+import { ServiceRequestComponent } from './client-request.component';
 
 describe('ClientRequestComponent', () => {
-  let component: ClientRequestComponent;
-  let fixture: ComponentFixture<ClientRequestComponent>;
+  let component: ServiceRequestComponent;
+  let fixture: ComponentFixture<ServiceRequestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientRequestComponent ]
+      declarations: [ ServiceRequestComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClientRequestComponent);
+    fixture = TestBed.createComponent(ServiceRequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
