@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail/kiuwan-application-detail.component';
-import { ApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
+import { KiuwanApplicationListComponent } from './kiuwan-applications/kiuwan-applications.component';
 import { ServiceRequestComponent } from './_sastlight-client-requests/client-request.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
     }]
   }, 
   { path: 'detail/:name', component: KiuwanApplicationDetailComponent, canActivate: [AuthGuard] },
-  { path: 'kiuwan', component: ApplicationListComponent, canActivate: [AuthGuard], 
+  { path: 'kiuwan', component: KiuwanApplicationListComponent, canActivate: [AuthGuard], 
     children: [ {
       path: 'detail/:name',
       component: KiuwanApplicationDetailComponent
