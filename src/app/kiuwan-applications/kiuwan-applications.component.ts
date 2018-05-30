@@ -17,7 +17,7 @@ import { KiuwanApplicationTableListComponent } from './kiuwan-applications-table
   styleUrls: ['./kiuwan-applications.component.css']
 })
 
-export class ApplicationListComponent implements OnInit, AfterViewInit {
+export class KiuwanApplicationListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private appProv: KiuwanApplicationService,
@@ -28,6 +28,10 @@ export class ApplicationListComponent implements OnInit, AfterViewInit {
     console.log("Constructor de ApplicationsComponent"); //@aaa delete
   }
 
+  userName : string;
+  userPasswd : string;
+
+  
   applications: Kiuwanapplication[];
   applications_POC: Kiuwanapplication[];
 
@@ -109,7 +113,6 @@ export class ApplicationListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.appProv.setCredentials(this.userName, this.userPasswd);
-    
   }
 
   ngAfterViewInit() {

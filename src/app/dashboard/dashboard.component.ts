@@ -181,11 +181,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     for (let i = 0; i < this.MAX_CHARTS; i++) {
       let gphInfo;
       // Labels must have a maximun length????  //@aaa @TODO
-      for ( let iAux=0; iAux < this.graphsInfo[i].data.classes.length; iAux++){
-        this.graphsInfo[i].data.classes[iAux] =  
-          this.graphsInfo[i].data.classes[iAux].substr(0,10);
+      if (this.graphsInfo[i].data && this.graphsInfo[i].data.classes && this.graphsInfo[i].data.classes.length ){
+        for ( let iAux=0; iAux < this.graphsInfo[i].data.classes.length; iAux++){
+          this.graphsInfo[i].data.classes[iAux] =  
+            this.graphsInfo[i].data.classes[iAux].substr(0,10);
+        }
       }
-
       if( this.graphsInfo[i].gType === 'bar'){
         gphInfo= {
           type: this.graphsInfo[i].gType, // pie, line,  'bar',

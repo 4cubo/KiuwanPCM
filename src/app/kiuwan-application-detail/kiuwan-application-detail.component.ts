@@ -4,6 +4,7 @@ import {KiuwanApplicationService} from '../_services/kiuwan.application.service'
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MessageService} from '../message.service';
+import {Message} from 'primeng/api';
 
 @Component({
   selector: 'app-application-detail',
@@ -17,12 +18,15 @@ export class KiuwanApplicationDetailComponent implements OnInit {
   
   app: Kiuwanapplication;
 
+  msgs: Message[];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private appProvService: KiuwanApplicationService,
     private location: Location,
-    private messageService: MessageService
+    private messageService: MessageService,
+    //private msgs: Message[]
   ) {
     
     this.route.params.subscribe( params => {
@@ -34,12 +38,20 @@ export class KiuwanApplicationDetailComponent implements OnInit {
   getApplicationDetail(): void {
     this.appProvService.getApplicationAndReports(this.appName)
       .subscribe(
-        app => { 
-          this.app = app; 
+        data => { 
+          this.app = data; 
+        },
+        error => {
+          this.msgs = [{severity: 'error', summary: 'BE error loading details of ' + this.appName, 
+            detail: error.toString() }];
+        },
+        ()=>{
           //console.log("  App details=", this.app); 
-          //console.log('----------ADADADADADD---------------------------> : getApplicationDetail DATA FINISHED LOADING');
+          console.log('----------ADADADADADD---------------------------> : getApplicationDetail DATA FINISHED LOADING');
           for (let iAux = 0; iAux < this.app.ANALISYS.length; iAux++){
             this.app.ANALISYS[iAux]._secRating = 5;
+
+
             if( this.app.ANALISYS[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 4'] > 0) 
               this.app.ANALISYS[iAux]._secRating = 4;
             if( this.app.ANALISYS[iAux]['com.optimyth.CQM.securityDefectsByPriority.Priority 3'] > 0) 
@@ -68,6 +80,8 @@ export class KiuwanApplicationDetailComponent implements OnInit {
           0 *   >   5z 
           */
           this.messageService.add('ApplicationDetailComponent:getApplicationDeatil name:' + JSON.stringify( this.appName ));
+          this.msgs = [{severity: 'info', summary: this.app.name , 
+            detail: "BL Analysis: " +  this.app.DELIVERIES.length + " DEL Analysis: " + this.app.DELIVERIES.length }];
         }
       );
     

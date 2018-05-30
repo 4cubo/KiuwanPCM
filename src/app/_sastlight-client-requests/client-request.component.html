@@ -9,87 +9,89 @@
 <br>
 <div class="example-container mat-elevation-z8" matSort>
 
-	<div class="spinner-container" *ngIf="requestList.length<=0">
+	<div class="spinner-container" [hidden]="loadingDataHidden">
 		<mat-spinner></mat-spinner>
 	</div>
 
-	<div class="example-header">
-		<mat-form-field> <input matInput
-			(keyup)="applyFilter($event.target.value)" placeholder="Filter">
-		</mat-form-field>
+	<div [hidden]="!loadingDataHidden">
+		<div class="example-header">
+			<mat-form-field> <input matInput
+				(keyup)="applyFilter($event.target.value)" placeholder="Filter">
+			</mat-form-field>
+		</div>
+
+		<mat-table #table [dataSource]="dataSource">
+
+		<!-- Checkbox Column -->
+		<ng-container matColumnDef="select">
+			<mat-header-cell *matHeaderCellDef>
+				<mat-checkbox (change)="$event ? masterToggle() : null"
+											[checked]="selection.hasValue() && isAllSelected()"
+											[indeterminate]="selection.hasValue() && !isAllSelected()">
+				</mat-checkbox>
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<mat-checkbox (click)="$event.stopPropagation()"
+											(change)="$event ? selection.toggle(row) : null"
+											[checked]="selection.isSelected(row)">
+				</mat-checkbox>
+			</mat-cell>
+		</ng-container>
+			<!-- P_DES Column -->
+			<ng-container matColumnDef="P_DES">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</mat-header-cell>
+				<mat-cell *matCellDef="let app"> {{app.P_DES}} </mat-cell>
+			</ng-container>
+			
+			<!-- P_APP Column -->
+			<ng-container matColumnDef="P_APP">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>Application</mat-header-cell>
+				<mat-cell *matCellDef="let app"> {{app.P_APP}} </mat-cell>
+			</ng-container>
+			
+			<!-- P_PRO Column -->
+			<ng-container matColumnDef="P_PRO">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
+				<mat-cell *matCellDef="let app"> {{app.P_PRO}} </mat-cell>
+			</ng-container>
+
+			<!-- P_CLI Column -->
+			<ng-container matColumnDef="P_CLI">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>Client</mat-header-cell>
+				<mat-cell *matCellDef="let app"> {{app.P_CLI}} </mat-cell>
+			</ng-container>
+
+			<!-- PM_BA Column -->
+			<ng-container matColumnDef="PM_BA">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>Bussines Area</mat-header-cell>
+				<mat-cell *matCellDef="let app"> {{app.PM_BA}} </mat-cell>
+			</ng-container>
+			
+			<!-- PM_FC Column -->
+			<ng-container matColumnDef="PM_FC">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>Functional Comunity</mat-header-cell>
+				<mat-cell *matCellDef="let app"> {{app.PM_FC}} </mat-cell>
+			</ng-container>
+			
+			<!-- P_NUMTEC Column -->
+			<ng-container matColumnDef="P_NUMTEC">
+				<mat-header-cell *matHeaderCellDef mat-sort-header>#Technologies</mat-header-cell>
+				<mat-cell *matCellDef="let app"> {{app.P_NUMTEC}} </mat-cell>
+			</ng-container>
+			
+			
+			
+			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+			
+			<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)" >
+			</mat-row>
+			
+		</mat-table>
+		
+		<mat-paginator #paginator
+									[pageSize]="5"
+									[pageSizeOptions]="[5, 10, 20]"
+									[showFirstLastButtons]="false">
+		</mat-paginator>
 	</div>
-
-	<mat-table #table [dataSource]="dataSource">
-
-	<!-- Checkbox Column -->
-	<ng-container matColumnDef="select">
-		<mat-header-cell *matHeaderCellDef>
-		  <mat-checkbox (change)="$event ? masterToggle() : null"
-		                [checked]="selection.hasValue() && isAllSelected()"
-		                [indeterminate]="selection.hasValue() && !isAllSelected()">
-		  </mat-checkbox>
-		</mat-header-cell>
-		<mat-cell *matCellDef="let row">
-		  <mat-checkbox (click)="$event.stopPropagation()"
-		                (change)="$event ? selection.toggle(row) : null"
-		                [checked]="selection.isSelected(row)">
-		  </mat-checkbox>
-		</mat-cell>
-	</ng-container>
-		<!-- P_DES Column -->
-		<ng-container matColumnDef="P_DES">
-		  <mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</mat-header-cell>
-		  <mat-cell *matCellDef="let app"> {{app.P_DES}} </mat-cell>
-		</ng-container>
-		
-		<!-- P_APP Column -->
-		<ng-container matColumnDef="P_APP">
-		  <mat-header-cell *matHeaderCellDef mat-sort-header>Application</mat-header-cell>
-		  <mat-cell *matCellDef="let app"> {{app.P_APP}} </mat-cell>
-		</ng-container>
-		
-		<!-- P_PRO Column -->
-		<ng-container matColumnDef="P_PRO">
-		  <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
-		  <mat-cell *matCellDef="let app"> {{app.P_PRO}} </mat-cell>
-		</ng-container>
-
-		<!-- P_CLI Column -->
-		<ng-container matColumnDef="P_CLI">
-		  <mat-header-cell *matHeaderCellDef mat-sort-header>Client</mat-header-cell>
-		  <mat-cell *matCellDef="let app"> {{app.P_CLI}} </mat-cell>
-		</ng-container>
-
-		<!-- PM_BA Column -->
-		<ng-container matColumnDef="PM_BA">
-		  <mat-header-cell *matHeaderCellDef mat-sort-header>Bussines Area</mat-header-cell>
-		  <mat-cell *matCellDef="let app"> {{app.PM_BA}} </mat-cell>
-		</ng-container>
-		
-		<!-- PM_FC Column -->
-		<ng-container matColumnDef="PM_FC">
-		  <mat-header-cell *matHeaderCellDef mat-sort-header>Functional Comunity</mat-header-cell>
-		  <mat-cell *matCellDef="let app"> {{app.PM_FC}} </mat-cell>
-		</ng-container>
-		
-		<!-- P_NUMTEC Column -->
-		<ng-container matColumnDef="P_NUMTEC">
-		  <mat-header-cell *matHeaderCellDef mat-sort-header>#Technologies</mat-header-cell>
-		  <mat-cell *matCellDef="let app"> {{app.P_NUMTEC}} </mat-cell>
-		</ng-container>
-		
-		
-		
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		
-		<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)" >
-		</mat-row>
-		
-	</mat-table>
-	
-	<mat-paginator #paginator
-	               [pageSize]="5"
-	               [pageSizeOptions]="[5, 10, 20]"
-	               [showFirstLastButtons]="false">
-	</mat-paginator>
 </div>

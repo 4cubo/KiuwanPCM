@@ -16,6 +16,10 @@ export class KiuwanDataComponent implements OnInit, AfterViewInit {
     console.log("Constructor de KiuwanDataComponent"); //@aaa delete
   }
 
+  userName : string;
+  userPasswd : string;
+
+  
   kiuwanDataStatus = { 
     id : '',
     status : '', 

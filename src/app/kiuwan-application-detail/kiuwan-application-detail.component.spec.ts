@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail.component';
 
-import { ApplicationDetailComponent } from './application-detail.component';
 
 describe('ApplicationDetailComponent', () => {
-  let component: ApplicationDetailComponent;
-  let fixture: ComponentFixture<ApplicationDetailComponent>;
+  let component: KiuwanApplicationDetailComponent;
+  let fixture: ComponentFixture<KiuwanApplicationDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicationDetailComponent ]
+      declarations: [ KiuwanApplicationDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplicationDetailComponent);
+    fixture = TestBed.createComponent(KiuwanApplicationDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

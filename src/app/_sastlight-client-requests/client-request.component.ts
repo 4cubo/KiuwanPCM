@@ -38,6 +38,8 @@ export class ServiceRequestComponent implements OnInit, AfterViewInit  {
   //displayedColumns = ['select', 'id', 'name', 'descriptcion'];
   displayedColumns = ['select', 'P_DES', 'P_APP', 'P_PRO', 'PM_BA', 'PM_FC', 'P_NUMTEC', 'P_CLI'];
 
+  loadingDataHidden = false; //Initial state
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -78,10 +80,26 @@ export class ServiceRequestComponent implements OnInit, AfterViewInit  {
   }
 
   getRequestList(): void {
-    this.requestService.getAll().subscribe( sastRequestList => this.getRequestList_CB(sastRequestList) );
+    this.requestService.getAll().subscribe( 
+
+      data => {
+        this.getRequestList_CB(data); 
+        //this.requestList = data;
+        //this.dataSource.data = data;
+      },
+      error => { 
+        console.log ("Error getting requests " , error ); 
+        this.loadingDataHidden = true; // hide loading
+      },
+      () => {
+        console.log ("Data  completed" );
+        this.loadingDataHidden = true; // hide loading
+      }
+    );
   };
 
   ngOnInit() {
+    this.loadingDataHidden = false; // show loading
     this.getRequestList();
   }
 
