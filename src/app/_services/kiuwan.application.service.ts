@@ -4,7 +4,7 @@ import 'rxjs/add/observable/forkJoin';
 //import {forkJoin} from 'rxjs/add/observable/forkJoin';
 import {of} from 'rxjs/observable/of';
 
-import {Kiuwanapplication, KiuwanApplicationAnalisys, KiuwanApplicationDelivery} from '../classes/kiuwanapplication';
+import {KiuwanApplication, KiuwanApplicationAnalisys, KiuwanApplicationDelivery} from '../classes/kiuwanapplication';
 import {MessageService} from '../message.service';
 import {appConfig} from '../app.config';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -19,7 +19,7 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
     console.log("Constructor de KiuwanApplicationService[Service]"); //@aaa delete
   }
 
-  applications: Kiuwanapplication[]; //@aaa mock-applications
+  applications: KiuwanApplication[]; //@aaa mock-applications
 
   kiuwanUser: string = '';
   kiuwanPasswd: string = '';
@@ -34,7 +34,7 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
   };
 
   //Gets applications from kiuwan or from Local Storage
-  getApplications(): Observable<Kiuwanapplication[]> {
+  getApplications(): Observable<KiuwanApplication[]> {
 
     //this.messageService.add('Kiuwan App Service: getApplications');
 
@@ -43,7 +43,7 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
       return of(this.applications);
     }
     // @aaa @TODO Do not use LocalStorage in the future, session storage or server mongo instead
-    let apps: Kiuwanapplication[] =  
+    let apps: KiuwanApplication[] =  
       JSON.parse(localStorage.getItem('KiuwanApplications'));
     if (apps) {
       console.log('----------------------------_>Recuerado aplicaciones kiuwan del local storage');
@@ -63,7 +63,7 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
     };
 
 
-    return this.http.post<Kiuwanapplication[]>(appConfig.apiUrl + '/kiuwan', data)
+    return this.http.post<KiuwanApplication[]>(appConfig.apiUrl + '/kiuwan', data)
       .map(kiuApps => {
         console.log('Lista de apps recibida:', kiuApps);
 
@@ -73,8 +73,8 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
 
   }
 
-  getApplicationAndReports(name: string): Observable<Kiuwanapplication> {
-    let result: Kiuwanapplication;
+  getApplicationAndReports(name: string): Observable<KiuwanApplication> {
+    let result: KiuwanApplication;
     //let analisys: KiuwanApplicationAnalisys[];
 
     this.getApplications().subscribe(

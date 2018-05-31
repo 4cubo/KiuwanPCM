@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Kiuwanapplication} from '../classes/kiuwanapplication';
+import {KiuwanApplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService} from '../_services/kiuwan.application.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
@@ -15,8 +15,8 @@ import {Message} from 'primeng/api';
 export class KiuwanApplicationDetailComponent implements OnInit {
 
   @Input() appName: string;
-  
-  app: Kiuwanapplication;
+  KiuwanApplication
+  app: KiuwanApplication;
 
   msgs: Message[];
 

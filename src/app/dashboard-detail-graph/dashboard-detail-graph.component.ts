@@ -17,10 +17,11 @@ export class DashboardDetailGraphComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-      this.route.params.subscribe( params => {
-      this.name = params['name'];
-      
-      });
+      this.route.params.subscribe( 
+        params => {
+          this.name = params['name'];
+        }
+      );
 
   }
 

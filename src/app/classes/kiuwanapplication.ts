@@ -1,4 +1,4 @@
-export class Kiuwanapplication {
+export class KiuwanApplication {
   id: number;
   name: string;
   description: string;
@@ -31,7 +31,7 @@ export class Kiuwanapplication {
 //    
 //  }
 
-  public static explodeData(item: Kiuwanapplication): void {
+  public static explodeData(item: KiuwanApplication): void {
 
     item._portfolio_Aplicacion =
       (item.applicationPortfolios['Aplicacion']) ? item.applicationPortfolios['Aplicacion'] : null;

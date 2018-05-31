@@ -4,7 +4,7 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 //let _ = require('lodash');
 import * as _ from 'lodash';
 
-import {Kiuwanapplication} from '../classes/kiuwanapplication';
+//import {KiuwanApplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService, KiuwanStatisticsData, KiuwanStatisticData} from '../_services/kiuwan.application.service';
 import {ClientRequestProviderService} from '../_services/clientrequestprovider.service';
 

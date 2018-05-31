@@ -14,7 +14,9 @@ import { RegisterComponent } from './register/register.component';
 import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.component';
 import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
 import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
-import { FortifyOnDemandComponent } from './fortify-on-demand/fortify-on-demand.component';
+import { FoDAppListComponent } from './fod-app-list/fod-app-list.component';
+import { FodAppRelVulListComponentComponent } from './fod-app-rel-vul-list-component/fod-app-rel-vul-list-component.component';
+import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full' },
@@ -45,7 +47,12 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admu', component: AdminUserComponent, canActivate: [AuthGuard] }, /* @aaa TODO add AdminGuard to access this functionality */
 
-  { path: 'fod', component: FortifyOnDemandComponent, canActivate: [AuthGuard] },
+  { path: 'fod', component: FoDAppListComponent, canActivate: [AuthGuard],
+    children: [ { 
+      path: 'rel/:applicationId',
+      component: FoDAppRelListComponent
+    }]
+},
 
   
   { path: '**', redirectTo: '' }

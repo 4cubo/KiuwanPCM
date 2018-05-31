@@ -50,8 +50,11 @@ import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.com
 import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
 import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FortifyOnDemandComponent } from './fortify-on-demand/fortify-on-demand.component';
+import { FoDAppListComponent } from './fod-app-list/fod-app-list.component';
 import { FoDService } from './_services/fortify.service';
+//import { FodAppRelListComponentComponent } from './fod-app-rel-list/fod-app-rel-list.component';
+import { FodAppRelVulListComponentComponent } from './fod-app-rel-vul-list-component/fod-app-rel-vul-list-component.component';
+import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,9 @@ import { FoDService } from './_services/fortify.service';
     DashBoardPanelComponent,
     KiuwanDataComponent,
     DashboardDetailGraphComponent,
-    FortifyOnDemandComponent,
+    FoDAppListComponent,
+    FoDAppRelListComponent,
+    FodAppRelVulListComponentComponent,
   ],
   imports: [
     BrowserModule,

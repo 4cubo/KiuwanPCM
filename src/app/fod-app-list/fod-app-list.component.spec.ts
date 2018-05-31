@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FortifyOnDemandComponent } from './fortify-on-demand.component';
+import { FoDAppListComponent } from './fod-app-list.component';
 
 describe('FortifyOnDemandComponent', () => {
-  let component: FortifyOnDemandComponent;
-  let fixture: ComponentFixture<FortifyOnDemandComponent>;
+  let component: FoDAppListComponent;
+  let fixture: ComponentFixture<FoDAppListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FortifyOnDemandComponent ]
+      declarations: [ FoDAppListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FortifyOnDemandComponent);
+    fixture = TestBed.createComponent(FoDAppListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

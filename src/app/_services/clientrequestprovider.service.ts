@@ -4,7 +4,7 @@ import {of} from 'rxjs/observable/of';
 import {HttpClient} from '@angular/common/http';
 import {appConfig} from '../app.config';
 
-import {Kiuwanapplication} from '../classes/kiuwanapplication';
+//(import {KiuwanApplication} from '../classes/kiuwanapplication';
 import {SASTRequest} from '../classes/sastrequest';
 import {MessageService} from '../message.service';
 

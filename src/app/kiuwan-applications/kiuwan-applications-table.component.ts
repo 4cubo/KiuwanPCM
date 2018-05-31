@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {ViewChild, AfterViewInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {MessageService} from '../message.service';
-import {Kiuwanapplication} from '../classes/kiuwanapplication';
+import {KiuwanApplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService} from '../_services/kiuwan.application.service';
 import {MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
 import {DataSource, SelectionModel} from '@angular/cdk/collections';
@@ -27,8 +27,8 @@ export class KiuwanApplicationTableListComponent implements OnInit, AfterViewIni
   }
 
 
-  applications: Kiuwanapplication[];
-  dataSource = new MatTableDataSource<Kiuwanapplication>(this.applications);
+  applications: KiuwanApplication[];
+  dataSource = new MatTableDataSource<KiuwanApplication>(this.applications);
   displayedColumns = [
     'name',
     'descriptcion',
@@ -55,7 +55,7 @@ export class KiuwanApplicationTableListComponent implements OnInit, AfterViewIni
   loadingText  = 'Loading Kiuwan Applications'
 
   /** Row selection setup */
-  selection = new SelectionModel<Kiuwanapplication>(true, []);
+  selection = new SelectionModel<KiuwanApplication>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
