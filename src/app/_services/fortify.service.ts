@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
+//import 'rxjs/add/observable/forkJoin';
 //import {forkJoin} from 'rxjs/add/observable/forkJoin';
-import { of } from 'rxjs/observable/of';
-
-import { Kiuwanapplication, KiuwanApplicationAnalisys, KiuwanApplicationDelivery } from '../classes/kiuwanapplication';
+//import { of } from 'rxjs/observable/of';
 import { MessageService } from '../message.service';
 import { appConfig } from '../app.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -30,18 +28,19 @@ export class FoDService {
   }
 
   // Request contains only .url & .method attibutes
-  getObject(req): Observable<FoDAppAPIResponse> { //TODO Change to postFoDRequest
+  getObject(req): Observable<any> { //TODO Change to postFoDRequest
 
     let data = {
       method: req.method,
       url: req.url,
-      headers: {
+      headers: { // Headers for fortify
         'Authorization': 'Bearer ' + this.token,
         'Accept': 'application/json'
-      }
+      },
+      body : {}
     };
 
-    return this.http.post<FoDAppAPIResponse>(appConfig.apiUrl + '/fod', data).map(
+    return this.http.post<any>(appConfig.apiUrl + '/fod', data).map(
       kiuApps => {
         console.log('Lista de apps recibida:', kiuApps);
         //this.appList = kiuApps;
