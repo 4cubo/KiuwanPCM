@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-// import { Application} from '../classes/application';
-import { MessageService} from '../message.service';
-// import { ApplicationProviderService} from '../_services/applicationprovider.service';
 import { ClientRequestProviderService } from '../_services/clientrequestprovider.service';
 import { ViewChild, AfterViewInit} from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
@@ -11,6 +7,7 @@ import { Router } from '@angular/router';
 import { User} from '../_user/user';
 import { SASTRequest } from '../classes/sastrequest';
 import { Observable } from 'rxjs';
+import { MessageService } from '../_services/message.service';
 
 @Component({
   selector: 'app-client-request',

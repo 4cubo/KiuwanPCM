@@ -30,7 +30,8 @@ export class KiuwanDataComponent implements OnInit, AfterViewInit {
   STATISTICS = {};
 
   ngOnInit() {
-    this.kiuSrv.setCredentials(this.userName, this.userPasswd);
+    //this.kiuSrv.setCredentials(this.userName, this.userPasswd);
+    this.kiuSrv.setCredentials("poc.isban.alvaro.alonso", "q0q=tnJsV1Isn9HUECaR");
     this.getStatus();
   }
 

@@ -11,10 +11,9 @@ import {ClientRequestProviderService} from '../_services/clientrequestprovider.s
 import {User} from '../_user/user';                     /* @aaa   Listado de usuarios */
 import {GeneralStatistisc, DashBoardGraphInfoNode} from '../classes/generalstatistisc';
 import {SASTRequest} from '../classes/sastrequest';
-import {MessageService} from '../message.service';
 import { error } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
-// import {UserService} from '../_services/index';         /* @aaa   Listado de usuarios */
+import { MessageService } from '../_services/message.service';
 
 
 @Component({
@@ -97,7 +96,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
   private _BAR_GRAPH_CONF(i: number): any {
-    console.log("----------------------------------------->", this.graphsInfo[i].data.min, this.graphsInfo[i].data.max );
+    console.log("-->", this.graphsInfo[i].data.min, this.graphsInfo[i].data.max );
     return {
       fullWidth : true,
       legend: {
@@ -372,7 +371,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   showDetailGraph( title ){
-    console.log('---------------------------------->showDetailGraph', title);
+    console.log('->showDetailGraph', title);
     for (let i = 0; i < this.MAX_CHARTS; i++) {
       let gphInfo;
       if( this.graphsInfo[i].title === title ){

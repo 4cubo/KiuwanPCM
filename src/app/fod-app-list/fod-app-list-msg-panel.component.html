@@ -1,0 +1,45 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+  <!--
+     error  : boolean;
+  errorString : string;
+  totalCount : number;
+  loadedCount : number;
+  token : string;
+  -->
+      <mat-panel-title>
+        <span style="color: darkgray; font: bold;">
+          Fortify Connection Status
+        </span>&nbsp;&nbsp;&nbsp;
+        <span style="color: darkgray; font: bold;">
+          <img src="/assets/ko.png" [hidden]="!fodMsgPanelSrv.status.error" width="17px;">
+          <img src="/assets/ok.png" [hidden]="fodMsgPanelSrv.status.error" width="17px;">
+        </span>
+      </mat-panel-title>
+  
+      <mat-panel-description>
+        <span style="color: red; font: bold;">{{fodMsgPanelSrv.status.errorString}}</span>
+  
+      </mat-panel-description>
+
+      <mat-panel-description>
+        Loaded items: {{fodMsgPanelSrv.status.loadedCount}} /{{ fodMsgPanelSrv.status.totalCount}}
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+  
+    <mat-form-field>
+      <input matInput placeholder="Token" name="token" id="token"  [(ngModel)]="fodMsgPanelSrv.status.token"> <!-- (change)="setFoDSvcToken()" -->
+    </mat-form-field>
+
+    <div *ngIf="fodMsgPanelSrv.messages.length">
+
+        <h2>Messages</h2>
+        <button class="clear"
+                (click)="fodMsgPanelSrv.clear()">clear</button>
+        <div *ngFor='let message of fodMsgPanelSrv.messages'> {{message}} </div>
+      
+      </div>
+
+  
+  </mat-expansion-panel>

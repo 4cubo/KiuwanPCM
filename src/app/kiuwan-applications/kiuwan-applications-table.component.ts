@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ViewChild, AfterViewInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {MessageService} from '../message.service';
 import {KiuwanApplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService} from '../_services/kiuwan.application.service';
 import {MatPaginator, MatTableDataSource, MatSort, MatCardModule} from '@angular/material';
 import {DataSource, SelectionModel} from '@angular/cdk/collections';
+import { MessageService } from '../_services/message.service';
 
 
 @Component({

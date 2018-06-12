@@ -5,9 +5,10 @@ import 'rxjs/add/observable/forkJoin';
 import {of} from 'rxjs/observable/of';
 
 import {KiuwanApplication, KiuwanApplicationAnalisys, KiuwanApplicationDelivery} from '../classes/kiuwanapplication';
-import {MessageService} from '../message.service';
 import {appConfig} from '../app.config';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { MessageService } from './message.service';
+
 
 @Injectable()
 export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
@@ -29,7 +30,7 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
     console.log(" setCredentials:" + userName + "/" + passwd);
     this.kiuwanUser = userName;
     this.kiuwanPasswd = passwd;
-    this.messageService.add('Kiuwan App Service: credentials configured');
+    this.messageService.add('Kiuwan App Service: credentials');
 
   };
 

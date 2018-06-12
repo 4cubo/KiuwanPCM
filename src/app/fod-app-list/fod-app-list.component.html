@@ -1,101 +1,134 @@
-<h2>Fortify On Demand Account Applications</h2>
+<app-fod-app-list-msg-panel></app-fod-app-list-msg-panel>
+<!-- <br>
+<mat-expansion-panel>
+	<mat-expansion-panel-header>
 
-<div class="example-container mat-elevation-z8" >
+		<mat-panel-title>
+			<span style="color: darkgray; font: bold;">
+				Fortify Connection Status
+			</span>&nbsp;&nbsp;&nbsp;
+			<span style="color: darkgray; font: bold;">
+				<img src="/assets/ko.png" [hidden]="!showFoDError" width="17px;">
+				<img src="/assets/ok.png" [hidden]="showFoDError" width="17px;">
+			</span>
+		</mat-panel-title>
 
-	<div class="spinner-container" [hidden]="loadingDataHidden">
-		<mat-spinner></mat-spinner>
-	</div>
+		<mat-panel-description>
+			<span style="color: red; font: bold;">{{fodErrorStr}}</span>
 
-	<div class="spinner-container">
-		<div>
-			<label>Token
-				<input type="text" size="80" name="token" id="token" ng-change="setFoDSvcToken()" [(ngModel)]="token" [ngModelOptions]="{standalone: true}"/>
-			</label>
+		</mat-panel-description>
+		<mat-panel-description>
+			Loaded items: {{userAppLoadedCount}} /{{ userAppCount}}
+		</mat-panel-description>
+	</mat-expansion-panel-header>
+
+	<mat-form-field>
+		<input matInput placeholder="Token" name="token" id="token" (change)="setFoDSvcToken()" [(ngModel)]="token">
+	</mat-form-field>
+
+</mat-expansion-panel>
+-->
+<div [hidden]="actRoute.children.length > 0">
+
+	<h2>Fortify On Demand Account Applications</h2>
+
+	<div class="example-container mat-elevation-z8">
+
+		<div class="spinner-container" [hidden]="loadingDataHidden">
+			<mat-spinner></mat-spinner>
 		</div>
-		<div [hidden]="!showFoDError" class="panel-body">{{fodErrorStr}}</div>
-		<div [hidden]="!(loadingData > 0)" class="panel-body">Number of open connections: {{loadingData}}</div>
-		<div>#Items {{userAppLoadedCount}} /{{ userAppCount}}</div>
-	</div>
 
-	<div [hidden]="!loadingDataHidden" matSort>
-		<div class="example-header">
-			<mat-form-field>
-				<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-			</mat-form-field>
+
+
+
+
+
+
+
+
+		<div [hidden]="!loadingDataHidden" matSort style="padding: 1px">
+
+
+			<div class="example-header">
+				<mat-form-field>
+					<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+
+				</mat-form-field>
+			</div>
+
+			<mat-table #table [dataSource]="dataSource">
+
+				<!-- Checkbox Column -->
+				<ng-container matColumnDef="select">
+					<mat-header-cell *matHeaderCellDef>
+						<mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+						</mat-checkbox>
+					</mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+						</mat-checkbox>
+					</mat-cell>
+				</ng-container>
+				<!-- applicationId Column -->
+				<ng-container matColumnDef="applicationId">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>App. Id.</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.applicationId}} </mat-cell>
+				</ng-container>
+
+
+
+				<!-- applicationName Column -->
+				<ng-container matColumnDef="applicationName">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>applicationName</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.applicationName}} </mat-cell>
+				</ng-container>
+
+				<!-- applicationDescription Column -->
+				<ng-container matColumnDef="applicationDescription">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>applicationDescription</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.applicationDescription}} </mat-cell>
+				</ng-container>
+
+				<!-- applicationCreatedDate Column -->
+				<ng-container matColumnDef="applicationCreatedDate">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>applicationCreatedDate</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.applicationCreatedDate}} </mat-cell>
+				</ng-container>
+
+				<!-- businessCriticalityTypeId Column -->
+				<ng-container matColumnDef="businessCriticalityTypeId">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>businessCriticalityTypeId</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.businessCriticalityTypeId}} </mat-cell>
+				</ng-container>
+
+				<!-- businessCriticalityType Column -->
+				<ng-container matColumnDef="businessCriticalityType">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>businessCriticalityType</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.businessCriticalityType}} </mat-cell>
+				</ng-container>
+
+				<!-- applicationTypeId Column -->
+				<ng-container matColumnDef="applicationTypeId">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>applicationTypeId</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.applicationTypeId}} </mat-cell>
+				</ng-container>
+
+				<!-- applicationType Column -->
+				<ng-container matColumnDef="applicationType">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>applicationType</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.applicationType}} </mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+				<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">
+				</mat-row>
+
+			</mat-table>
+
+			<mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+			</mat-paginator>
 		</div>
-
-		<mat-table #table [dataSource]="dataSource">
-
-			<!-- Checkbox Column -->
-			<ng-container matColumnDef="select">
-				<mat-header-cell *matHeaderCellDef>
-					<mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-					</mat-checkbox>
-				</mat-header-cell>
-				<mat-cell *matCellDef="let row">
-					<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
-					</mat-checkbox>
-				</mat-cell>
-			</ng-container>
-			<!-- applicationId Column -->
-			<ng-container matColumnDef="applicationId">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>App. Id.</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationId}} </mat-cell>
-			</ng-container>
-
-
-
-			<!-- applicationName Column -->
-			<ng-container matColumnDef="applicationName">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationName</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationName}} </mat-cell>
-			</ng-container>
-
-			<!-- applicationDescription Column -->
-			<ng-container matColumnDef="applicationDescription">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationDescription</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationDescription}} </mat-cell>
-			</ng-container>
-
-			<!-- applicationCreatedDate Column -->
-			<ng-container matColumnDef="applicationCreatedDate">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationCreatedDate</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationCreatedDate}} </mat-cell>
-			</ng-container>
-
-			<!-- businessCriticalityTypeId Column -->
-			<ng-container matColumnDef="businessCriticalityTypeId">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>businessCriticalityTypeId</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.businessCriticalityTypeId}} </mat-cell>
-			</ng-container>
-
-			<!-- businessCriticalityType Column -->
-			<ng-container matColumnDef="businessCriticalityType">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>businessCriticalityType</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.businessCriticalityType}} </mat-cell>
-			</ng-container>
-
-			<!-- applicationTypeId Column -->
-			<ng-container matColumnDef="applicationTypeId">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationTypeId</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationTypeId}} </mat-cell>
-			</ng-container>
-
-			<!-- applicationType Column -->
-			<ng-container matColumnDef="applicationType">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationType</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationType}} </mat-cell>
-			</ng-container>
-
-			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-
-			<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">
-			</mat-row>
-
-		</mat-table>
-
-		<mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-		</mat-paginator>
 	</div>
 </div>
 <div [hidden]="!loadingDataHidden">

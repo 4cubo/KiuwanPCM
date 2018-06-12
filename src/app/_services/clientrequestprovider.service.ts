@@ -6,7 +6,8 @@ import {appConfig} from '../app.config';
 
 //(import {KiuwanApplication} from '../classes/kiuwanapplication';
 import {SASTRequest} from '../classes/sastrequest';
-import {MessageService} from '../message.service';
+import { MessageService } from './message.service';
+
 
 
 export class SASTRequestSaveResponse {

@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-//import 'rxjs/add/observable/forkJoin';
-//import {forkJoin} from 'rxjs/add/observable/forkJoin';
-//import { of } from 'rxjs/observable/of';
-import { MessageService } from '../message.service';
 import { appConfig } from '../app.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MessageService } from './message.service';
 
 @Injectable()
 export class FoDService {
@@ -23,39 +20,54 @@ export class FoDService {
   //obj.fortifyAPIUrl= "https://api.emea.fortify.com/api/v3";
 
   setSecToken(tokeni: string) {
-    console.log(" FORTIFY TOKEN=" + tokeni);
+    //console.log(" FORTIFY TOKEN=" + tokeni);
     this.token = tokeni;
   }
 
   // Request contains only .url & .method attibutes
-  getObject(req): Observable<any> { //TODO Change to postFoDRequest
+  getObject(req : FodProxyRequest): Observable<any> { //TODO Change to postFoDRequest
 
     let data = {
       method: req.method,
       url: req.url,
       headers: { // Headers for fortify
         'Authorization': 'Bearer ' + this.token,
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'fodcol': req.fodcol
       },
-      body : {}
+      body: {}
     };
 
     return this.http.post<any>(appConfig.apiUrl + '/fod', data).map(
-      kiuApps => {
-        console.log('Lista de apps recibida:', kiuApps);
+      kiuData => {
+        console.log('Lista de objetos recibida:', kiuData);
         //this.appList = kiuApps;
-        return kiuApps;
+        return kiuData;
       }
     );
 
   };
 
 }
+export class FodProxyRequest {
+  method: string;
+  url: string;
+  fodcol: string;
+}
 
 export class FoDAppAPIResponse {
   items: FoDApplication[];
   totalCount: number;
 }
+export class FoDRelAPIResponse {
+  items: FoDReleasse[];
+  totalCount: number;
+}
+export class FoDVulAPIResponse {
+  items: FoDVulnerability[];
+  totalCount: number;
+}
+
 export class FoDApplication {
   applicationId: string;
   applicationName: string;

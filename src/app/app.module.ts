@@ -1,3 +1,4 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms'; // <-- NgModel lives here
@@ -10,12 +11,13 @@ import { KiuwanApplicationDetailComponent } from './kiuwan-application-detail/ki
 import { KiuwanApplicationService } from './_services/kiuwan.application.service';
 
 import { MessagesComponent } from './messages/messages.component';
-import { MessageService } from './message.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+
+
 
 /* @aaa Angular Material , MatButtonToggleGroup, */
-import { MatTableModule,  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule} from '@angular/material';
+import { MatTableModule,  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule, MatExpansionModule} from '@angular/material';
 import { MatCheckboxModule, MatSelectModule, MatCardModule, MatIconModule, MatChipsModule, MatFormFieldModule} from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -38,6 +40,7 @@ import { AuthGuard } from './_auth/auth.guard';
 import { JwtInterceptorProvider } from './_helpers/jwt.interceptor';
 import { AlertService, UserService } from './_services/index';
 import { AuthenticationService } from './_services/authentication.service';
+import { MessageService } from './_services/message.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
@@ -52,9 +55,12 @@ import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboar
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FoDAppListComponent } from './fod-app-list/fod-app-list.component';
 import { FoDService } from './_services/fortify.service';
-//import { FodAppRelListComponentComponent } from './fod-app-rel-list/fod-app-rel-list.component';
-import { FodAppRelVulListComponentComponent } from './fod-app-rel-vul-list-component/fod-app-rel-vul-list-component.component';
 import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.component';
+import { FoDAppRelVulListComponent } from './fod-app-rel-vul-list/fod-app-rel-vul-list.component';
+import { FoDAppRelVulDetailsComponent } from './fod-app-rel-vul-details/fod-app-rel-vul-details.component';
+import { FodAppListMsgPanelComponent } from './fod-app-list/fod-app-list-msg-panel.component';
+import { FodAppListMsgService } from './fod-app-list/fod-app-list-msg.service';
+
 
 @NgModule({
   declarations: [
@@ -75,7 +81,9 @@ import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.comp
     DashboardDetailGraphComponent,
     FoDAppListComponent,
     FoDAppRelListComponent,
-    FodAppRelVulListComponentComponent,
+    FoDAppRelVulListComponent,
+    FoDAppRelVulDetailsComponent,
+    FodAppListMsgPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +99,7 @@ import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.comp
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatExpansionModule,
 
     MatChipsModule,
     NoopAnimationsModule,
@@ -120,6 +129,7 @@ import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.comp
     AuthenticationService,
     ConfirmationService,
     ClientRequestProviderService,
+    FodAppListMsgService
   ],
   bootstrap: [
     AppComponent

@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ViewChild, ViewChildren, ViewChildrenDecorator, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MessageService } from '../message.service';
+
 import { KiuwanApplication } from '../classes/kiuwanapplication';
 import { KiuwanApplicationService } from '../_services/kiuwan.application.service';
 import { MatPaginator, MatTableDataSource, MatSort, MatCardModule } from '@angular/material';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { KiuwanApplicationTableListComponent } from './kiuwan-applications-table.component';
+import { MessageService } from '../_services/message.service';
 
 
 
@@ -91,24 +92,25 @@ export class KiuwanApplicationListComponent implements OnInit, AfterViewInit {
     //      return;
     //    }
 
-    this.appProv.getApplications().subscribe(
-      apps => {
-        //console.log ( 'getApplications->', apps );
-        this.color = 'accent'; // primary warn  accent
-        this.mode = 'determinate'; // indeterminate determinate
-        this.value = 0;
+    this.appProv.getApplications()
+      .subscribe(
+        apps => {
+          //console.log ( 'getApplications->', apps );
+          this.color = 'accent'; // primary warn  accent
+          this.mode = 'determinate'; // indeterminate determinate
+          this.value = 0;
 
-        this.getApplicationsCB(apps as KiuwanApplication[]);
-      },
-      error => {
-        console.log('getApplications->ERROR', error);
-      }
-    );
+          this.getApplicationsCB(apps as KiuwanApplication[]);
+        },
+        error => {
+          console.log('getApplications->ERROR', error);
+        }
+      );
   }
 
 
   ngOnInit() {
-    this.appProv.setCredentials("poc.isban.alvaro.alonso", "");
+    this.appProv.setCredentials("poc.isban.alvaro.alonso", "q0q=tnJsV1Isn9HUECaR");
     //this.appProv.setCredentials(this.userName, this.userPasswd);
 
   }

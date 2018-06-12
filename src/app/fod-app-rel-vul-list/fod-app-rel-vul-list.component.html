@@ -1,0 +1,144 @@
+<div [hidden]="actRoute.children.length > 0">
+	<h2>Vulnerabilities of {{applicationId}} /{{releaseId}}</h2>
+
+	<div class="example-container mat-elevation-z8" >
+
+		<div class="spinner-container" [hidden]="loadingDataHidden">
+			<mat-spinner></mat-spinner>
+		</div>
+		<br>
+		<div class="spinner-container">
+		
+			<div style="padding: 7px" [hidden]="!showFoDError" class="panel-body">{{fodErrorStr}}</div>
+			<div style="padding: 7px" [hidden]="!(loadingData > 0)" class="panel-body">Number of open connections: {{loadingData}}</div>
+			<div  style="padding: 7px">#Vulnerabilities  {{vulLoadedCount}} /{{ vulCount}}</div>
+		</div>
+		<br>
+		<div [hidden]="!loadingDataHidden" matSort>
+			<div class="example-header">
+				<mat-form-field>
+					<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+				</mat-form-field>
+			</div>
+
+			<mat-table #table [dataSource]="dataSource">
+
+				<!-- Checkbox Column -->
+				<ng-container matColumnDef="select">
+					<mat-header-cell *matHeaderCellDef>
+						<mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+						</mat-checkbox>
+					</mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+						</mat-checkbox>
+					</mat-cell>
+				</ng-container>
+
+				<!-- id Column -->
+				<ng-container matColumnDef="id">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>Id.</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.id}} </mat-cell>
+				</ng-container>
+				<!-- vulnId Column -->
+				<ng-container matColumnDef="vulnId">
+						<mat-header-cell *matHeaderCellDef mat-sort-header>Vuln Id.</mat-header-cell>
+						<mat-cell *matCellDef="let app"> {{app.vulnId}} </mat-cell>
+					</ng-container>
+				
+
+
+				<!-- releaseId Column -->
+				<ng-container matColumnDef="releaseId">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>releaseId</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.releaseId}} </mat-cell>
+				</ng-container>
+
+				<!-- fisma Column -->
+				<ng-container matColumnDef="fisma">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>fisma</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.fisma}} </mat-cell>
+				</ng-container>
+
+				<!-- severityString Column -->
+				<ng-container matColumnDef="severityString">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>severityString</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.severityString}} </mat-cell>
+				</ng-container>
+
+				<!-- severity Column -->
+				<ng-container matColumnDef="severity">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>severity</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.severity}} </mat-cell>
+				</ng-container>
+
+				<!-- category Column -->
+				<ng-container matColumnDef="category">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>category</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.category}} </mat-cell>
+				</ng-container>
+
+				<!-- kingdom Column -->
+				<ng-container matColumnDef="kingdom">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>kingdom</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.kingdom}} </mat-cell>
+				</ng-container>
+
+				<!-- owasp2004 Column -->
+				<ng-container matColumnDef="owasp2004">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>owasp2004</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.owasp2004}} </mat-cell>
+				</ng-container>
+
+				<!-- owasp2007 Column -->
+				<ng-container matColumnDef="owasp2007">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>owasp2007</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.owasp2007}} </mat-cell>
+				</ng-container>
+
+				<!-- owasp2010 Column -->
+				<ng-container matColumnDef="owasp2010">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>owasp2010</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.owasp2010}} </mat-cell>
+				</ng-container>
+
+				<!-- owasp2013 Column -->
+				<ng-container matColumnDef="owasp2013">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>owasp2013</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.owasp2013}} </mat-cell>
+				</ng-container>
+
+				<!-- owasp2017 Column -->
+				<ng-container matColumnDef="owasp2017">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>owasp2017</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.owasp2017}} </mat-cell>
+				</ng-container>
+
+				<!-- cwe Column -->
+				<ng-container matColumnDef="cwe">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>cwe</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.cwe}} </mat-cell>
+				</ng-container>
+
+				<!-- package Column -->
+				<ng-container matColumnDef="package">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>package</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.package}} </mat-cell>
+				</ng-container>
+
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+				<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">
+				</mat-row>
+
+			</mat-table>
+
+			<mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+			</mat-paginator>
+		</div>
+	</div>
+	<button (click)="goBack()">go back</button>
+</div>
+<div [hidden]="!loadingDataHidden">
+	<router-outlet></router-outlet>
+</div>

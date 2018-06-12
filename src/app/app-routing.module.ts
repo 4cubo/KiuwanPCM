@@ -15,8 +15,9 @@ import { DashBoardPanelComponent } from './dash-board-panel/dash-board-panel.com
 import { KiuwanDataComponent } from './kiuwan-data/kiuwan-data.component';
 import { DashboardDetailGraphComponent } from './dashboard-detail-graph/dashboard-detail-graph.component';
 import { FoDAppListComponent } from './fod-app-list/fod-app-list.component';
-import { FodAppRelVulListComponentComponent } from './fod-app-rel-vul-list-component/fod-app-rel-vul-list-component.component';
+import { FoDAppRelVulListComponent } from './fod-app-rel-vul-list/fod-app-rel-vul-list.component';
 import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.component';
+import { FoDAppRelVulDetailsComponent } from './fod-app-rel-vul-details/fod-app-rel-vul-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full' },
@@ -47,15 +48,24 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admu', component: AdminUserComponent, canActivate: [AuthGuard] }, /* @aaa TODO add AdminGuard to access this functionality */
 
-  { path: 'fod', component: FoDAppListComponent, canActivate: [AuthGuard],
+  { path: 'fod', component: FoDAppListComponent, canActivate: [AuthGuard], 
     children: [ { 
-      path: 'rel/:applicationId',
-      component: FoDAppRelListComponent
+      path: ':applicationId', 
+      //path: 'rel/:applicationId/:iToken', 
+      component: FoDAppRelListComponent,
+      children: [ { 
+        path: ':releaseId', 
+        component: FoDAppRelVulListComponent,
+        children: [ { 
+          path: ':vulId', 
+          component: FoDAppRelVulDetailsComponent,
+        }]
+      }]
     }]
 },
 
   
-  { path: '**', redirectTo: '' }
+ // { path: '**', redirectTo: '' }
 ];
 
 

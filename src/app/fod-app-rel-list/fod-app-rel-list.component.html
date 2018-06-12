@@ -1,99 +1,121 @@
-<h2>Releasses of {{applicationId}}</h2>
+<div [hidden]="actRoute.children.length > 0">
+	<h2>Releasses of {{curApp.applicationName}} [{{applicationId}}]</h2>
 
-<div class="example-container mat-elevation-z8" >
+	<div class="example-container mat-elevation-z8">
 
-	<div class="spinner-container" [hidden]="loadingDataHidden">
-		<mat-spinner></mat-spinner>
-	</div>
-
-	<div class="spinner-container">
-	
-		<div [hidden]="!showFoDError" class="panel-body">{{fodErrorStr}}</div>
-		<div [hidden]="!(loadingData > 0)" class="panel-body">Number of open connections: {{loadingData}}</div>
-		<div>#Items {{userAppLoadedCount}} /{{ userAppCount}}</div>
-	</div>
-
-	<div [hidden]="!loadingDataHidden" matSort>
-		<div class="example-header">
-			<mat-form-field>
-				<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-			</mat-form-field>
+		<div class="spinner-container" [hidden]="loadingDataHidden">
+			<mat-spinner></mat-spinner>
 		</div>
 
-		<mat-table #table [dataSource]="dataSource">
+		<div class="spinner-container">
 
-			<!-- Checkbox Column -->
-			<ng-container matColumnDef="select">
-				<mat-header-cell *matHeaderCellDef>
-					<mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-					</mat-checkbox>
-				</mat-header-cell>
-				<mat-cell *matCellDef="let row">
-					<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
-					</mat-checkbox>
-				</mat-cell>
-			</ng-container>
-			<!-- applicationId Column -->
-			<ng-container matColumnDef="applicationId">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>App. Id.</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationId}} </mat-cell>
-			</ng-container>
+			<div style="padding: 7px" [hidden]="!showFoDError" class="panel-body">{{fodErrorStr}}</div>
+			<div style="padding: 7px" [hidden]="!(loadingData > 0)" class="panel-body">Number of open connections: {{loadingData}}</div>
+			<div style="padding: 7px">Loaded/Total [{{relLoadedCount}}/{{ relCount}}]</div>
+		</div>
+
+		<div [hidden]="!loadingDataHidden" matSort>
+			<div class="example-header">
+				<mat-form-field>
+					<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+				</mat-form-field>
+			</div>
+
+			<mat-table #table [dataSource]="dataSource">
+
+				<!-- Checkbox Column -->
+				<ng-container matColumnDef="select">
+					<mat-header-cell *matHeaderCellDef>
+						<mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+						</mat-checkbox>
+					</mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+						</mat-checkbox>
+					</mat-cell>
+				</ng-container>
 
 
+				<!-- releaseId Column -->
+				<ng-container matColumnDef="releaseId">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>releaseId</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.releaseId}} </mat-cell>
+				</ng-container>
 
-			<!-- applicationName Column -->
-			<ng-container matColumnDef="applicationName">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationName</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationName}} </mat-cell>
-			</ng-container>
 
-			<!-- applicationDescription Column -->
-			<ng-container matColumnDef="applicationDescription">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationDescription</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationDescription}} </mat-cell>
-			</ng-container>
+				<!-- releaseName Column -->
+				<ng-container matColumnDef="releaseName">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>releaseName</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.releaseName}} </mat-cell>
+				</ng-container>
 
-			<!-- applicationCreatedDate Column -->
-			<ng-container matColumnDef="applicationCreatedDate">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationCreatedDate</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationCreatedDate}} </mat-cell>
-			</ng-container>
+				<!-- releaseDescription Column -->
+				<ng-container matColumnDef="releaseDescription">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>releaseDescription</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.releaseDescription}} </mat-cell>
+				</ng-container>
 
-			<!-- businessCriticalityTypeId Column -->
-			<ng-container matColumnDef="businessCriticalityTypeId">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>businessCriticalityTypeId</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.businessCriticalityTypeId}} </mat-cell>
-			</ng-container>
+				<!-- releaseCreatedDate Column -->
+				<ng-container matColumnDef="releaseCreatedDate">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>releaseCreatedDate</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.releaseCreatedDate}} </mat-cell>
+				</ng-container>
 
-			<!-- businessCriticalityType Column -->
-			<ng-container matColumnDef="businessCriticalityType">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>businessCriticalityType</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.businessCriticalityType}} </mat-cell>
-			</ng-container>
+				<!-- rating Column -->
+				<ng-container matColumnDef="rating">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>rating</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.rating}} </mat-cell>
+				</ng-container>
 
-			<!-- applicationTypeId Column -->
-			<ng-container matColumnDef="applicationTypeId">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationTypeId</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationTypeId}} </mat-cell>
-			</ng-container>
+				<!-- critical Column -->
+				<ng-container matColumnDef="critical">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>critical</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.critical}} </mat-cell>
+				</ng-container>
 
-			<!-- applicationType Column -->
-			<ng-container matColumnDef="applicationType">
-				<mat-header-cell *matHeaderCellDef mat-sort-header>applicationType</mat-header-cell>
-				<mat-cell *matCellDef="let app"> {{app.applicationType}} </mat-cell>
-			</ng-container>
+				<!-- high Column -->
+				<ng-container matColumnDef="high">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>high</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.high}} </mat-cell>
+				</ng-container>
 
-			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+				<!-- medium Column -->
+				<ng-container matColumnDef="medium">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>medium</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.medium}} </mat-cell>
+				</ng-container>
 
-			<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">
-			</mat-row>
+				<!-- low Column -->
+				<ng-container matColumnDef="low">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>low</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.low}} </mat-cell>
+				</ng-container>
 
-		</mat-table>
+				<!-- staticScanDate Column -->
+				<ng-container matColumnDef="staticScanDate">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>staticScanDate</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.staticScanDate}} </mat-cell>
+				</ng-container>
 
-		<mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-		</mat-paginator>
+				<!-- issueCount Column -->
+				<ng-container matColumnDef="issueCount">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>issueCount</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.issueCount}} </mat-cell>
+				</ng-container>
+
+
+				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+				<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">
+				</mat-row>
+
+			</mat-table>
+
+			<mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+			</mat-paginator>
+		</div>
 	</div>
+	<button (click)="goBack()">go back</button>
 </div>
-<div [hidden]="!loadingDataHidden">
-	<router-outlet></router-outlet>
-</div>
+
+<router-outlet></router-outlet>

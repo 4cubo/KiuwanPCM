@@ -1,0 +1,25 @@
+<div [hidden]="actRoute.children.length > 0">
+	<h2>Vulnerabilities of {{applicationId}} /{{releaseId}}</h2>
+
+	<div class="example-container mat-elevation-z8" >
+
+		<div class="spinner-container" [hidden]="loadingDataHidden">
+			<mat-spinner></mat-spinner>
+		</div>
+		<br>
+		<div class="spinner-container">
+		
+			<div style="padding: 7px" [hidden]="!showFoDError" class="panel-body">{{fodErrorStr}}</div>
+			<div style="padding: 7px" [hidden]="!(loadingData > 0)" class="panel-body">Number of open connections: {{loadingData}}</div>
+			
+		</div>
+		<br>
+		<div [hidden]="!loadingDataHidden" matSort>
+			
+
+			datos!!!!!!!!!!!!!!!!!!!!!!!!!
+
+		</div>
+	</div>
+	<button (click)="goBack()">go back</button>
+</div>

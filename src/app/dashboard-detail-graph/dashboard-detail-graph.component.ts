@@ -28,9 +28,9 @@ export class DashboardDetailGraphComponent implements OnInit {
 
   ngOnInit() {
     this.graphInfo = JSON.parse(localStorage.getItem('GRAPH_DATA_DETAIL'));
-      
       if( this.graphInfo ){
         console.log("---------------------------->DETALLE ", this.name, this.graphInfo.data, this.graphInfo.graphConf  );
+        localStorage.removeItem('GRAPH_DATA_DETAIL')
       }
 
       let backgroundColor = [];

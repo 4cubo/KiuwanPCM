@@ -3,8 +3,8 @@ import {KiuwanApplication} from '../classes/kiuwanapplication';
 import {KiuwanApplicationService} from '../_services/kiuwan.application.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {MessageService} from '../message.service';
 import {Message} from 'primeng/api';
+import { MessageService } from '../_services/message.service';
 
 @Component({
   selector: 'app-application-detail',
