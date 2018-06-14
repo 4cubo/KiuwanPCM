@@ -110,9 +110,8 @@ export class KiuwanApplicationListComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    this.appProv.setCredentials("poc.isban.alvaro.alonso", "q0q=tnJsV1Isn9HUECaR");
+    this.appProv.setCredentials("poc.isban.alvaro.alonso", "miscojones_33");
     //this.appProv.setCredentials(this.userName, this.userPasswd);
-
   }
 
   ngAfterViewInit() {
