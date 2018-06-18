@@ -60,6 +60,7 @@ import { FoDAppRelVulListComponent } from './fod-app-rel-vul-list/fod-app-rel-vu
 import { FoDAppRelVulDetailsComponent } from './fod-app-rel-vul-details/fod-app-rel-vul-details.component';
 import { FodAppListMsgPanelComponent } from './fod-app-list/fod-app-list-msg-panel.component';
 import { FodAppListMsgService } from './fod-app-list/fod-app-list-msg.service';
+import { FodLoadDbComponent } from './fod-load-db/fod-load-db.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { FodAppListMsgService } from './fod-app-list/fod-app-list-msg.service';
     FoDAppRelVulListComponent,
     FoDAppRelVulDetailsComponent,
     FodAppListMsgPanelComponent,
+    FodLoadDbComponent,
   ],
   imports: [
     BrowserModule,

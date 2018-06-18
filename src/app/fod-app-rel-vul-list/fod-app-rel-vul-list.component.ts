@@ -22,7 +22,7 @@ export class FoDAppRelVulListComponent implements OnInit, AfterViewInit {
 
 	vulList: FoDVulnerability[] = [];
 	vulCount = 0;
-	appOffset = 0;
+	vulOffset = 0;
 	vulLimit = 50;
 	vulLoadedCount = 0;
 
@@ -54,6 +54,7 @@ export class FoDAppRelVulListComponent implements OnInit, AfterViewInit {
 		'owasp2017',
 		'cwe',
 		'package',
+		'status'
 	];
 
 	loadingDataHidden = false; //Initial state
@@ -121,7 +122,8 @@ export class FoDAppRelVulListComponent implements OnInit, AfterViewInit {
 		// this.router.navigate(['/detail/' + row.id]);
 		//this.router.navigate(['/fod/rel/' + row.name], { relativeTo: this.actRoute });
 		localStorage.setItem('FoDToken', this.token ); 
-		//localStorage.setItem('CurrentVul', JSON.stringify(row as FoDReleasse) ); 
+		//localStorage.setItem('applicationId', this.applicationId ); 
+		localStorage.setItem('releaseId', this.releaseId ); 
 		this.router.navigate( ['/fod/' + this.applicationId + '/' + this.releaseId + '/' + row.vulnId] , { relativeTo: this.actRoute } );
 	}
 
@@ -172,7 +174,7 @@ export class FoDAppRelVulListComponent implements OnInit, AfterViewInit {
 	}
 
 	initAppLoadingInfo() {
-		this.appOffset = 0;
+		this.vulOffset = 0;
 		this.clearFoDError();
 		this.vulLoadedCount = 0;
 		this.vulList = [];
@@ -195,7 +197,7 @@ export class FoDAppRelVulListComponent implements OnInit, AfterViewInit {
 		if  ( req == null ){
 			req = new FodProxyRequest();
 			req.method= 'GET';
-			req.url= "/releases/" + relId + "/vulnerabilities?orderBy=severity&orderByDirection=DESC&offset=" + this.appOffset + "&limit=" + this.vulLimit;
+			req.url= "/releases/" + relId + "/vulnerabilities?orderBy=severity&orderByDirection=DESC&offset=" + this.vulOffset + "&limit=" + this.vulLimit;
 			req.fodcol = 'fod_vuls';
 		}
 
@@ -224,10 +226,10 @@ export class FoDAppRelVulListComponent implements OnInit, AfterViewInit {
 				//Check if there are more apps not loaded
 				if (this.vulCount > this.vulLoadedCount) {
 					console.log(" FoDController.getVulnerabilities: Cargar siguiente paquete: " + this.vulCount + "  " + this.vulLoadedCount);
-					this.appOffset = this.appOffset + this.vulLimit;
-					req.url = "/releases/" + relId + "/vulnerabilities?orderBy=severity&orderByDirection=DESC&offset=" + this.appOffset + "&limit=" + this.vulLimit;
+					this.vulOffset = this.vulOffset + this.vulLimit;
+					req.url = "/releases/" + relId + "/vulnerabilities?orderBy=severity&orderByDirection=DESC&offset=" + this.vulOffset + "&limit=" + this.vulLimit;
 					console.log('--------->', req);
-					//this.getAllAppRel( this.applicationId, nexReq, false );
+					this.getVulnerabilities( relId, req, false );
 				}
 			}
 		);

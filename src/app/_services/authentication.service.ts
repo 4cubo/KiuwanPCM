@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
  
 import { appConfig } from '../app.config';
+import { User } from '../_user/user';
  
 @Injectable()
 export class AuthenticationService {
@@ -12,13 +13,15 @@ export class AuthenticationService {
     login(username: string, password: string) {
         console.log( "AuthenticationService.login user= " + username + " pwd=" + password );
         return this.http.post<any>(appConfig.apiUrl + '/users/authenticate', { username: username, password: password })
-            .map(user => {
+            .map(data => {
+                let result : User = data as User;
+                console.log();
                 // login successful if there's a jwt token in the response
-                if (user && user.token) {
+                if (data && data.token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem('currentUser', JSON.stringify(data ));
                 }
-                return user;
+                return data;
             });
     }
 

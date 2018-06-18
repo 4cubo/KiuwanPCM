@@ -21,20 +21,8 @@ export class FoDAppListComponent implements OnInit, AfterViewInit {
 	appLimit = 50;
 	userAppLoadedCount = 0;
 
-
-
 	appPanelVisible = false;
-
-
 	search = "";
-
-	//fodErrorStr = "";
-	//showFoDError = false;
-
-
-	//token: string;
-
-
 	selectedAppName: string;
 	selectedRow: number;
 
@@ -196,8 +184,8 @@ export class FoDAppListComponent implements OnInit, AfterViewInit {
 
 					//this.getAllAppsNextBlock();
 					req.url =  "/applications?orderBy=applicationCreatedDate&orderByDirection=DESC&offset=" + this.appOffset + "&limit=" + this.appLimit;
-					console.log ( '--------->', req );
-					//this.getAllApps( req, false );
+					//console.log ( '--------->', req );
+					this.getAllApps( req, false );
 				}
 			}
 		);

@@ -18,6 +18,7 @@ import { FoDAppListComponent } from './fod-app-list/fod-app-list.component';
 import { FoDAppRelVulListComponent } from './fod-app-rel-vul-list/fod-app-rel-vul-list.component';
 import { FoDAppRelListComponent } from './fod-app-rel-list/fod-app-rel-list.component';
 import { FoDAppRelVulDetailsComponent } from './fod-app-rel-vul-details/fod-app-rel-vul-details.component';
+import { FodLoadDbComponent } from './fod-load-db/fod-load-db.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full' },
@@ -48,6 +49,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admu', component: AdminUserComponent, canActivate: [AuthGuard] }, /* @aaa TODO add AdminGuard to access this functionality */
 
+  
+  { path: 'foddb', component: FodLoadDbComponent, canActivate: [AuthGuard] },
   { path: 'fod', component: FoDAppListComponent, canActivate: [AuthGuard], 
     children: [ { 
       path: ':applicationId', 

@@ -16,8 +16,27 @@
 		<br>
 		<div [hidden]="!loadingDataHidden" matSort>
 			
+			<h4>Clasification:</h4>
+			<ul>
+				<li *ngFor='let category of vulnerability.details.complianceCategories'>
+					{{category.categoryName}}
+					<ul>
+						<li *ngFor='let item of category.complianceItems'>{{item.complianceRule}} </li>
+					</ul>
+				</li>
+			</ul>
+			
+			<h4>Location:</h4>
+			<p>File: {{vulnerability.summary.primaryLocationFull}}</p>
+			<p>Line: {{vulnerability.summary.lineNumber}}</p>
+			
 
-			datos!!!!!!!!!!!!!!!!!!!!!!!!!
+			<h4>Recommmendations:</h4>
+			<div style="padding-left: 20px;" [innerHtml]="vulnerability.recommendations.recommendations"></div>
+			<h4>References:</h4>
+			<div [innerHtml]="vulnerability.recommendations.references"></div>
+			<h4>Tips:</h4>
+			<div [innerHtml]="vulnerability.recommendations.tips"></div>
 
 		</div>
 	</div>

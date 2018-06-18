@@ -5,5 +5,9 @@
   firstName: string;
   lastName: string;
   email: string;
-  token: string;
+  kiuwanUN : string;
+  kiuwanPW : string;
+  fodUN : string;
+  fodPW : string;
+  token : string;
 }

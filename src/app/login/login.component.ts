@@ -5,11 +5,11 @@ import { AlertService, AuthenticationService } from '../_services/index';
 import { FormsModule, FormControl, FormGroupDirective, NgForm, Validators, NgModel} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 
-import { ReactiveFormsModule} from '@angular/forms'; 
+//import { ReactiveFormsModule} from '@angular/forms'; 
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
-export class AppErrorStateMatcher implements ErrorStateMatcher {
+export class LoginErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     userNameFormControl: FormControl;
     passwdFormControl: FormControl;
 
-    matcher: AppErrorStateMatcher;
+    matcher: LoginErrorStateMatcher;
 
     constructor(
         private route: ActivatedRoute,
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
           Validators.required
         ]);
 
-        this.matcher = new AppErrorStateMatcher();
+        this.matcher = new LoginErrorStateMatcher();
     }
 
     ngOnInit() {
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
                     console.log("LoginComponent.login()-> navegar a " + this.returnUrl );
                     this.router.navigate([this.returnUrl]);
                     this.alertService.error("Login OK");
-                  this.loading = false;
+                    this.loading = false;
                 },
                 error => {
                     console.log("LoginComponent.login()->error=" + JSON.stringify(error));

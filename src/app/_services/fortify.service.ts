@@ -25,7 +25,7 @@ export class FoDService {
   }
 
   // Request contains only .url & .method attibutes
-  getObject(req : FodProxyRequest): Observable<any> { //TODO Change to postFoDRequest
+  getObject(req: FodProxyRequest): Observable<any> { //TODO Change to postFoDRequest
 
     let data = {
       method: req.method,
@@ -40,7 +40,7 @@ export class FoDService {
 
     return this.http.post<any>(appConfig.apiUrl + '/fod', data).map(
       kiuData => {
-        console.log('Lista de objetos recibida:', kiuData);
+        //console.log('Lista de objetos recibida:', kiuData);
         //this.appList = kiuApps;
         return kiuData;
       }
@@ -65,6 +65,10 @@ export class FoDRelAPIResponse {
 }
 export class FoDVulAPIResponse {
   items: FoDVulnerability[];
+  totalCount: number;
+}
+export class FoDVulAllDataAPIResponse {
+  item: FoDVulnerabilityAllData[];
   totalCount: number;
 }
 
@@ -172,4 +176,173 @@ export class FoDVulnerability {
   bugSubmitted: string;
   bugLink: string;
   auditPendingSuppression: string;
+}
+
+export class FoDVulnerabilityAllData {
+
+  summary: {
+    lineNumber: string,
+    primaryLocation: string,
+    primaryLocationFull: string,
+    severity: string,
+    isSuppressed: true,
+    assignedUser: string,
+    developerStatus: string,
+    auditorStatus: string,
+    auditPending: true,
+    auditPendingAuditorStatus: string,
+    auditPendingSeverity: string,
+    auditPendingSuppression: string,
+    comments: [
+      {
+        username: string,
+        commentDate: Date,
+        comment: string
+      }
+    ],
+    notes: string,
+    bugSubmitted: true,
+    bugLink: string,
+    vulnId: string,
+    releaseId: 0
+  };
+  details: {
+    isStatic: boolean,
+    summary: string,
+    explanation: string,
+    instanceId: string,
+    ruleId: string,
+    impact: string,
+    probability: string,
+    severity: string,
+    confidence: string,
+    analyzerName: string,
+    complianceCategories: [
+      {
+        categoryName: string,
+        complianceItems: [
+          {
+            complianceRule: string
+          }
+        ]
+      }
+    ],
+    vulnId: string,
+    releaseId: number
+  };
+
+  recommendations: {
+    isStatic: boolean,
+    recommendations: string,
+    tips: string,
+    references: string,
+    vulnId: string,
+    releaseId: number
+  };
+
+  screenshots: [
+    {
+      id: number,
+      name: string,
+      description: string,
+      uploadDate: Date
+    }
+  ];
+
+  history: [
+    {
+      content: string,
+      historyDateTime: Date,
+      user: string
+    }
+  ];
+
+  requestResponse: {
+    requestContent: string,
+    responseContent: string,
+    vulnId: string,
+    releaseId: number
+  };
+
+  headers: {
+    requestHeaders: [
+      {
+        name: string,
+        value: string,
+        cookieHeaders: [
+          {}
+        ]
+      }
+    ],
+    responseHeaders: [
+      {
+        name: string,
+        value: string,
+        cookieHeaders: [
+          {}
+        ]
+      }
+    ],
+    vulnId: string,
+    releaseId: number
+  };
+
+  parameters: {
+    queryParameters: [
+      {
+        name: string,
+        value: string,
+        decodedValue: string
+      }
+    ],
+    postParameters: [
+      {
+        name: string,
+        value: string,
+        decodedValue: string
+      }
+    ],
+    vulnId: string,
+    releaseId: number
+  };
+
+  traces: [
+    {
+      traceIndex: number,
+      traceEntries: [
+        {
+          index: number,
+          lineNumber: number,
+          displayText: string,
+          location: string,
+          actionType: string
+        }
+      ]
+    }
+  ];
+  auditOptions: {
+    canAudit: boolean,
+    canChallenge: boolean,
+    canEdit: boolean,
+    inAuditMode: boolean,
+    auditProcessing: boolean,
+    auditActions: [
+      {
+        auditActionType: string,
+        auditActionTypeName: string,
+        items: [
+          {
+            value: string,
+            text: string,
+            group: string
+          }
+        ]
+      }
+    ],
+    vulnId: string,
+    releaseId: number
+  };
+
+  vulnId: string;
+  releaseId: number;
 }

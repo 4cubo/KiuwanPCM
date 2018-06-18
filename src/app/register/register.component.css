@@ -1,11 +1,13 @@
-.example-container {
+.login-container {
   display: flex;
   flex-direction: column;
-  
+/*   background-color: red; */
+  padding: 60px 60px 60px 60px;
 }
 
-.example-container > * {
+.register-container  {
   width: 100%;
+  padding: 15px;
 }
 
 
@@ -18,4 +20,4 @@
 .example-full-width {
   width: 100%;
 }
-  
+

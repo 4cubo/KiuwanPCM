@@ -26,6 +26,7 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
   kiuwanPasswd: string = '';
 
 
+  /*  DEPRECATED, NOT USED */
   setCredentials = function(userName, passwd) {
     console.log(" setCredentials:" + userName + "/" + passwd);
     this.kiuwanUser = userName;
@@ -40,24 +41,24 @@ export class KiuwanApplicationService { // @aaa @TODO cambiar a KiuwanService
     //this.messageService.add('Kiuwan App Service: getApplications');
 
     if (this.applications) {
-      console.log('----------------------------_>Recuerado aplicaciones kiuwan del propio servicio');
+      console.log('\t->Recuperado aplicaciones kiuwan del propio servicio');
       return of(this.applications);
     }
     // @aaa @TODO Do not use LocalStorage in the future, session storage or server mongo instead
     let apps: KiuwanApplication[] =  
       JSON.parse(localStorage.getItem('KiuwanApplications'));
     if (apps) {
-      console.log('----------------------------_>Recuerado aplicaciones kiuwan del local storage');
+      console.log('\t->Recuerado aplicaciones kiuwan del local storage');
       return of(apps);
     }
 
-    console.log('----------------------------_>Recuerado aplicaciones kiuwan de kiuwan');
+    console.log('->Recuerado aplicaciones kiuwan de kiuwan');
 
     let data = {
       method: 'GET',
       url: "/apps/list",
       headers: {
-        'Authorization': 'Basic ' + window.btoa(this.kiuwanUser + ':' + this.kiuwanPasswd)
+        'Authorization': 'Basic ' + window.btoa(this.kiuwanUser + ':' + this.kiuwanPasswd)  // @DEPRECATED @TODO
         // 'Target_URL': 'https://api.kiuwan.com',
         // 'Content-Type': 'application/json; charset=UTF-8'
       }

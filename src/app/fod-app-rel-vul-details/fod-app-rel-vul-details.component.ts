@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { FoDService, FoDAppAPIResponse, FoDVulnerability, FoDReleasse, FodProxyRequest, FoDVulAPIResponse } from '../_services/fortify.service';
+import { FoDService, FoDAppAPIResponse, FoDVulnerability, FoDReleasse, FodProxyRequest, FoDVulAPIResponse, FoDVulAllDataAPIResponse, FoDVulnerabilityAllData } from '../_services/fortify.service';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 
 
@@ -13,20 +13,18 @@ import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular
 })
 export class FoDAppRelVulDetailsComponent implements OnInit, AfterViewInit {
 
-	@Input() applicationId: string;
-	@Input() releaseId: string;
+	//@Input() applicationId: string;
+	//@Input() releaseId: string;
 	@Input() vulId: string;
 
+	//applicationId: string;
+	releaseId: string; //By localStorage
 
 	//curRelease : FoDReleasse;
 
 	loadingData = 0; //Number of http client open request
 
-	vulnerability: FoDVulnerability[] = [];
-	//vulCount = 0;
-	//appOffset = 0;
-	//vulLimit = 50;
-	//vulLoadedCount = 0;
+	vulnerability: FoDVulnerabilityAllData;
 
 	vulPanVisible = false;
 	//search = "";
@@ -36,10 +34,6 @@ export class FoDAppRelVulDetailsComponent implements OnInit, AfterViewInit {
 
 	token: string;
 
-	//selectedAppName: string;
-	//selectedRow: number;
-
-	
 
 	loadingDataHidden = false; //Initial state
 
@@ -57,14 +51,31 @@ export class FoDAppRelVulDetailsComponent implements OnInit, AfterViewInit {
 				// this.token = params['iToken'];
 			}
 		);
+		//localStorage.setItem('FoDToken', this.token ); 
+		//localStorage.setItem('releaseId', this.releaseId ); 
+
 		this.token = localStorage.getItem('FoDToken');
 		if (this.token) {
 			localStorage.removeItem('FoDToken')
 		}else{
-			console.log("Error: fod-app-rel-list  constructor: FoDToken doesn´t exits in localstorage"); 
+			console.log("Error: fod-app-rel-vul-details  constructor: FoDToken doesn´t exits in localstorage"); 
+		}
+
+		/*this.applicationId = localStorage.getItem('applicationId');
+		if (this.applicationId) {
+			localStorage.removeItem('applicationId')
+		}else{
+			console.log("Error: fod-app-rel-vul-details  constructor: applicationId doesn´t exits in localstorage"); 
+		}*/
+
+		this.releaseId = localStorage.getItem('releaseId');
+		if (this.releaseId) {
+			localStorage.removeItem('releaseId')
+		}else{
+			console.log("Error: fod-app-rel-vul-details  constructor: releaseId doesn´t exits in localstorage"); 
 		}
 		
-		
+		console.log ("Panel de detalle de vulnerabilidad: releaseId=",this.releaseId, " this.vulId=", this.vulId  );
 	}
 
 	goBack(): void {
@@ -90,7 +101,7 @@ export class FoDAppRelVulDetailsComponent implements OnInit, AfterViewInit {
 	setFoDSvcToken() {
 		if (this.isOk(this.token)) {
 			this.foD.setSecToken(this.token);
-			this.getvulnerability(this.vulId); // void req & init  control data
+			this.getvulnerability(); // void req & init  control data
 		}
 	}
 
@@ -123,22 +134,22 @@ export class FoDAppRelVulDetailsComponent implements OnInit, AfterViewInit {
 		this.vulPanVisible = false;
 	}
 
-	getvulnerability(vullId: string) {
+	getvulnerability() {
 		let req: any = null;
 
 		if (this.loadingData > 0) {
-			alert("FoDController.getAllAppRelVi: Pending request: wait until completed");
+			alert("getvulnerability: Pending request: wait until completed");
 			return;
 		}
 		
 		this.initLoadingInfo();
 		
 
-		//Prepare req.url
+		//Prepare req.url GET /api/v3/releases/{releaseId}/vulnerabilities/{vulnId}/all-data
 		if  ( req == null ){
 			req = new FodProxyRequest();
 			req.method= 'GET';
-			req.url= "/releases/" + vullId + "/vulnerabilities";
+			req.url= "/releases/" + this.releaseId + "/vulnerabilities/"+this.vulId+"/all-data";
 			req.fodcol = 'fod_vuls_comp';
 		}
 
@@ -146,9 +157,9 @@ export class FoDAppRelVulDetailsComponent implements OnInit, AfterViewInit {
 
 		this.foD.getObject(req).subscribe(
 			data => {
-				data as FoDVulAPIResponse;
+				var foDVulAllDataAPIResponse= data as FoDVulnerabilityAllData;
 				this.showFoDError = false;
-				this.vulnerability.push(data.items[0]);
+				this.vulnerability=foDVulAllDataAPIResponse;
 				this.vulPanVisible = true;
 			},
 			error => {

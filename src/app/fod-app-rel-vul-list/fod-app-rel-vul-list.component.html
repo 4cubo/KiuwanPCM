@@ -40,10 +40,11 @@
 					<mat-header-cell *matHeaderCellDef mat-sort-header>Id.</mat-header-cell>
 					<mat-cell *matCellDef="let app"> {{app.id}} </mat-cell>
 				</ng-container>
+
 				<!-- vulnId Column -->
 				<ng-container matColumnDef="vulnId">
 						<mat-header-cell *matHeaderCellDef mat-sort-header>Vuln Id.</mat-header-cell>
-						<mat-cell *matCellDef="let app"> {{app.vulnId}} </mat-cell>
+						<mat-cell *matCellDef="let app"><span  style="font-size: 1em;">{{app.vulnId}}</span> </mat-cell>
 					</ng-container>
 				
 
@@ -126,6 +127,12 @@
 					<mat-cell *matCellDef="let app"> {{app.package}} </mat-cell>
 				</ng-container>
 
+				<!-- status Column -->
+				<ng-container matColumnDef="status">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>status</mat-header-cell>
+					<mat-cell *matCellDef="let app"> {{app.status}} </mat-cell>
+				</ng-container>
+				
 				<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
 				<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)">

@@ -239,7 +239,7 @@ export class FoDAppRelListComponent implements OnInit, AfterViewInit {
 					this.relOffset = this.relOffset + this.appLimit;
 					req .url= "/applications/" + appId + "/releases?orderBy=releaseCreatedDate&orderByDirection=DESC&offset=" + this.relOffset + "&limit=" + this.appLimit;
 					console.log('--------->', req);
-					this.getAllAppRel(this.applicationId, req, false);
+					this.getAllAppRel(appId, req, false);
 				}
 			}
 		);

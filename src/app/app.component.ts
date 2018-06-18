@@ -14,7 +14,7 @@ import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '
 
 export class AppComponent implements OnInit {
   currentUser: User;
-  title = 'SAST PaceMaker';
+  title = 'FoD & Kiuwan Dashboard';
 
   constructor(
     private router: Router,
@@ -34,7 +34,3 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 }
-
-
-
-

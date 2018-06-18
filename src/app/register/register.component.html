@@ -1,93 +1,118 @@
-<div class="example-container">
-        <mat-form-field>
-                <input matInput placeholder="Input">
-              </mat-form-field>
-    <!-- <h2>Register</h2> -->
-    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate class="example-form">
-    
-      
-        <!-- 
-             <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-     
-            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
-            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
-        </div> 
-        -->
+<mat-card class="example-card">
+	<mat-card-header>
+		<mat-card-title><h4>User Registration</h4></mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
 
-        <mat-form-field class="example-full-width">
-           
-            <input  appearance="legacy" matInput type="text"  placeholder="First Name"  maxLength="100" required 
-                [(ngModel)]="model.firstName"  [formControl]="firstNameFormControl" [errorStateMatcher]="matcher">
-            <mat-hint>Please, insert fisrt name</mat-hint>
-            <mat-error *ngIf="firstNameFormControl.hasError('required')">
-                    First Name is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-        <br>
+		<div class="register-container">
+			<!--     <h4>Login</h4> -->
+			<form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate class="example-form">
 
-       <!--  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
-            <div *ngIf="f.submitted && !secondName.valid" class="help-block">Last Name is required</div>
-        </div>
-        <br> -->
+                <!--Fisrt Name-->
+                <mat-form-field class="example-full-width">
+					<input matInput type="text" placeholder="Fisrt name" maxLength="100" required [(ngModel)]="model.firstName" [formControl]="fisrtNameFormControl"
+					 [errorStateMatcher]="matcher">
+					<mat-hint>Please, insert a valid user first name</mat-hint>
+					<mat-error *ngIf="fisrtNameFormControl.hasError('required')">
+						Fisrt name is <strong>required</strong>
+					</mat-error>
+                </mat-form-field>
+                <br><br>
+                <!--Last Name-->
+                <mat-form-field class="example-full-width">
+					<input matInput type="text" placeholder="Last Name" maxLength="100" required [(ngModel)]="model.lastName" [formControl]="lastNameFormControl"
+					 [errorStateMatcher]="matcher">
+					<mat-hint>Please, insert a valid user last name</mat-hint>
+					<mat-error *ngIf="fisrtNameFormControl.hasError('required')">
+						Last name is <strong>required</strong>
+					</mat-error>
+                </mat-form-field>
+                <br><br>
+                <!--User Name-->
+                <mat-form-field class="example-full-width">
+					<input matInput type="text" placeholder="User name" maxLength="100" required [(ngModel)]="model.username" [formControl]="userNameFormControl"
+					 [errorStateMatcher]="matcher">
+					<mat-hint>Please, insert a valid user name</mat-hint>
+					<mat-error *ngIf="userNameFormControl.hasError('required')">
+						User name is <strong>required</strong>
+					</mat-error>
+				</mat-form-field>
+                <br><br>
+                <!--Passwd-->
+				<mat-form-field class="example-full-width">
+					<input matInput type="password" placeholder="Password" maxLength="100" required [(ngModel)]="model.password" [formControl]="passwdFormControl"
+					 [errorStateMatcher]="matcher">
+					<mat-hint>Please, insert a valid password</mat-hint>
+					<mat-error *ngIf="passwdFormControl.hasError('required')">
+						Password is <strong>required</strong>
+					</mat-error>
+                </mat-form-field>
+                <br><br>
+                <!--email-->
+				<mat-form-field class="example-full-width">
+					<input matInput type="text" placeholder="Email" maxLength="100" required [(ngModel)]="model.email" [formControl]="emailFormControl"
+					 [errorStateMatcher]="matcher">
+					<mat-hint>Please, insert a valid email</mat-hint>
+					<mat-error *ngIf="passwdFormControl.hasError('required')">
+						User email is <strong>required</strong>
+					</mat-error>
+                </mat-form-field>
 
-        <mat-form-field class="full-width">
-            <input matInput type="text"  placeholder="Last Name"  maxLength="100" required 
-                [(ngModel)]="model.lastName"   [formControl]="lastNameFormControl" [errorStateMatcher]="matcher">
-            <mat-hint>Please, insert last name</mat-hint>
-            <mat-error *ngIf="lastNameFormControl.hasError('required')">
-                   Last Name is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-        <br>
-        <!-- <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
-        </div> -->
-        <mat-form-field class="full-width">
-            <input matInput type="text"  placeholder="User name"  maxLength="100" required
-                [(ngModel)]="model.username"   [formControl]="userNameFormControl" [errorStateMatcher]="matcher">
-            <mat-hint>Please, insert a valid user name</mat-hint>
-            <mat-error *ngIf="userNameFormControl.hasError('required')">
-                        User name is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-        <br>
-              
-             
-        
-        <!-- <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-        </div> -->
-        <mat-form-field class="full-width">
-            <input matInput  type="password" placeholder="Password"  maxLength="100"  required 
-                [(ngModel)]="model.password"  [formControl]="passwdFormControl" [errorStateMatcher]="matcher">
-            <mat-hint>Please, insert a valid password</mat-hint>
-            <mat-error *ngIf="passwdFormControl.hasError('required')">
-                        Password is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-        
-        <!-- <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !kpassword.valid }">
-            <label for="kpassword">Kiuwan Password</label>
-            <input type="password" class="form-control" name="kpassword" [(ngModel)]="model.kpassword" #kpassword="ngModel" required />
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Kiuwan password is required</div>
-        </div> -->
-        
-        
-        
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-        </div>
-        
-    </form>
-   	
-</div>
+
+                <!--Kiuwan User Name-->
+                <mat-form-field class="example-full-width">
+                    <input matInput type="text" placeholder="Kiuwan user name" maxLength="100" required [(ngModel)]="model.kiuwanUN" [formControl]="kiuUserNameFormControl"
+                    [errorStateMatcher]="matcher">
+                    <mat-hint>Please, insert a valid kiuwan user name</mat-hint>
+                    <mat-error *ngIf="userNameFormControl.hasError('required')">
+                        Kiuwan user name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <br><br>
+                <!--Kiuwan Passwd-->
+                <mat-form-field class="example-full-width">
+                    <input matInput type="password" placeholder="Kiuwan Password" maxLength="100" required [(ngModel)]="model.kiuwanPW" [formControl]="kiuPasswdFormControl"
+                    [errorStateMatcher]="matcher">
+                    <mat-hint>Please, insert a valid password</mat-hint>
+                    <mat-error *ngIf="passwdFormControl.hasError('required')">
+                        Kiuwan password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <br><br>
+                
+                <!--FOD User Name-->
+                <mat-form-field class="example-full-width">
+                    <input matInput type="text" placeholder="FoD user name" maxLength="100" required [(ngModel)]="model.fodUN" [formControl]="fodUserNameFormControl"
+                    [errorStateMatcher]="matcher">
+                    <mat-hint>Please, insert a valid Fortify on Demand user name</mat-hint>
+                    <mat-error *ngIf="userNameFormControl.hasError('required')">
+                        Fortify on Demand  user name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <br><br>
+
+                <!--FoD Passwd-->
+                <mat-form-field class="example-full-width">
+                    <input matInput type="password" placeholder="FoD Password" maxLength="100" required [(ngModel)]="model.fodPW" [formControl]="passwdFormControl"
+                    [errorStateMatcher]="matcher">
+                    <mat-hint>Please, insert a valid Fortify on Demand password</mat-hint>
+                    <mat-error *ngIf="passwdFormControl.hasError('required')">
+                        Fortify on Demand  password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <br><br>
+
+                <!--Buttons-->
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">Register</button>
+                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+                </div>
+
+			</form>
+
+		</div>
+
+	</mat-card-content>
+
+</mat-card>
